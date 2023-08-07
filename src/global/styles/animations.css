@@ -1,0 +1,14 @@
+.animate-reveal{
+    transform-origin: right top;
+    animation : reveal .2s ease;
+}
+@keyframes reveal {
+    from{
+        opacity: 0;
+        scale: .5;
+    }
+    to{
+        opacity: 1;
+        scale: 1;
+    }
+}
