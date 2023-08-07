@@ -1,10 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './global/styles/defaults.css'
-import Routing from './pages/routing'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./global/styles/defaults.css";
+import Routing from "./pages/routing";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <Routing/>
-  </React.StrictMode>,
-)
+ReactDOM.createRoot(document.getElementById("root")!).render(
+	<React.StrictMode>
+		<div className="bg-white text-neutral-800">
+			<Routing />
+		</div>
+	</React.StrictMode>
+);
