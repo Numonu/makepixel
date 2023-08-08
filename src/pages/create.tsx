@@ -6,7 +6,7 @@ import { BsUpload } from "react-icons/bs";
 export default function Create() {
 	return (
 		<Wrapper>
-			<header className="text-center mt-4 mb-16 lg:mb-6">
+			<header className="text-center mt-4 mb-16 lg:mb-14">
 				<h1 className="text-black mb-2 text-xl font-medium">
 					New Pixelart
 				</h1>
