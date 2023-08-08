@@ -1,6 +1,9 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useContext } from "react";
 import { requireDependencies } from "../../global/utilities/errorHandlers";
 import { repeatThis } from "../../global/utilities/loops";
+import { drawContext } from "../../global/context/drawContext";
+import { Tool } from "../../global/enums/drawEnums";
+import { Vector2 } from "../../global/types/vectors";
 
 type DrawCanvasTypes = {
 	size?: number;
@@ -12,6 +15,7 @@ type CanvasTypes = {
 };
 
 export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
+	const { currentTool } = useContext(drawContext);
 	const canvasRef = useRef(null);
 	const [mouseHold, setMouseHold] = useState(false);
 	const [canvas, setCanvas] = useState<CanvasTypes>({
@@ -40,41 +44,35 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 		});
 	}, []);
 
-	//Paint-Pixel
-	const drawPixel = (x: number, y: number) => {
+	//Execute-Action
+	const mouseAction = (x: number, y: number) => {
 		//Error-Handler
 		requireDependencies(canvas.element, canvas.context);
 		//Pre-Config
-		const normalPos = normalizeMousePos(x, y);
+		const normalPos = normalizeMousePos({ x, y });
 		//Multi-Paint (for disable blurry effect)
-		canvas.context!.fillStyle = brush.color;
-		repeatThis(() => {
-			canvas.context!.fillRect(
-				normalPos.x,
-				normalPos.y,
-				brush.size,
-				brush.size
-			);
-		}, 5);
+		repeatThis(() => getAction({ x: normalPos.x, y: normalPos.y }, brush.size),5);
 	};
 
 	//Normalize-Mouse-Position
-	const normalizeMousePos = (x: number, y: number) => {
+	const normalizeMousePos = (pos: Vector2) => {
 		const CANVAS_RECT = canvas.element!.getBoundingClientRect();
 		return {
-			x: Math.floor((x - CANVAS_RECT.left) / brush.size) * brush.size,
-			y: Math.floor((y - CANVAS_RECT.top) / brush.size) * brush.size,
+			x: Math.floor((pos.x - CANVAS_RECT.left) / brush.size) * brush.size,
+			y: Math.floor((pos.y - CANVAS_RECT.top) / brush.size) * brush.size,
 		};
 	};
 
-	// const getCurrentPixelColor = (x:number , y:number) => {
-	// 	//Error-Handler
-	// 	requireDependencies(config.canvasCtx);
-	// 	//
-	// 	const DATA = config.canvasCtx!.getImageData(x,y,1,1);
-	// 	const RGB = DATA.data;
-	// 	return `rgba(${RGB[0]},${RGB[1]},${RGB[2]},${RGB[3]})`
-	// }
+	//Return-Action-Function
+	const getAction = (pos: Vector2, size: number) => {
+		switch (currentTool) {
+			case Tool.Brush:
+				canvas.context!.fillStyle = brush.color;
+				return canvas.context!.fillRect(pos.x, pos.y, size, size);
+			default:
+				break;
+		}
+	};
 
 	const holdOn = () => setMouseHold(true);
 	const holdOff = () => setMouseHold(false);
@@ -85,8 +83,8 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 			ref={canvasRef}
 			width={500}
 			height={500}
-			onClick={(e) => drawPixel(e.clientX, e.clientY)}
-			onMouseMove={(e) => mouseHold && drawPixel(e.clientX, e.clientY)}
+			onClick={(e) => mouseAction(e.clientX, e.clientY)}
+			onMouseMove={(e) => mouseHold && mouseAction(e.clientX, e.clientY)}
 			onMouseDown={holdOn}
 			onMouseUp={holdOff}
 			onMouseOut={holdOff}
