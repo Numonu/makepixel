@@ -1,6 +1,6 @@
 import Canvas from "../components/molecules/DrawCanvas";
 import Wrapper from "../components/atoms/Wrapper";
-import PaintToolBar from "../components/molecules/PaintToolBar";
+import DrawToolBar from "../components/molecules/DrawToolBar";
 import { BsUpload } from "react-icons/bs";
 
 export default function Create() {
@@ -17,7 +17,7 @@ export default function Create() {
 			</header>
 			<main className="grid pb-12 gap-4 grid-cols-1 lg:grid-cols-[1fr_min-content_1fr]">
 				<section className="flex justify-center lg:justify-end lg:-order-1 lg:mx-0">
-					<PaintToolBar />
+					<DrawToolBar />
 				</section>
 				<section>
 					<Canvas size={64} />
