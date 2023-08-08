@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { requireDependencies } from "../../global/utilities/errorHandlers";
+import { repeatThis } from "../../global/utilities/loops";
 
 type DrawCanvasTypes = {
 	size?: number;
@@ -45,14 +46,14 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 		const normalPos = normalizeMousePos(x, y);
 		//Multi-Paint (for disable blurry effect)
 		config.canvasCtx!.fillStyle = brush.color;
-		for (let i = 0; i < 5; i++) {
+		repeatThis(() => {
 			config.canvasCtx!.fillRect(
 				normalPos.x,
 				normalPos.y,
 				brush.size,
 				brush.size
 			);
-		}
+		}, 5);
 	};
 
 	//Normalize-Mouse-Position
@@ -65,9 +66,12 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 	};
 
 	// const getCurrentPixelColor = (x:number , y:number) => {
-	// 	const DATA = config.canvasCtx?.getImageData(x,y,1,1);
-	// 	const RGB = DATA?.data;
-	// 	return `rgb(${RGB[0]},${RGB[1]},${RGB[2]})`
+	// 	//Error-Handler
+	// 	requireDependencies(config.canvasCtx);
+	// 	//
+	// 	const DATA = config.canvasCtx!.getImageData(x,y,1,1);
+	// 	const RGB = DATA.data;
+	// 	return `rgba(${RGB[0]},${RGB[1]},${RGB[2]},${RGB[3]})`
 	// }
 
 	const holdOn = () => setMouseHold(true);
