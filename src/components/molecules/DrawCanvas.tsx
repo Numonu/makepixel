@@ -5,16 +5,18 @@ import { repeatThis } from "../../global/utilities/loops";
 type DrawCanvasTypes = {
 	size?: number;
 };
-type ConfigTypes = {
-	canvasEl: HTMLCanvasElement | null;
-	canvasCtx: CanvasRenderingContext2D | null;
+
+type CanvasTypes = {
+	element: HTMLCanvasElement | null;
+	context: CanvasRenderingContext2D | null;
 };
+
 export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 	const canvasRef = useRef(null);
 	const [mouseHold, setMouseHold] = useState(false);
-	const [config, setConfig] = useState<ConfigTypes>({
-		canvasEl: null,
-		canvasCtx: null,
+	const [canvas, setCanvas] = useState<CanvasTypes>({
+		element: null,
+		context: null,
 	});
 	const [brush, setBrush] = useState({
 		color: "#323232",
@@ -27,9 +29,9 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 		requireDependencies(canvasRef.current);
 		//Setup-Canvas
 		const CANVAS = canvasRef.current! as HTMLCanvasElement;
-		setConfig({
-			canvasEl: CANVAS,
-			canvasCtx: CANVAS.getContext("2d"),
+		setCanvas({
+			element: CANVAS,
+			context: CANVAS.getContext("2d"),
 		});
 		//Setup-Brush
 		setBrush({
@@ -41,13 +43,13 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 	//Paint-Pixel
 	const drawPixel = (x: number, y: number) => {
 		//Error-Handler
-		requireDependencies(config.canvasEl, config.canvasCtx);
+		requireDependencies(canvas.element, canvas.context);
 		//Pre-Config
 		const normalPos = normalizeMousePos(x, y);
 		//Multi-Paint (for disable blurry effect)
-		config.canvasCtx!.fillStyle = brush.color;
+		canvas.context!.fillStyle = brush.color;
 		repeatThis(() => {
-			config.canvasCtx!.fillRect(
+			canvas.context!.fillRect(
 				normalPos.x,
 				normalPos.y,
 				brush.size,
@@ -58,7 +60,7 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 
 	//Normalize-Mouse-Position
 	const normalizeMousePos = (x: number, y: number) => {
-		const CANVAS_RECT = config.canvasEl!.getBoundingClientRect();
+		const CANVAS_RECT = canvas.element!.getBoundingClientRect();
 		return {
 			x: Math.floor((x - CANVAS_RECT.left) / brush.size) * brush.size,
 			y: Math.floor((y - CANVAS_RECT.top) / brush.size) * brush.size,
