@@ -1,4 +1,4 @@
-import Canvas from "../components/molecules/DrawCanvas";
+import DrawCanvas from "../components/molecules/DrawCanvas";
 import Wrapper from "../components/atoms/Wrapper";
 import DrawToolBar from "../components/molecules/DrawToolBar";
 import { BsUpload } from "react-icons/bs";
@@ -22,7 +22,7 @@ export default function Create() {
 						<DrawToolBar />
 					</section>
 					<section>
-						<Canvas size={64} />
+						<DrawCanvas size={64} />
 					</section>
 					<section>
 						<button className="border-neutral-400 w-full max-w-[500px] py-1 mx-auto flex justify-center items-center gap-2 text-lg rounded-md border">
