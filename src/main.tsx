@@ -6,7 +6,7 @@ import Routing from "./pages/routing";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
-		<div className="bg-white text-neutral-800">
+		<div className="bg-white text-neutral-900">
 			<Routing />
 		</div>
 	</React.StrictMode>
