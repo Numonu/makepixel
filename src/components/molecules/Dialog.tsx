@@ -15,7 +15,7 @@ export default function Dialog({
 	const toggleFocus = () => (focus ? setFocus(false) : setFocus(true));
 
 	return (
-		<div className="relative" onClick={toggleFocus}>
+		<div className="relative z-20" onClick={toggleFocus}>
 			<span className="text-3xl">{focus ? onElement : offElement}</span>
 			{focus && <div className="absolute right-0 bottom-0 translate-y-full">{children}</div>}
 		</div>
