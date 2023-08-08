@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from "react";
+import { requireDependencies } from "../../global/utilities/errorHandlers";
 
 type DrawCanvasTypes = {
 	size?: number;
@@ -19,13 +20,12 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 		size: 0,
 	});
 
-	//Setup
+	//Main-Setup
 	useEffect(() => {
-		if (!canvasRef.current) {
-			throw new Error("A reference to the Canvas is required ");
-		}
+		//Error-Handler
+		requireDependencies(canvasRef.current);
 		//Setup-Canvas
-		const CANVAS = canvasRef.current as HTMLCanvasElement;
+		const CANVAS = canvasRef.current! as HTMLCanvasElement;
 		setConfig({
 			canvasEl: CANVAS,
 			canvasCtx: CANVAS.getContext("2d"),
@@ -37,36 +37,45 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 		});
 	}, []);
 
-	//Paint
+	//Paint-Pixel
 	const drawPixel = (x: number, y: number) => {
 		//Error-Handler
-		if (!config.canvasCtx || !config.canvasEl) {
-			throw new Error(
-				"Some dependency of the canvas is missing, correct it in order to be able to draw"
-			);
-		}
+		requireDependencies(config.canvasEl, config.canvasCtx);
 		//Pre-Config
-		const CANVAS_RECT = config.canvasEl.getBoundingClientRect();
-		const X = Math.floor((x - CANVAS_RECT.left) / brush.size);
-		const Y = Math.floor((y - CANVAS_RECT.top) / brush.size);
+		const normalPos = normalizeMousePos(x, y);
 		//Multi-Paint (for disable blurry effect)
-		config.canvasCtx.fillStyle = brush.color;
+		config.canvasCtx!.fillStyle = brush.color;
 		for (let i = 0; i < 5; i++) {
-			config.canvasCtx.fillRect(
-				X * brush.size,
-				Y * brush.size,
+			config.canvasCtx!.fillRect(
+				normalPos.x,
+				normalPos.y,
 				brush.size,
 				brush.size
 			);
 		}
 	};
 
+	//Normalize-Mouse-Position
+	const normalizeMousePos = (x: number, y: number) => {
+		const CANVAS_RECT = config.canvasEl!.getBoundingClientRect();
+		return {
+			x: Math.floor((x - CANVAS_RECT.left) / brush.size) * brush.size,
+			y: Math.floor((y - CANVAS_RECT.top) / brush.size) * brush.size,
+		};
+	};
+
+	// const getCurrentPixelColor = (x:number , y:number) => {
+	// 	const DATA = config.canvasCtx?.getImageData(x,y,1,1);
+	// 	const RGB = DATA?.data;
+	// 	return `rgb(${RGB[0]},${RGB[1]},${RGB[2]})`
+	// }
+
 	const holdOn = () => setMouseHold(true);
 	const holdOff = () => setMouseHold(false);
 
 	return (
 		<canvas
-			className="bg-amber-500 mx-auto"
+			className="bg-amber-500 cursor-crosshair"
 			ref={canvasRef}
 			width={500}
 			height={500}
