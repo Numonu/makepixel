@@ -5,7 +5,7 @@ import { MdFileDownload } from "react-icons/md";
 
 export default function PaintToolBar() {
 	return (
-		<aside className="mr-6 flex flex-row gap-6 lg:flex-col">
+		<aside className="flex flex-row gap-6 lg:flex-col">
 			<div className="shadow-neutral-300 p-2 rounded-md flex lg:flex-col gap-4 text-3xl shadow-md">
 				<HiOutlinePaintBrush />
 				<img className="w-9" src="svg/colorpicker.svg" />
