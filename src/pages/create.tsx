@@ -6,7 +6,7 @@ import { BsUpload } from "react-icons/bs";
 export default function Create() {
 	return (
 		<Wrapper>
-			<header className="text-center mt-4 mb-6">
+			<header className="text-center mt-4 mb-16 lg:mb-6">
 				<h1 className="text-black mb-2 text-xl font-medium">
 					New Pixelart
 				</h1>
@@ -15,15 +15,15 @@ export default function Create() {
 					collection
 				</h2>
 			</header>
-			<main className="grid pb-12 gap-4 grid-cols-1 lg:grid-cols-[1fr_min-content_1fr] lg:gap-0">
-				<section className="flex justify-center order-1 lg:justify-end lg:-order-1 lg:mx-0">
+			<main className="grid pb-12 gap-4 grid-cols-1 lg:grid-cols-[1fr_min-content_1fr]">
+				<section className="flex justify-center lg:justify-end lg:-order-1 lg:mx-0">
 					<PaintToolBar />
 				</section>
 				<section>
-					<Canvas size={6} />
+					<Canvas size={64} />
 				</section>
 				<section>
-					<button className="border-neutral-400 w-full max-w-[500px] ml-6  py-1 mx-auto flex  justify-center items-center gap-2 text-lg rounded-md border">
+					<button className="border-neutral-400 w-full max-w-[500px] py-1 mx-auto flex justify-center items-center gap-2 text-lg rounded-md border">
 						<span className="text-xl">
 							<BsUpload />
 						</span>
