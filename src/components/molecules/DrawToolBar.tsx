@@ -5,33 +5,47 @@ import { MdInvertColors } from "react-icons/md";
 import { MdFileDownload } from "react-icons/md";
 import ToolButton from "./ToolButton";
 import { Tool } from "../../global/enums/drawEnums";
+import ToolTip from "../ToolTip";
 
 export default function PaintToolBar() {
 	return (
 		<aside className="flex flex-row gap-6 lg:flex-col">
 			<div className="shadow-neutral-300 p-1 rounded-md flex lg:flex-col gap-2 shadow-md">
-				<ToolButton toolValue={Tool.Brush}>
-					<HiOutlinePaintBrush />
-				</ToolButton>
-				<ToolButton toolValue={Tool.Picker}>
-					<MdInvertColors />
-				</ToolButton>
-				<ToolButton toolValue={Tool.Eraser}>
-					<BsEraser />
-				</ToolButton>
+				<ToolTip tip="Brush" keycode="b">
+					<ToolButton toolValue={Tool.Brush}>
+						<HiOutlinePaintBrush />
+					</ToolButton>
+				</ToolTip>
+				<ToolTip tip="Picker" keycode="P">
+					<ToolButton toolValue={Tool.Picker}>
+						<MdInvertColors />
+					</ToolButton>
+				</ToolTip>
+				<ToolTip tip="Eraser" keycode="e">
+					<ToolButton toolValue={Tool.Eraser}>
+						<BsEraser />
+					</ToolButton>
+				</ToolTip>
 			</div>
 			<div className="shadow-neutral-300 p-1 rounded-md flex lg:flex-col gap-2 shadow-md">
-				<ToolButton>
-					<TfiBackLeft />
-				</ToolButton>
-				<ToolButton>
-					<TfiBackRight />
-				</ToolButton>
+				<ToolTip tip="Revert" keycode="z">
+					<ToolButton>
+						<TfiBackLeft />
+					</ToolButton>
+				</ToolTip>
+
+				<ToolTip tip="Advance" keycode="x">
+					<ToolButton>
+						<TfiBackRight />
+					</ToolButton>
+				</ToolTip>
 			</div>
 			<div className="shadow-neutral-300 p-1 rounded-md flex lg:flex-col gap-2 shadow-md">
-				<ToolButton>
-					<MdFileDownload />
-				</ToolButton>
+				<ToolTip tip="Download" keycode="d">
+					<ToolButton>
+						<MdFileDownload />
+					</ToolButton>
+				</ToolTip>
 			</div>
 		</aside>
 	);
