@@ -1,9 +1,9 @@
 import { useRef, useEffect, useState, useContext } from "react";
 import { requireDependencies } from "../../global/utilities/errorHandlers";
 import { repeatThis } from "../../global/utilities/loops";
-import { drawContext } from "../../global/context/drawContext";
 import { Tool } from "../../global/enums/drawEnums";
 import { Vector2 } from "../../global/types/vectors";
+import { DrawContextTypes, drawContext } from "../../global/context/drawContext";
 
 type DrawCanvasTypes = {
 	size?: number;
@@ -15,7 +15,7 @@ type CanvasTypes = {
 };
 
 export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
-	const { currentTool } = useContext(drawContext);
+	const draw = useContext<DrawContextTypes | null>(drawContext);
 	const canvasRef = useRef(null);
 	const [mouseHold, setMouseHold] = useState(false);
 	const [canvas, setCanvas] = useState<CanvasTypes>({
@@ -63,9 +63,10 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 		};
 	};
 
-	//Return-Action-Function
+	//Return-Action-Type
 	const getAction = (pos: Vector2, size: number) => {
-		switch (currentTool) {
+		requireDependencies(draw);
+		switch (draw!.currentTool) {
 			case Tool.Brush:
 				canvas.context!.fillStyle = brush.color;
 				return canvas.context!.fillRect(pos.x, pos.y, size, size);
