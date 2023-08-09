@@ -70,6 +70,8 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 			case Tool.Brush:
 				canvas.context!.fillStyle = brush.color;
 				return canvas.context!.fillRect(pos.x, pos.y, size, size);
+			case Tool.Eraser:
+				return canvas.context!.clearRect(pos.x, pos.y, size, size);
 			default:
 				break;
 		}
