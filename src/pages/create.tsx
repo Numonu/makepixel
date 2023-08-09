@@ -1,6 +1,6 @@
 import DrawCanvas from "../components/molecules/DrawCanvas";
 import Wrapper from "../components/atoms/Wrapper";
-import DrawToolBar from "../components/molecules/DrawToolBar";
+import DrawToolBar from "../components/organisms/DrawToolBar";
 import { BsUpload } from "react-icons/bs";
 import DrawProvider from "../components/providers/DrawProvider";
 
