@@ -1,16 +1,12 @@
-import { ReactNode, useState, createContext } from "react";
+import { ReactNode, useState } from "react";
+import { drawContext } from "../../global/context/drawContext";
+import { Tool } from "../../global/enums/drawEnums";
 
-type PaintProviderTypes = {
+type DrawProviderTypes = {
 	children: ReactNode;
 };
-const enum Tool {
-	Brush,
-	Picker,
-	Eraser,
-}
-const drawContext = createContext({});
 
-export default function DrawProvider({ children }: PaintProviderTypes) {
+export default function DrawProvider({ children }: DrawProviderTypes) {
 	const [currentTool, setCurrentTool] = useState(Tool.Brush);
 	return (
 		<drawContext.Provider
