@@ -1,6 +1,10 @@
-import {createContext} from "react";
+import { createContext, Dispatch, SetStateAction } from "react";
 import { Tool } from "../enums/drawEnums";
-export const drawContext = createContext({
-    currentTool : Tool.Brush,
-    setCurrentTool : () => null
-});
+
+export type DrawContextTypes = {
+	currentTool: Tool;
+	setCurrentTool: Dispatch<SetStateAction<Tool>>;
+};
+const drawContext = createContext<DrawContextTypes | null>(null);
+
+export { drawContext };
