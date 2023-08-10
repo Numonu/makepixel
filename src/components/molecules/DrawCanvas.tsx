@@ -9,6 +9,7 @@ import {
 } from "../../global/context/drawContext";
 
 type DrawCanvasTypes = {
+	currentSnapshot? : ImageData;
 	size?: number;
 };
 
@@ -17,7 +18,7 @@ type CanvasTypes = {
 	context: CanvasRenderingContext2D | null;
 };
 
-export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
+export default function DrawCanvas({ currentSnapshot ,  size = 8 }: DrawCanvasTypes) {
 	const draw = useContext<DrawContextTypes | null>(drawContext);
 	const canvasRef = useRef(null);
 	const [mouseHold, setMouseHold] = useState(false);
@@ -47,6 +48,10 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 		});
 	}, []);
 
+	useEffect(() => {
+		if(currentSnapshot && canvas.context)canvas.context!.putImageData(currentSnapshot , 0 ,0);
+	} , [currentSnapshot , canvas.context])
+
 	//Execute-Action
 	const mouseAction = (x: number, y: number) => {
 		//Error-Handler
@@ -72,19 +77,31 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 	//Return-Action-Type
 	const getAction = (pos: Vector2, size: number) => {
 		requireDependencies(draw);
-		switch (draw!.currentTool) {
+		switch (draw!.tool.current) {
 			case Tool.Brush:
 				canvas.context!.fillStyle = brush.color;
 				return () => canvas.context!.fillRect(pos.x, pos.y, size, size);
 			case Tool.Eraser:
-				return () => canvas.context!.clearRect(pos.x, pos.y, size, size);
+				return () =>
+					canvas.context!.clearRect(pos.x, pos.y, size, size);
 			default:
 				return () => null;
 		}
 	};
 
 	const holdOn = () => setMouseHold(true);
-	const holdOff = () => setMouseHold(false);
+	const holdOff = () => {
+		requireDependencies(draw, canvas.context, canvas.element);
+		draw!.snapshot.add(
+			canvas.context!.getImageData(
+				0,
+				0,
+				canvas.element!.width,
+				canvas.element!.height
+			)
+		);
+		setMouseHold(false);
+	};
 
 	return (
 		<canvas
