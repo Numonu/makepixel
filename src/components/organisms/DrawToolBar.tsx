@@ -13,26 +13,26 @@ export default function PaintToolBar() {
 		<aside className="flex flex-row gap-6 lg:flex-col">
 			<div className="shadow-neutral-300 p-1 rounded-md flex lg:flex-col gap-2 shadow-md">
 				<ToolTip tip="Brush" keycode="b">
-					<ToolButton.Setter toolValue={Tool.Brush}>
+					<ToolButton.ToolSetter toolValue={Tool.Brush}>
 						<HiOutlinePaintBrush />
-					</ToolButton.Setter>
+					</ToolButton.ToolSetter>
 				</ToolTip>
 				<ToolTip tip="Picker" keycode="P">
-					<ToolButton.Setter toolValue={Tool.Picker}>
+					<ToolButton.ToolSetter toolValue={Tool.Picker}>
 						<MdInvertColors />
-					</ToolButton.Setter>
+					</ToolButton.ToolSetter>
 				</ToolTip>
 				<ToolTip tip="Eraser" keycode="e">
-					<ToolButton.Setter toolValue={Tool.Eraser}>
+					<ToolButton.ToolSetter toolValue={Tool.Eraser}>
 						<BsEraser />
-					</ToolButton.Setter>
+					</ToolButton.ToolSetter>
 				</ToolTip>
 			</div>
 			<div className="shadow-neutral-300 p-1 rounded-md flex lg:flex-col gap-2 shadow-md">
 				<ToolTip tip="Revert" keycode="z">
-					<ToolButton.Setter>
+					<ToolButton.ToolSetter>
 						<TfiBackLeft />
-					</ToolButton.Setter>
+					</ToolButton.ToolSetter>
 				</ToolTip>
 
 				<ToolTip tip="Advance" keycode="x">
