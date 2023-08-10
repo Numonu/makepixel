@@ -17,10 +17,10 @@ export default function ToolButtonSetter({ children, toolValue }: ToolButtonSett
 	return (
 		<button
 			className={`hover:bg-sky-200 p-2 text-2xl rounded-sm transition-colors ${
-				draw!.currentTool == toolValue && "bg-sky-200 text-sky-900"
+				draw!.tool.current == toolValue && "bg-sky-200 text-sky-900"
 			}`}
 			onClick={() =>
-				toolValue != undefined && draw!.setCurrentTool(toolValue)
+				toolValue != undefined && draw!.tool.update(toolValue)
 			}
 		>
 			{children}
