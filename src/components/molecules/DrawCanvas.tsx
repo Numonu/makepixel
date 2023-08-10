@@ -82,7 +82,7 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 
 	return (
 		<canvas
-			className="bg-amber-500 cursor-crosshair"
+			className="bg-amber-500 cursor-crosshair mx-auto"
 			ref={canvasRef}
 			width={500}
 			height={500}
