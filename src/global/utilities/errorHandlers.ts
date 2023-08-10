@@ -6,7 +6,7 @@ const requireDependencies = (...dependencies: unknown[]) => {
         }
     });
     if (missing.length) {
-        throw new Error(`[!]Some dependencies are missing, ${[...missing]}`);
+        throw new Error("[!]Some dependencies are missing");
     }
 };
 
