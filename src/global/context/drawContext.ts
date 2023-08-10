@@ -2,8 +2,16 @@ import { createContext, Dispatch, SetStateAction } from "react";
 import { Tool } from "../enums/drawEnums";
 
 export type DrawContextTypes = {
-	currentTool: Tool;
-	setCurrentTool: Dispatch<SetStateAction<Tool>>;
+	tool: {
+		current: Tool;
+		update: Dispatch<SetStateAction<Tool>>;
+	};
+	snapshot: {
+		current: ImageData | null;
+		add: (imageData: ImageData) => void;
+		previus: () => void;
+		advance: () => void;
+	};
 };
 const drawContext = createContext<DrawContextTypes | null>(null);
 
