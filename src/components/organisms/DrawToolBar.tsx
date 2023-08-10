@@ -3,6 +3,7 @@ import { BsEraser } from "react-icons/bs";
 import { TfiBackLeft, TfiBackRight } from "react-icons/tfi";
 import { MdInvertColors } from "react-icons/md";
 import { MdFileDownload } from "react-icons/md";
+import { BsGrid3X3 } from "react-icons/bs";
 import ToolButton from "../atoms/ToolButton";
 import { Tool } from "../../global/enums/drawEnums";
 import ToolTip from "../atoms/ToolTip";
@@ -41,6 +42,11 @@ export default function PaintToolBar() {
 				</ToolTip>
 			</div>
 			<div className="shadow-neutral-300 p-1 rounded-md flex lg:flex-col gap-2 shadow-md">
+				<ToolTip tip="Grid" keycode="g">
+					<ToolButton>
+						<BsGrid3X3 />
+					</ToolButton>
+				</ToolTip>
 				<ToolTip tip="Download" keycode="d">
 					<ToolButton>
 						<MdFileDownload />
