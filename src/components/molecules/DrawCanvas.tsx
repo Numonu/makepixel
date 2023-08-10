@@ -3,7 +3,10 @@ import { requireDependencies } from "../../global/utilities/errorHandlers";
 import { repeatThis } from "../../global/utilities/loops";
 import { Tool } from "../../global/enums/drawEnums";
 import { Vector2 } from "../../global/types/vectors";
-import { DrawContextTypes, drawContext } from "../../global/context/drawContext";
+import {
+	DrawContextTypes,
+	drawContext,
+} from "../../global/context/drawContext";
 
 type DrawCanvasTypes = {
 	size?: number;
@@ -51,7 +54,10 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 		//Pre-Config
 		const normalPos = normalizeMousePos({ x, y });
 		//Multi-Paint (for disable blurry effect)
-		repeatThis(() => getAction({ x: normalPos.x, y: normalPos.y }, brush.size),5);
+		repeatThis(
+			getAction({ x: normalPos.x, y: normalPos.y }, brush.size),
+			5
+		);
 	};
 
 	//Normalize-Mouse-Position
@@ -69,11 +75,11 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 		switch (draw!.currentTool) {
 			case Tool.Brush:
 				canvas.context!.fillStyle = brush.color;
-				return canvas.context!.fillRect(pos.x, pos.y, size, size);
+				return () => canvas.context!.fillRect(pos.x, pos.y, size, size);
 			case Tool.Eraser:
-				return canvas.context!.clearRect(pos.x, pos.y, size, size);
+				return () => canvas.context!.clearRect(pos.x, pos.y, size, size);
 			default:
-				break;
+				return () => null;
 		}
 	};
 
