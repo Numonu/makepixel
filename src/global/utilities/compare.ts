@@ -1,12 +1,13 @@
-function imageDataAreSame(first: ImageData, second: ImageData) {
-	if(!first.data || !second.data)return true;
+function imageDataAreSame(first: ImageData, second: ImageData | undefined) {
+	if(!second || !second.data)return true;
 
-	const data1 = first.data;
-	const data2 = second.data;
-	const length = data1.length;
+	const DATA1 = first.data;
+	const DATA2 = second.data;
+
+	const length = DATA1.length;
 
 	for (let i = 0; i < length; i++) {
-		if (data1[i] !== data2[i]) {
+		if (DATA1[i] !== DATA2[i]) {
 			return false;
 		}
 	}
