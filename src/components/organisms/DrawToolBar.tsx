@@ -7,8 +7,13 @@ import { BsGrid3X3 } from "react-icons/bs";
 import ToolButton from "../atoms/ToolButton";
 import { Tool } from "../../global/enums/drawEnums";
 import ToolTip from "../atoms/ToolTip";
+import { useContext } from "react";
+import { drawContext } from "../../global/context/drawContext";
+import { requireDependencies } from "../../global/utilities/errorHandlers";
 
 export default function PaintToolBar() {
+	requireDependencies(drawContext);
+	const draw = useContext(drawContext);
 	return (
 		<aside className="flex flex-row gap-6 lg:flex-col">
 			<div className="shadow-neutral-300 p-1 rounded-md flex lg:flex-col gap-2 shadow-md">
@@ -30,13 +35,13 @@ export default function PaintToolBar() {
 			</div>
 			<div className="shadow-neutral-300 p-1 rounded-md flex lg:flex-col gap-2 shadow-md">
 				<ToolTip tip="Revert" keycode="z">
-					<ToolButton.ToolSetter>
+					<ToolButton callback={draw!.snapshot.previus}>
 						<TfiBackLeft />
-					</ToolButton.ToolSetter>
+					</ToolButton>
 				</ToolTip>
 
 				<ToolTip tip="Advance" keycode="x">
-					<ToolButton>
+					<ToolButton callback={draw!.snapshot.advance}>
 						<TfiBackRight />
 					</ToolButton>
 				</ToolTip>
