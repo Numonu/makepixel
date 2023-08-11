@@ -21,10 +21,8 @@ export default function DrawProvider({ children }: DrawProviderTypes) {
 
 	const addSnapshot = (imageData: ImageData) => {
 		//does not apply if there are no changes between this one and the previous one
-		if (snapshot.list.length > 0 && imageDataAreSame(imageData, snapshot.list[snapshot.listFocus]))
-			return;
-		//
-		alert("se agrego una nueva imagen owo");
+		const IMG_ARE_SAME = imageDataAreSame(imageData, snapshot.list[snapshot.listFocus]);
+		if (snapshot.list.length && IMG_ARE_SAME) return;
 		const newSnapshotList = [...snapshot.list, imageData];
 		//slice and update
 		if (newSnapshotList.length > 5) newSnapshotList.shift();
