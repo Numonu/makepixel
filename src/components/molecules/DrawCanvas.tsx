@@ -9,7 +9,6 @@ import {
 } from "../../global/context/drawContext";
 
 type DrawCanvasTypes = {
-	currentSnapshot? : ImageData;
 	size?: number;
 };
 
@@ -18,7 +17,7 @@ type CanvasTypes = {
 	context: CanvasRenderingContext2D | null;
 };
 
-export default function DrawCanvas({ currentSnapshot ,  size = 8 }: DrawCanvasTypes) {
+export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 	const draw = useContext<DrawContextTypes | null>(drawContext);
 	const canvasRef = useRef(null);
 	const [mouseHold, setMouseHold] = useState(false);
@@ -49,8 +48,12 @@ export default function DrawCanvas({ currentSnapshot ,  size = 8 }: DrawCanvasTy
 	}, []);
 
 	useEffect(() => {
-		if(currentSnapshot && canvas.context)canvas.context!.putImageData(currentSnapshot , 0 ,0);
-	} , [currentSnapshot , canvas.context])
+		requireDependencies(draw);
+		if(draw!.snapshot.current && canvas.context){
+			canvas.context!.putImageData(draw!.snapshot.current , 0 ,0);
+			console.log("se reescribio ?");
+		}
+	} , [draw , canvas.context])
 
 	//Execute-Action
 	const mouseAction = (x: number, y: number) => {
@@ -89,19 +92,19 @@ export default function DrawCanvas({ currentSnapshot ,  size = 8 }: DrawCanvasTy
 		}
 	};
 
-	const holdOn = () => setMouseHold(true);
-	const holdOff = () => {
+	//Save-This-Snapshot
+	const takeSnapshot = () => {
 		requireDependencies(draw, canvas.context, canvas.element);
 		draw!.snapshot.add(
 			canvas.context!.getImageData(
-				0,
-				0,
-				canvas.element!.width,
-				canvas.element!.height
+				0,0,
+				canvas.element!.width, canvas.element!.height
 			)
 		);
-		setMouseHold(false);
-	};
+	}
+
+	const holdOn = () => setMouseHold(true);
+	const holdOff = () => setMouseHold(false);
 
 	return (
 		<canvas
@@ -112,7 +115,7 @@ export default function DrawCanvas({ currentSnapshot ,  size = 8 }: DrawCanvasTy
 			onClick={(e) => mouseAction(e.clientX, e.clientY)}
 			onMouseMove={(e) => mouseHold && mouseAction(e.clientX, e.clientY)}
 			onMouseDown={holdOn}
-			onMouseUp={holdOff}
+			onMouseUp={() => {holdOff() , takeSnapshot()}}
 			onMouseOut={holdOff}
 			style={{ imageRendering: "pixelated" }}
 		></canvas>
