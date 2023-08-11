@@ -49,11 +49,10 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 
 	useEffect(() => {
 		requireDependencies(draw);
-		if(draw!.snapshot.current && canvas.context){
-			canvas.context!.putImageData(draw!.snapshot.current , 0 ,0);
-			console.log("se reescribio ?");
+		if (draw!.snapshot.current && canvas.context) {
+			canvas.context!.putImageData(draw!.snapshot.current, 0, 0);
 		}
-	} , [draw , canvas.context])
+	}, [draw, canvas.context]);
 
 	//Execute-Action
 	const mouseAction = (x: number, y: number) => {
@@ -97,11 +96,13 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 		requireDependencies(draw, canvas.context, canvas.element);
 		draw!.snapshot.add(
 			canvas.context!.getImageData(
-				0,0,
-				canvas.element!.width, canvas.element!.height
+				0,
+				0,
+				canvas.element!.width,
+				canvas.element!.height
 			)
 		);
-	}
+	};
 
 	const holdOn = () => setMouseHold(true);
 	const holdOff = () => setMouseHold(false);
@@ -115,7 +116,9 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 			onClick={(e) => mouseAction(e.clientX, e.clientY)}
 			onMouseMove={(e) => mouseHold && mouseAction(e.clientX, e.clientY)}
 			onMouseDown={holdOn}
-			onMouseUp={() => {holdOff() , takeSnapshot()}}
+			onMouseUp={() => {
+				holdOff(), takeSnapshot();
+			}}
 			onMouseOut={holdOff}
 			style={{ imageRendering: "pixelated" }}
 		></canvas>
