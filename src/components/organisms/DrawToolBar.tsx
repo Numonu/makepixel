@@ -10,6 +10,7 @@ import ToolTip from "../atoms/ToolTip";
 import { useContext } from "react";
 import { drawContext } from "../../global/context/drawContext";
 import { requireDependencies } from "../../global/utilities/errorHandlers";
+import RemoteAction from "../atoms/RemoteAction";
 
 export default function PaintToolBar() {
 	requireDependencies(drawContext);
@@ -17,19 +18,22 @@ export default function PaintToolBar() {
 	return (
 		<aside className="flex flex-row gap-6 lg:flex-col">
 			<div className="shadow-neutral-300 p-1 rounded-md flex lg:flex-col gap-2 shadow-md">
-				<ToolTip tip="Brush" keycode="b">
+				<ToolTip tip="Brush" keycode="q">
 					<ToolButton.ToolSetter toolValue={Tool.Brush}>
 						<HiOutlinePaintBrush />
+						<RemoteAction keycode="q"/>
 					</ToolButton.ToolSetter>
 				</ToolTip>
-				<ToolTip tip="Picker" keycode="P">
+				<ToolTip tip="Picker" keycode="w">
 					<ToolButton.ToolSetter toolValue={Tool.Picker}>
 						<MdInvertColors />
+						<RemoteAction keycode="w"/>
 					</ToolButton.ToolSetter>
 				</ToolTip>
 				<ToolTip tip="Eraser" keycode="e">
 					<ToolButton.ToolSetter toolValue={Tool.Eraser}>
 						<BsEraser />
+						<RemoteAction keycode="e"/>
 					</ToolButton.ToolSetter>
 				</ToolTip>
 			</div>
@@ -37,12 +41,14 @@ export default function PaintToolBar() {
 				<ToolTip tip="Revert" keycode="z">
 					<ToolButton callback={draw!.snapshot.previus}>
 						<TfiBackLeft />
+						<RemoteAction keycode="z"/>
 					</ToolButton>
 				</ToolTip>
 
 				<ToolTip tip="Advance" keycode="x">
 					<ToolButton callback={draw!.snapshot.advance}>
 						<TfiBackRight />
+						<RemoteAction keycode="x"/>
 					</ToolButton>
 				</ToolTip>
 			</div>
