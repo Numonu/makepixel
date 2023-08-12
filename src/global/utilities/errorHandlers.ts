@@ -1,15 +1,22 @@
 const requireDependencies = (...dependencies: unknown[]) => {
-    const missing: unknown[] = [];
-    dependencies.forEach((e) => {
-        if (e === null || e == undefined) {
-            missing.push(e);
-        }
-    });
-    if (missing.length) {
-        throw new Error("[!]Some dependencies are missing");
-    }
+	let missingCount: number = 0;
+	dependencies.forEach((e) => {
+		if (e === null || e == undefined) missingCount++;
+	});
+	if (missingCount)
+		throw new Error(`[!] ${missingCount} dependencies have been lost`);
 };
 
-export {
-    requireDependencies
-}
+const checkDependencies = (...dependencies: unknown[]) => {
+	let missingCount: number = 0;
+	dependencies.forEach((e) => {
+		if (e === null || e == undefined) missingCount++;
+	});
+	if (missingCount) {
+		console.error(`[!] ${missingCount} dependencies have been lost`);
+		return false;
+	}
+	return true;
+};
+
+export { requireDependencies, checkDependencies };
