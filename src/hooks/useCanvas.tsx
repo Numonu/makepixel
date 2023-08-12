@@ -4,7 +4,6 @@ import { requireDependencies } from "../global/utilities/errorHandlers";
 type UseCanvasTypes = (
 	gridSize: number,
 	canvasRef: React.MutableRefObject<null>,
-	brushSetter?: React.Dispatch<React.SetStateAction<BrushTypes | null>>
 ) => CanvasStateTypes;
 
 export type CanvasStateTypes = {
@@ -13,12 +12,7 @@ export type CanvasStateTypes = {
 	pixelSize: number;
 };
 
-export type BrushTypes = {
-	color?: string;
-	size: number;
-};
-
-const useCanvas: UseCanvasTypes = (gridSize, canvasRef, brushSetter) => {
+const useCanvas: UseCanvasTypes = (gridSize, canvasRef) => {
 	const [canvas, setCanvas] = useState<CanvasStateTypes>({
 		element: null,
 		context: null,
@@ -32,13 +26,7 @@ const useCanvas: UseCanvasTypes = (gridSize, canvasRef, brushSetter) => {
 			context: CANVAS.getContext("2d"),
 			pixelSize: CANVAS.width / gridSize,
 		});
-		if (brushSetter) {
-			brushSetter({
-				color: "#262626",
-				size: CANVAS.width / gridSize,
-			});
-		}
-	}, []);
+	}, [canvasRef , gridSize]);
 
 	return {
 		element: canvas.element,
