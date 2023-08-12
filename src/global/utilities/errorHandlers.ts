@@ -13,7 +13,7 @@ const checkDependencies = (...dependencies: unknown[]) => {
 		if (e === null || e == undefined) missingCount++;
 	});
 	if (missingCount) {
-		console.error(`[!] ${missingCount} dependencies have been lost`);
+		console.warn(`[!] ${missingCount} dependencies have been lost`);
 		return false;
 	}
 	return true;
