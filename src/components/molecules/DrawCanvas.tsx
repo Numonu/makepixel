@@ -32,7 +32,7 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 		const normalPos = normalizeMousePos({ x, y });
 		//Multi-Paint (for disable blurry effect)
 		repeatThis(
-			getAction({ x: normalPos.x, y: normalPos.y }, brush!.size),
+			getAction({ x: normalPos.x, y: normalPos.y }, canvas.pixelSize),
 			5
 		);
 	};
@@ -43,11 +43,11 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 		const CANVAS_RECT = canvas.element!.getBoundingClientRect();
 		return {
 			x:
-				Math.floor((pos.x - CANVAS_RECT.left) / brush!.size) *
-				brush!.size,
+				Math.floor((pos.x - CANVAS_RECT.left) / canvas.pixelSize) *
+				canvas.pixelSize,
 			y:
-				Math.floor((pos.y - CANVAS_RECT.top) / brush!.size) *
-				brush!.size,
+				Math.floor((pos.y - CANVAS_RECT.top) / canvas.pixelSize) *
+				canvas.pixelSize,
 		};
 	};
 
