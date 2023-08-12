@@ -20,12 +20,21 @@ export default function DrawProvider({ children }: DrawProviderTypes) {
 	});
 
 	const addSnapshot = (imageData: ImageData) => {
-		//does not apply if there are no changes between this one and the previous one
+		if(snapshot.list.length == 0){
+			//UPDATE
+			setSnapshot({
+				...snapshot,
+				list: [imageData],
+			});
+			return;
+		}
+		//WE CHECK THAT THEY ARE DIFFERENT
 		const IMG_ARE_SAME = imageDataAreSame(imageData, snapshot.list[snapshot.listFocus]);
-		if (snapshot.list.length && IMG_ARE_SAME) return;
+		if(IMG_ARE_SAME) return;
+		//SLICE
 		const newSnapshotList = [...snapshot.list, imageData];
-		//slice and update
 		if (newSnapshotList.length > 5) newSnapshotList.shift();
+		//UPDATE
 		snapshot.listFocus = newSnapshotList.length - 1;
 		setSnapshot({
 			...snapshot,
