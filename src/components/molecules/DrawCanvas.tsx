@@ -1,5 +1,4 @@
 import { useRef, useState, useContext } from "react";
-import { requireDependencies } from "../../global/utilities/errorHandlers";
 import { repeatThis } from "../../global/utilities/loops";
 import { Tool } from "../../global/enums/drawEnums";
 import { Vector2 } from "../../global/types/vectors";
