@@ -75,13 +75,17 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 			ref={canvasRef}
 			width={500}
 			height={500}
-			onClick={(e) => mouseAction(e.clientX, e.clientY)}
-			onMouseMove={(e) => mouseHold && mouseAction(e.clientX, e.clientY)}
 			onMouseDown={holdOn}
+			onMouseMove={(e) => mouseHold && mouseAction(e.clientX, e.clientY)}
+			onClick={(e) => mouseAction(e.clientX, e.clientY)}
 			onMouseUp={() => {
-				holdOff(), takeSnapshot();
+				holdOff();
+				takeSnapshot();
 			}}
-			onMouseOut={holdOff}
+			onMouseOut={() => {
+				holdOff();
+				takeSnapshot();
+			}}
 			style={{ imageRendering: "pixelated" }}
 		></canvas>
 	);
