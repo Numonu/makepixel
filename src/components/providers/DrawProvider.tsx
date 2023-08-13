@@ -33,7 +33,7 @@ export default function DrawProvider({ children }: DrawProviderTypes) {
 		if(IMG_ARE_SAME) return;
 		//SLICE
 		const newSnapshotList = [...snapshot.list, imageData];
-		if (newSnapshotList.length > 5) newSnapshotList.shift();
+		if (newSnapshotList.length > 10) newSnapshotList.shift();
 		//UPDATE
 		snapshot.listFocus = newSnapshotList.length - 1;
 		setSnapshot({
