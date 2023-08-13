@@ -66,27 +66,25 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 		}
 	};
 
-	const holdOn = () => setMouseHold(true);
-	const holdOff = () => setMouseHold(false);
+	const holdOn = () => {
+		setMouseHold(true); takeSnapshot();
+	};
+	const holdOff = () => {
+		setMouseHold(false); takeSnapshot();
+	};
 
 	return (
 		<canvas
 			className="bg-amber-500 cursor-crosshair mx-auto"
+			style={{ imageRendering: "pixelated" }}
 			ref={canvasRef}
 			width={500}
 			height={500}
-			onMouseDown={holdOn}
 			onMouseMove={(e) => mouseHold && mouseAction(e.clientX, e.clientY)}
 			onClick={(e) => mouseAction(e.clientX, e.clientY)}
-			onMouseUp={() => {
-				holdOff();
-				takeSnapshot();
-			}}
-			onMouseOut={() => {
-				holdOff();
-				takeSnapshot();
-			}}
-			style={{ imageRendering: "pixelated" }}
+			onMouseDown={holdOn}
+			onMouseUp={holdOff}
+			onMouseOut={holdOff}
 		></canvas>
 	);
 }
