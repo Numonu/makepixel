@@ -14,6 +14,8 @@ export type SnapshotTypes = {
 };
 
 export default function DrawProvider({ children }: DrawProviderTypes) {
+	const [currentColor , setCurrentColor] = useState("#262626");
+
 	const [currentTool, setCurrentTool] = useState(Tool.Brush);
 
 	const [snapshot, dispatch] = useReducer(snapshotReduce, {
@@ -52,6 +54,10 @@ export default function DrawProvider({ children }: DrawProviderTypes) {
 					previus: previusSnapshot,
 					advance: advanceSnapshot,
 				},
+				color : {
+					current : currentColor,
+					update : setCurrentColor
+				}
 			}}
 		>
 			{children}
