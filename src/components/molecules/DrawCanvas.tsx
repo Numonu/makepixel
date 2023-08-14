@@ -21,7 +21,6 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 	const { takeSnapshot } = useSnapshot(draw, canvas);
 	//
 	const [mouseHold, setMouseHold] = useState(false);
-	const [brush, setBrush] = useState("red");
 
 	//Execute-Action
 	const mouseAction = (x: number, y: number) => {
@@ -45,7 +44,7 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 
 		switch (draw!.tool.current) {
 			case Tool.Brush:
-				canvas.context!.fillStyle = brush;
+				canvas.context!.fillStyle = draw!.color.current;
 				return () =>
 					canvas.context!.fillRect(
 						pos.x,
