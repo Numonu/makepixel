@@ -1,8 +1,8 @@
 import DrawCanvas from "../components/molecules/DrawCanvas";
 import Wrapper from "../components/atoms/Wrapper";
 import DrawToolBar from "../components/organisms/DrawToolBar";
-import { BsUpload } from "react-icons/bs";
 import DrawProvider from "../components/providers/DrawProvider";
+import ToolOptions from "../components/ToolOptions";
 
 export default function Create() {
 	return (
@@ -22,15 +22,10 @@ export default function Create() {
 						<DrawToolBar />
 					</section>
 					<section>
-						<DrawCanvas size={64} />
+						<DrawCanvas size={16} />
 					</section>
-					<section>
-						<button className="border-neutral-400 w-full max-w-[500px] py-1 mx-auto flex justify-center items-center gap-2 text-lg rounded-md border">
-							<span className="text-xl">
-								<BsUpload />
-							</span>
-							Publish
-						</button>
+					<section className="border-neutral-300 p-2 rounded-md border">
+						<ToolOptions />
 					</section>
 				</DrawProvider>
 			</main>
