@@ -49,27 +49,31 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 					canvas.context!.fillRect(
 						pos.x,
 						pos.y,
-						PIXEL_SIZE * draw!.effectSize.current,
-						PIXEL_SIZE * draw!.effectSize.current
+						applySize(PIXEL_SIZE),
+						applySize(PIXEL_SIZE)
 					);
 			case Tool.Eraser:
 				return () =>
 					canvas.context!.clearRect(
 						pos.x,
 						pos.y,
-						PIXEL_SIZE,
-						PIXEL_SIZE
+						applySize(PIXEL_SIZE),
+						applySize(PIXEL_SIZE)
 					);
 			default:
 				return () => null;
 		}
 	};
-
+	const applySize = (value: number) => {
+		return value * draw!.effectSize.current;
+	};
 	const holdOn = () => {
-		setMouseHold(true); takeSnapshot();
+		setMouseHold(true);
+		takeSnapshot();
 	};
 	const holdOff = () => {
-		setMouseHold(false); takeSnapshot();
+		setMouseHold(false);
+		takeSnapshot();
 	};
 
 	return (
