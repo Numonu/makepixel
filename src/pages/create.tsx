@@ -2,7 +2,7 @@ import DrawCanvas from "../components/molecules/DrawCanvas";
 import Wrapper from "../components/atoms/Wrapper";
 import DrawToolBar from "../components/organisms/DrawToolBar";
 import DrawProvider from "../components/providers/DrawProvider";
-import ToolOptions from "../components/ToolOptions";
+import ToolOptions from "../components/organisms/ToolOptions";
 
 export default function Create() {
 	return (
