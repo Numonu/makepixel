@@ -4,5 +4,5 @@ import Range from "./Range";
 
 export default function EffectSize() {
 	const draw = useContext(drawContext);
-	return <Range onChange={(e) => draw!.effectSize.update(e)} />;
+	return <Range current={draw!.effectSize.current} onChange={(e) => draw!.effectSize.update(e)} />;
 }
