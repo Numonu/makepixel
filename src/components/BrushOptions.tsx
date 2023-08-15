@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { HexColorPicker } from "react-colorful";
 import CopyButton from "./molecules/CopyButton";
 import { drawContext } from "../global/context/drawContext";
+import EffectSize from "./molecules/EffectSize";
 
 export default function BrushOptions() {
 	const draw = useContext(drawContext);
@@ -30,12 +31,7 @@ export default function BrushOptions() {
 			</div>
 			<div>
 				<h2 className="text-neutral-700 mb-2">Brush Size</h2>
-				<input
-					className="accent-sky-300"
-					type="range"
-					min={1}
-					max={10}
-				/>
+				<EffectSize/>
 			</div>
 		</div>
 	);
