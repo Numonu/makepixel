@@ -24,8 +24,10 @@ export default function Create() {
 					<section>
 						<DrawCanvas size={16} />
 					</section>
-					<section className="border-neutral-300 p-2 rounded-md border">
-						<ToolOptions />
+					<section>
+						<div className="border-neutral-300 w-min min-w-[200px] h-full p-2 rounded-md border">
+							<ToolOptions />
+						</div>
 					</section>
 				</DrawProvider>
 			</main>
