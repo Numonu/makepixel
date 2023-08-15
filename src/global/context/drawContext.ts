@@ -12,10 +12,14 @@ export type DrawContextTypes = {
 		previus: () => void;
 		advance: () => void;
 	};
-	color : {
-		current : string;
-		update : Dispatch<SetStateAction<string>>;
-	}
+	color: {
+		current: string;
+		update: Dispatch<SetStateAction<string>>;
+	};
+	effectSize: {
+		current: number;
+		update: Dispatch<SetStateAction<number>>;
+	};
 };
 const drawContext = createContext<DrawContextTypes | null>(null);
 
