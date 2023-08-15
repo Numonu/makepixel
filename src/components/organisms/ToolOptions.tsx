@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { drawContext } from "../global/context/drawContext";
-import { Tool } from "../global/enums/drawEnums";
+import { drawContext } from "../../global/context/drawContext";
+import { Tool } from "../../global/enums/drawEnums";
 import BrushOptions from "./BrushOptions";
 
 export default function ToolOptions() {
