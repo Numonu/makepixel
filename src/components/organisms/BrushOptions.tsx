@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { HexColorPicker } from "react-colorful";
 import CopyButton from "../molecules/CopyButton";
 import { drawContext } from "../../global/context/drawContext";
-import EffectSize from "../molecules/EffectSize";
 
 export default function BrushOptions() {
 	const draw = useContext(drawContext);
