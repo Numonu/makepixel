@@ -49,8 +49,8 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 					canvas.context!.fillRect(
 						pos.x,
 						pos.y,
-						PIXEL_SIZE,
-						PIXEL_SIZE
+						PIXEL_SIZE * draw!.effectSize.current,
+						PIXEL_SIZE * draw!.effectSize.current
 					);
 			case Tool.Eraser:
 				return () =>
