@@ -29,10 +29,6 @@ export default function BrushOptions() {
 					onChange={(e) => updateColor(e)}
 				/>
 			</div>
-			<div>
-				<h2 className="text-neutral-700 mb-2">Brush Size</h2>
-				<EffectSize/>
-			</div>
 		</div>
 	);
 }
