@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { HexColorPicker } from "react-colorful";
 import CopyButton from "../molecules/CopyButton";
 import { drawContext } from "../../global/context/drawContext";
+import RecentColors from "../molecules/RecentColors";
 
 export default function BrushOptions() {
 	const draw = useContext(drawContext);
@@ -29,6 +30,10 @@ export default function BrushOptions() {
 					color={draw!.color.current}
 					onChange={(e) => updateColor(e)}
 				/>
+			</div>
+			<div>
+				<h2 className="text-neutral-700 mb-2">Recent Colors</h2>
+				<RecentColors/>
 			</div>
 		</div>
 	);
