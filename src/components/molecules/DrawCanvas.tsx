@@ -25,7 +25,7 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 	//Execute-Action
 	const mouseAction = (x: number, y: number) => {
 		const NORMAL = normalizeMousePos({ x, y });
-		repeatThis(getAction(NORMAL), 5);
+		repeatThis(getAction(NORMAL), 3);
 	};
 
 	//Normalize-Mouse-Position
@@ -60,6 +60,12 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 						applySize(PIXEL_SIZE),
 						applySize(PIXEL_SIZE)
 					);
+			case Tool.Picker:
+				return () => {
+					const PIXEL = canvas.context!.getImageData(pos.x,pos.y,1,1).data;
+					const HEX = '#' + ((1 << 24) | (PIXEL[0] << 16) | (PIXEL[1] << 8) | PIXEL[2]).toString(16).slice(1);
+					draw!.color.update(HEX);	
+				}
 			default:
 				return () => null;
 		}
