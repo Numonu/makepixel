@@ -2,8 +2,7 @@ import { HiOutlinePaintBrush } from "react-icons/hi2";
 import { BsEraser } from "react-icons/bs";
 import { TfiBackLeft, TfiBackRight } from "react-icons/tfi";
 import { MdInvertColors } from "react-icons/md";
-import { MdFileDownload } from "react-icons/md";
-import { BsGrid3X3 } from "react-icons/bs";
+import { BsNut , BsCloudUpload , BsDownload} from "react-icons/bs";
 import ToolButton from "../atoms/ToolButton";
 import { Tool } from "../../global/enums/drawEnums";
 import ToolTip from "../atoms/ToolTip";
@@ -53,14 +52,22 @@ export default function PaintToolBar() {
 				</ToolTip>
 			</div>
 			<div className="border-neutral-300 p-1 rounded-md border flex lg:flex-col gap-2">
-				<ToolTip tip="Grid" keycode="g">
+				<ToolTip tip="Config" keycode="c">
 					<ToolButton>
-						<BsGrid3X3 />
+						<BsNut />
+						<RemoteAction keycode="c"/>
 					</ToolButton>
 				</ToolTip>
 				<ToolTip tip="Download" keycode="d">
 					<ToolButton>
-						<MdFileDownload />
+						<BsDownload />
+						<RemoteAction keycode="d"/>
+					</ToolButton>
+				</ToolTip>
+				<ToolTip tip="Upload" keycode="u">
+					<ToolButton>
+						<BsCloudUpload/>
+						<RemoteAction keycode="u"/>
 					</ToolButton>
 				</ToolTip>
 			</div>
