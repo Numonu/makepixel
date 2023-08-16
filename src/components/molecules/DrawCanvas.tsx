@@ -44,22 +44,24 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 
 		switch (draw!.tool.current) {
 			case Tool.Brush:
-				canvas.context!.fillStyle = draw!.color.current;
-				return () =>
+				return () => {
+					canvas.context!.fillStyle = draw!.color.current;
 					canvas.context!.fillRect(
 						pos.x,
 						pos.y,
 						applySize(PIXEL_SIZE),
 						applySize(PIXEL_SIZE)
 					);
+				}
 			case Tool.Eraser:
-				return () =>
+				return () => {
 					canvas.context!.clearRect(
 						pos.x,
 						pos.y,
 						applySize(PIXEL_SIZE),
 						applySize(PIXEL_SIZE)
 					);
+				}
 			case Tool.Picker:
 				return () => {
 					const PIXEL = canvas.context!.getImageData(pos.x,pos.y,1,1).data;
@@ -80,6 +82,8 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 	const holdOff = () => {
 		setMouseHold(false);
 		takeSnapshot();
+
+		draw!.color.add(draw!.color.current);//Save used color to history
 	};
 
 	return (
