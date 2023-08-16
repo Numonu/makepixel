@@ -10,6 +10,7 @@ import { useContext } from "react";
 import { drawContext } from "../../global/context/drawContext";
 import { requireDependencies } from "../../global/utilities/errorHandlers";
 import RemoteAction from "../atoms/RemoteAction";
+import ToolSetter from "../molecules/ToolSetter";
 
 export default function PaintToolBar() {
 	requireDependencies(drawContext);
@@ -18,22 +19,22 @@ export default function PaintToolBar() {
 		<aside className="flex flex-row gap-6 lg:flex-col">
 			<div className="border-neutral-300 p-1 rounded-md border flex lg:flex-col gap-2">
 				<ToolTip tip="Brush" keycode="q">
-					<ToolButton.ToolSetter toolValue={Tool.Brush}>
+					<ToolSetter toolValue={Tool.Brush}>
 						<HiOutlinePaintBrush />
 						<RemoteAction keycode="q"/>
-					</ToolButton.ToolSetter>
+					</ToolSetter>
 				</ToolTip>
 				<ToolTip tip="Picker" keycode="w">
-					<ToolButton.ToolSetter toolValue={Tool.Picker}>
+					<ToolSetter toolValue={Tool.Picker}>
 						<MdInvertColors />
 						<RemoteAction keycode="w"/>
-					</ToolButton.ToolSetter>
+					</ToolSetter>
 				</ToolTip>
 				<ToolTip tip="Eraser" keycode="e">
-					<ToolButton.ToolSetter toolValue={Tool.Eraser}>
+					<ToolSetter toolValue={Tool.Eraser}>
 						<BsEraser />
 						<RemoteAction keycode="e"/>
-					</ToolButton.ToolSetter>
+					</ToolSetter>
 				</ToolTip>
 			</div>
 			<div className="border-neutral-300 p-1 rounded-md border flex lg:flex-col gap-2">
