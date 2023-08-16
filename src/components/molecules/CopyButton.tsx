@@ -1,5 +1,5 @@
 import { AiOutlineCopy } from "react-icons/ai";
-import ToolButton from "../atoms/ToolButton";
+import ToolButton from "../atoms/ToolCall";
 import ToolTip from "../atoms/ToolTip";
 
 type CopyButtonProps = {
