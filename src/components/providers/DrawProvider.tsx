@@ -17,6 +17,9 @@ export default function DrawProvider({ children }: DrawProviderTypes) {
 	//the current color for brush tool
 	const [currentColor , setCurrentColor] = useState("#262626");
 
+	//list of recently used colors
+	const [colorHistory , setColorHistory] = useState(["262626"]);
+
 	//the current active tool
 	const [currentTool, setCurrentTool] = useState(Tool.Brush);
 
@@ -47,6 +50,12 @@ export default function DrawProvider({ children }: DrawProviderTypes) {
 		});
 	};
 
+	const addColorToHistory = (newColor : string) => {
+		const NEW_LIST = [...new Set([newColor,...colorHistory , ])];
+		if(NEW_LIST.length > 5)NEW_LIST.pop();
+		setColorHistory(NEW_LIST);
+	}
+
 	return (
 		<drawContext.Provider
 			value={{
@@ -62,6 +71,8 @@ export default function DrawProvider({ children }: DrawProviderTypes) {
 				},
 				color : {
 					current : currentColor,
+					history : colorHistory,
+					add : addColorToHistory,
 					update : setCurrentColor
 				},
 				effectSize : {

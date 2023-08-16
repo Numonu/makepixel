@@ -14,7 +14,9 @@ export type DrawContextTypes = {
 	};
 	color: {
 		current: string;
-		update: Dispatch<SetStateAction<string>>;
+		history : string[];
+		add : (newColor:string) => void;
+		update : Dispatch<SetStateAction<string>>;
 	};
 	effectSize: {
 		current: number;
