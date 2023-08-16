@@ -6,12 +6,12 @@ import {
 	drawContext,
 } from "../../global/context/drawContext";
 
-type ToolButtonSetterTypes = {
+type ToolSetterTypes = {
 	children: ReactNode;
 	toolValue?: Tool;
 };
 
-export default function ToolButtonSetter({ children, toolValue }: ToolButtonSetterTypes) {
+export default function ToolSetter({ children, toolValue }: ToolSetterTypes) {
 	requireDependencies(drawContext);
 	const draw = useContext<DrawContextTypes | null>(drawContext);
 	return (
