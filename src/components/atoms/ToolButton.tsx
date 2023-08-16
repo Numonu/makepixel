@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import ToolButtonSetter from "../compounds/ToolButtonToolSetter";
 
 type ToolButtonTypes = {
 	children: ReactNode;
@@ -12,5 +11,3 @@ export default function ToolButton({ children , callback }: ToolButtonTypes) {
 		</button>
 	);
 }
-
-ToolButton.ToolSetter = ToolButtonSetter;
