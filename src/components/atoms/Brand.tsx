@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
+
 export default function Brand() {
 	return (
-		<div className="flex items-center gap-2">
+		<Link className="flex items-center gap-2" to={"/"}>
 			<span className="text-red-500 text-3xl">
 				<img
 					className="w-9"
@@ -9,6 +11,6 @@ export default function Brand() {
 				/>
 			</span>
 			<span className="hidden text-2xl sm:block">Pixelcrafters</span>
-		</div>
+		</Link>
 	);
 }
