@@ -18,6 +18,7 @@ const useCanvas: UseCanvasTypes = (gridSize, canvasRef) => {
 		context: null,
 		pixelSize: 0,
 	});
+	//Actualizar el estado de propiedades de nuestro canvas
 	useEffect(() => {
 		requireDependencies(canvasRef.current);
 		const CANVAS = canvasRef.current! as HTMLCanvasElement;
