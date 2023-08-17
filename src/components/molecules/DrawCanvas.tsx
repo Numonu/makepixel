@@ -78,12 +78,12 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 	const holdOn = () => {
 		setMouseHold(true);
 		takeSnapshot();
+		//Save used color to history
+		draw!.color.add(draw!.color.current);
 	};
 	const holdOff = () => {
 		setMouseHold(false);
 		takeSnapshot();
-
-		draw!.color.add(draw!.color.current);//Save used color to history
 	};
 
 	return (
