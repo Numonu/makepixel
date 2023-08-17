@@ -51,6 +51,7 @@ export default function DrawProvider({ children }: DrawProviderTypes) {
 	};
 
 	const addColorToHistory = (newColor : string) => {
+		if(newColor === colorHistory[0]) return;
 		const NEW_LIST = [newColor,...colorHistory , ];
 		if(NEW_LIST.length > 6)NEW_LIST.pop();
 		setColorHistory(NEW_LIST);
