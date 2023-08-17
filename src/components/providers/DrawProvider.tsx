@@ -18,7 +18,7 @@ export default function DrawProvider({ children }: DrawProviderTypes) {
 	const [currentColor , setCurrentColor] = useState("#262626");
 
 	//list of recently used colors
-	const [colorHistory , setColorHistory] = useState(["262626"]);
+	const [colorHistory , setColorHistory] = useState(new Array(6).fill(null));
 
 	//the current active tool
 	const [currentTool, setCurrentTool] = useState(Tool.Brush);
@@ -51,8 +51,8 @@ export default function DrawProvider({ children }: DrawProviderTypes) {
 	};
 
 	const addColorToHistory = (newColor : string) => {
-		const NEW_LIST = [...new Set([newColor,...colorHistory , ])];
-		if(NEW_LIST.length > 14)NEW_LIST.pop();
+		const NEW_LIST = [newColor,...colorHistory , ];
+		if(NEW_LIST.length > 6)NEW_LIST.pop();
 		setColorHistory(NEW_LIST);
 	}
 
