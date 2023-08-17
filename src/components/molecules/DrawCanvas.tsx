@@ -28,7 +28,7 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 		repeatThis(getAction(NORMAL), 3);
 	};
 
-	//Normalize-Mouse-Position
+	//Normalizar la posicion del mouse
 	const normalizeMousePos = (pos: Vector2) => {
 		const CANVAS_RECT = canvas.element!.getBoundingClientRect();
 		const PIXEL_SIZE = canvas.pixelSize;
@@ -38,7 +38,7 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 		};
 	};
 
-	//Return-Action-Type
+	//Devolver una callback correspondiente a la accion de nuestra herramienta activa
 	const getAction = (pos: Vector2) => {
 		const PIXEL_SIZE = canvas.pixelSize;
 
@@ -72,15 +72,18 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 				return () => null;
 		}
 	};
+	//Aplicar el exceso segun el aumento de tamaño en nuestro area de efecto
 	const applySize = (value: number) => {
 		return value * draw!.effectSize.current;
 	};
+	//Indica que el mouse se pulso , invoca una captura de pixeles y guarda el color usado
 	const holdOn = () => {
 		setMouseHold(true);
 		takeSnapshot();
 		//Save used color to history
 		draw!.color.add(draw!.color.current);
 	};
+	//Indica que el mouse se dejo de pulsar e invoca una captura de pixeles
 	const holdOff = () => {
 		setMouseHold(false);
 		takeSnapshot();
