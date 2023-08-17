@@ -2,7 +2,7 @@ import DrawCanvas from "../components/molecules/DrawCanvas";
 import Wrapper from "../components/atoms/Wrapper";
 import DrawToolBar from "../components/organisms/DrawToolBar";
 import DrawProvider from "../components/providers/DrawProvider";
-import ToolOptions from "../components/organisms/ToolOptions";
+import DrawOptions from "../components/organisms/DrawOptions";
 
 export default function Create() {
 	return (
@@ -22,11 +22,11 @@ export default function Create() {
 						<DrawToolBar />
 					</section>
 					<section>
-						<DrawCanvas size={16} />
+						<DrawCanvas size={32} />
 					</section>
 					<section>
 						<div className="border-neutral-300 w-min min-w-[200px] h-full p-2 rounded-md border">
-							<ToolOptions />
+							<DrawOptions/>
 						</div>
 					</section>
 				</DrawProvider>
