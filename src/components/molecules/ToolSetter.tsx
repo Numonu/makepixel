@@ -1,5 +1,5 @@
 import { ReactNode, useContext } from "react";
-import { Tool } from "../../global/enums/drawEnums";
+import { Tool } from "../../global/enums/drawTools";
 import { requireDependencies } from "../../global/utilities/errorHandlers";
 import {
 	DrawContextTypes,

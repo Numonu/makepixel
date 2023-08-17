@@ -1,6 +1,6 @@
 import { useRef, useState, useContext } from "react";
 import { repeatThis } from "../../global/utilities/loops";
-import { Tool } from "../../global/enums/drawEnums";
+import { Tool } from "../../global/enums/drawTools";
 import { Vector2 } from "../../global/types/vectors";
 import {
 	DrawContextTypes,

@@ -1,6 +1,6 @@
 import { ReactNode, useReducer, useState } from "react";
 import { drawContext } from "../../global/context/drawContext";
-import { Tool } from "../../global/enums/drawEnums";
+import { Tool } from "../../global/enums/drawTools";
 import {
 	snapshotReduce,
 } from "../../reducers/snapshotReduce";

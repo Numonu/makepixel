@@ -1,5 +1,5 @@
 import { createContext, Dispatch, SetStateAction } from "react";
-import { Tool } from "../enums/drawEnums";
+import { Tool } from "../enums/drawTools";
 
 export type DrawContextTypes = {
 	tool: {
