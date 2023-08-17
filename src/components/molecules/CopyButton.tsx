@@ -12,7 +12,7 @@ export default function CopyButton({ target }: CopyButtonProps) {
 		navigator.clipboard
 			.writeText(target)
 			.then(() => {
-				toast.success("Copied to clipboard");
+				toast.success("Color copied to clipboard");
 			})
 			.catch(() => {
 				toast.error("This function is not supported");
