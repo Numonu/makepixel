@@ -5,6 +5,7 @@ import { MdInvertColors } from "react-icons/md";
 import { BsNut , BsCloudUpload , BsDownload} from "react-icons/bs";
 import ToolButton from "../atoms/ToolCall";
 import { Tool } from "../../global/enums/drawEnums";
+import {PiPaintBucket} from "react-icons/pi"
 import ToolTip from "../atoms/ToolTip";
 import { useContext } from "react";
 import { drawContext } from "../../global/context/drawContext";
@@ -34,6 +35,12 @@ export default function PaintToolBar() {
 					<ToolSetter toolValue={Tool.Eraser}>
 						<BsEraser />
 						<RemoteAction keycode="e"/>
+					</ToolSetter>
+				</ToolTip>
+				<ToolTip tip="Bucket" keycode="r">
+					<ToolSetter toolValue={Tool.Bucket}>
+						<PiPaintBucket />
+						<RemoteAction keycode="r"/>
 					</ToolSetter>
 				</ToolTip>
 			</div>
