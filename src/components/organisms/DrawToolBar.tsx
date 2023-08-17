@@ -16,7 +16,7 @@ export default function PaintToolBar() {
 	requireDependencies(drawContext);
 	const draw = useContext(drawContext);
 	return (
-		<aside className="flex flex-row gap-6 lg:flex-col">
+		<aside className="flex flex-wrap justify-center flex-row gap-6 lg:flex-col lg:justify-start">
 			<div className="border-neutral-300 p-1 rounded-md border flex lg:flex-col gap-2">
 				<ToolTip tip="Brush" keycode="q">
 					<ToolSetter toolValue={Tool.Brush}>
