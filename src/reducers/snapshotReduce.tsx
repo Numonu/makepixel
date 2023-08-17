@@ -20,30 +20,32 @@ export const snapshotReduce: SnapshotReduceTypes = (
 	action: SnapshotActionTypes
 ) => {
 	switch (action.type) {
+		//En este caso agregamos un nuevo snapshot a la cola
 		case "add": {
 			if (!action.value) return state;
+			//Si nuestra cola esta vacia simplemente agregamos la nueva
 			if (state.list.length == 0) {
-				//UPDATE
 				return {
 					...state,
 					list: [action.value],
 				};
 			}
-			//WE CHECK THAT THEY ARE DIFFERENT
+			//Para continuar el nuevo snapshot debe ser diferente al anterior
 			const IMG_ARE_SAME = imageDataAreSame(
 				action.value,
 				state.list[state.listFocus]
 			);
 			if (IMG_ARE_SAME) return state;
-			//SLICE
+			//Si la cola excede el limite la cortamos
 			const newSnapshotList = [...state.list, action.value];
 			if (newSnapshotList.length > 10) newSnapshotList.shift();
-			//UPDATE
+			//Agregamos la nueva snapshot a la cola
 			return {
 				list: newSnapshotList,
                 listFocus : newSnapshotList.length - 1
 			};
 		}
+		//Movemos el foco al snapshot anterior
 		case "previus": {
             console.log("previus");
 			const NEW_ORDER = Math.max(0, state.listFocus - 1);
@@ -52,6 +54,7 @@ export const snapshotReduce: SnapshotReduceTypes = (
 				listFocus: NEW_ORDER,
 			};
 		}
+		//Movemos el foco al snapshot siguiente
 		case "advance": {
             console.log("advance");
 			const NEW_ORDER = Math.min(
