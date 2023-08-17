@@ -1,4 +1,5 @@
 import { AiOutlineCopy } from "react-icons/ai";
+import {toast} from "sonner";
 import ToolButton from "../atoms/ToolCall";
 import ToolTip from "../atoms/ToolTip";
 
@@ -11,10 +12,10 @@ export default function CopyButton({ target }: CopyButtonProps) {
 		navigator.clipboard
 			.writeText(target)
 			.then(() => {
-				// Success message or other desired behavior
+				toast.success("Copied to clipboard");
 			})
 			.catch(() => {
-				// Handle error
+				toast.error("This function is not supported");
 			});
 	};
 
