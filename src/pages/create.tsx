@@ -22,7 +22,7 @@ export default function Create() {
 						<DrawToolBar />
 					</section>
 					<section>
-						<DrawCanvas size={32} />
+						<DrawCanvas/>
 					</section>
 					<section>
 						<div className="border-neutral-300 w-min min-w-[200px] h-full p-2 rounded-md border">
