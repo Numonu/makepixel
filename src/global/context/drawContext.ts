@@ -18,8 +18,8 @@ export type DrawContextTypes = {
 		add : (newColor:string) => void;
 		update : Dispatch<SetStateAction<string>>;
 	};
-	effectSize: {
-		current: number;
+	grid: {
+		size: number;
 		update: Dispatch<SetStateAction<number>>;
 	};
 };
