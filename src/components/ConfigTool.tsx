@@ -29,7 +29,7 @@ export default function ConfigTool() {
 								<h2 className="text-neutral-900 font-medium text-xl mb-2">Settings</h2>
 								<p className="text-neutral-700">Configure your workspace</p>
 							</div>
-							<span className="text-3xl cursor-pointer opacity-70 hover:opacity-100 transition-opacity" onClick={off}>
+							<span className="text-neutral-500 text-3xl cursor-pointer" onClick={off}>
 								<MdOutlineCancel/>
 							</span>
 						</header>
