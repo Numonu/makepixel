@@ -13,7 +13,7 @@ import { requireDependencies } from "../../global/utilities/errorHandlers";
 import RemoteAction from "../atoms/RemoteAction";
 import ToolSetter from "../molecules/ToolSetter";
 import DownloadTool from "../molecules/DownloadTool";
-import ConfigTool from "../ConfigTool";
+import ConfigTool from "./ConfigTool";
 
 export default function PaintToolBar() {
 	requireDependencies(drawContext);
