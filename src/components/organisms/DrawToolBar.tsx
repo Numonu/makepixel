@@ -3,7 +3,7 @@ import { BsEraser } from "react-icons/bs";
 import { TfiBackLeft, TfiBackRight } from "react-icons/tfi";
 import { MdInvertColors } from "react-icons/md";
 import { BsNut , BsCloudUpload , BsDownload} from "react-icons/bs";
-import ToolButton from "../atoms/ToolCall";
+import ToolCall from "../atoms/ToolCall";
 import { Tool } from "../../global/enums/drawTools";
 import {PiPaintBucket} from "react-icons/pi"
 import ToolTip from "../atoms/ToolTip";
@@ -46,37 +46,37 @@ export default function PaintToolBar() {
 			</div>
 			<div className="border-neutral-300 p-1 rounded-md border flex lg:flex-col gap-2">
 				<ToolTip tip="Revert" keycode="z">
-					<ToolButton callback={draw!.snapshot.previus}>
+					<ToolCall callback={draw!.snapshot.previus}>
 						<TfiBackLeft />
 						<RemoteAction keycode="z"/>
-					</ToolButton>
+					</ToolCall>
 				</ToolTip>
 
 				<ToolTip tip="Advance" keycode="x">
-					<ToolButton callback={draw!.snapshot.advance}>
+					<ToolCall callback={draw!.snapshot.advance}>
 						<TfiBackRight />
 						<RemoteAction keycode="x"/>
-					</ToolButton>
+					</ToolCall>
 				</ToolTip>
 			</div>
 			<div className="border-neutral-300 p-1 rounded-md border flex lg:flex-col gap-2">
 				<ToolTip tip="Config" keycode="c">
-					<ToolButton>
+					<ToolCall>
 						<BsNut />
 						<RemoteAction keycode="c"/>
-					</ToolButton>
+					</ToolCall>
 				</ToolTip>
 				<ToolTip tip="Download" keycode="d">
-					<ToolButton>
+					<ToolCall>
 						<BsDownload />
 						<RemoteAction keycode="d"/>
-					</ToolButton>
+					</ToolCall>
 				</ToolTip>
 				<ToolTip tip="Upload" keycode="u">
-					<ToolButton>
+					<ToolCall>
 						<BsCloudUpload/>
 						<RemoteAction keycode="u"/>
-					</ToolButton>
+					</ToolCall>
 				</ToolTip>
 			</div>
 		</aside>
