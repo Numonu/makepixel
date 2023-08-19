@@ -8,6 +8,7 @@ import {
 } from "../../global/context/drawContext";
 import useCanvas, { CanvasStateTypes } from "../../hooks/useCanvas";
 import useSnapshot from "../../hooks/useSnapshot";
+import { CANVAS_ID } from "../../global/constant/DrawConstant";
 
 type DrawCanvasTypes = {
 	size?: number;
@@ -91,6 +92,7 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 
 	return (
 		<canvas
+			id={CANVAS_ID}
 			className="bg-amber-500 cursor-crosshair mx-auto"
 			style={{ imageRendering: "pixelated" }}
 			ref={canvasRef}
