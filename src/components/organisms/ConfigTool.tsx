@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { BsNut } from "react-icons/bs";
-import Modal from "./Modal";
-import ToolCall from "./atoms/ToolCall";
-import ToolTip from "./atoms/ToolTip";
-import RemoteAction from "./atoms/RemoteAction";
+import Modal from "../Modal";
+import ToolCall from "../atoms/ToolCall";
+import ToolTip from "../atoms/ToolTip";
+import RemoteAction from "../atoms/RemoteAction";
 import { MdOutlineCancel } from "react-icons/md";
-import GridConfig from "./GridConfig";
+import GridConfig from "../GridConfig";
 
 export default function ConfigTool() {
 	const [showModal, setShowModal] = useState(false);
