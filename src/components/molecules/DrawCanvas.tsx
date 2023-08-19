@@ -1,6 +1,4 @@
 import { useRef, useState, useContext } from "react";
-import { repeatThis } from "../../global/utilities/loops";
-import { Tool } from "../../global/enums/drawTools";
 import { Vector2 } from "../../global/types/vectors";
 import {
 	DrawContextTypes,
@@ -9,6 +7,7 @@ import {
 import useCanvas, { CanvasStateTypes } from "../../hooks/useCanvas";
 import useSnapshot from "../../hooks/useSnapshot";
 import { CANVAS_ID } from "../../global/constant/DrawConstant";
+import { executeAction } from "../../utilities/canvasActionts";
 
 export default function DrawCanvas() {
 	const canvasRef = useRef(null);
@@ -22,7 +21,7 @@ export default function DrawCanvas() {
 	//Execute-Action
 	const mouseAction = (x: number, y: number) => {
 		const NORMAL = normalizeMousePos({ x, y });
-		repeatThis(getAction(NORMAL), 3);
+		executeAction(canvas , draw! , NORMAL);
 	};
 
 	//Normalizar la posicion del mouse
@@ -35,41 +34,6 @@ export default function DrawCanvas() {
 		};
 	};
 
-	//Devolver una callback correspondiente a la accion de nuestra herramienta activa
-	const getAction = (pos: Vector2) => {
-		const PIXEL_SIZE = canvas.pixelSize;
-
-		switch (draw!.tool.current) {
-			case Tool.Brush:
-				return () => {
-					canvas.context!.fillStyle = draw!.color.current;
-					canvas.context!.fillRect(
-						pos.x,
-						pos.y,
-						PIXEL_SIZE,
-						PIXEL_SIZE
-					);
-				}
-			case Tool.Eraser:
-				return () => {
-					canvas.context!.clearRect(
-						pos.x,
-						pos.y,
-						PIXEL_SIZE,
-						PIXEL_SIZE
-					);
-				}
-			case Tool.Picker:
-				return () => {
-					const PIXEL = canvas.context!.getImageData(pos.x,pos.y,1,1).data;
-					const HEX = '#' + ((1 << 24) | (PIXEL[0] << 16) | (PIXEL[1] << 8) | PIXEL[2]).toString(16).slice(1);
-					draw!.color.update(HEX);	
-				}
-			default:
-				return () => null;
-		}
-	};
-	
 	//Indica que el mouse se pulso , invoca una captura de pixeles y guarda el color usado
 	const holdOn = () => {
 		setMouseHold(true);
