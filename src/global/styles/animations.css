@@ -12,3 +12,16 @@
         scale: 1;
     }
 }
+
+.animate-visible{
+    animation : visible .2s ease;
+
+}
+@keyframes visible {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
