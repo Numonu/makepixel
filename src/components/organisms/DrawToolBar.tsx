@@ -2,7 +2,7 @@ import { HiOutlinePaintBrush } from "react-icons/hi2";
 import { BsEraser } from "react-icons/bs";
 import { TfiBackLeft, TfiBackRight } from "react-icons/tfi";
 import { MdInvertColors } from "react-icons/md";
-import { BsNut , BsCloudUpload , BsDownload} from "react-icons/bs";
+import { BsNut , BsCloudUpload } from "react-icons/bs";
 import ToolCall from "../atoms/ToolCall";
 import { Tool } from "../../global/enums/drawTools";
 import {PiPaintBucket} from "react-icons/pi"
@@ -12,6 +12,7 @@ import { drawContext } from "../../global/context/drawContext";
 import { requireDependencies } from "../../global/utilities/errorHandlers";
 import RemoteAction from "../atoms/RemoteAction";
 import ToolSetter from "../molecules/ToolSetter";
+import DownloadTool from "../molecules/DownloadTool";
 
 export default function PaintToolBar() {
 	requireDependencies(drawContext);
@@ -66,12 +67,7 @@ export default function PaintToolBar() {
 						<RemoteAction keycode="c"/>
 					</ToolCall>
 				</ToolTip>
-				<ToolTip tip="Download" keycode="d">
-					<ToolCall>
-						<BsDownload />
-						<RemoteAction keycode="d"/>
-					</ToolCall>
-				</ToolTip>
+				<DownloadTool/>
 				<ToolTip tip="Upload" keycode="u">
 					<ToolCall>
 						<BsCloudUpload/>
