@@ -10,15 +10,11 @@ import useCanvas, { CanvasStateTypes } from "../../hooks/useCanvas";
 import useSnapshot from "../../hooks/useSnapshot";
 import { CANVAS_ID } from "../../global/constant/DrawConstant";
 
-type DrawCanvasTypes = {
-	size?: number;
-};
-
-export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
+export default function DrawCanvas() {
 	const canvasRef = useRef(null);
 	const draw = useContext<DrawContextTypes | null>(drawContext);
 	//
-	const canvas: CanvasStateTypes = useCanvas(size, canvasRef);
+	const canvas: CanvasStateTypes = useCanvas(draw!.grid.size, canvasRef);
 	const { takeSnapshot } = useSnapshot(draw, canvas);
 	//
 	const [mouseHold, setMouseHold] = useState(false);
@@ -50,8 +46,8 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 					canvas.context!.fillRect(
 						pos.x,
 						pos.y,
-						applySize(PIXEL_SIZE),
-						applySize(PIXEL_SIZE)
+						PIXEL_SIZE,
+						PIXEL_SIZE
 					);
 				}
 			case Tool.Eraser:
@@ -59,8 +55,8 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 					canvas.context!.clearRect(
 						pos.x,
 						pos.y,
-						applySize(PIXEL_SIZE),
-						applySize(PIXEL_SIZE)
+						PIXEL_SIZE,
+						PIXEL_SIZE
 					);
 				}
 			case Tool.Picker:
@@ -73,10 +69,7 @@ export default function DrawCanvas({ size = 8 }: DrawCanvasTypes) {
 				return () => null;
 		}
 	};
-	//Aplicar el exceso segun el aumento de tamaño en nuestro area de efecto
-	const applySize = (value: number) => {
-		return value * draw!.effectSize.current;
-	};
+	
 	//Indica que el mouse se pulso , invoca una captura de pixeles y guarda el color usado
 	const holdOn = () => {
 		setMouseHold(true);
