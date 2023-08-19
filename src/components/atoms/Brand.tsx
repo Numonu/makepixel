@@ -10,7 +10,7 @@ export default function Brand() {
 					style={{ imageRendering: "pixelated" }}
 				/>
 			</span>
-			<span className="hidden text-2xl sm:block">Pixelcrafters</span>
+			<span className="hidden text-2xl sm:block capitalize">Pixelcrafters</span>
 		</Link>
 	);
 }
