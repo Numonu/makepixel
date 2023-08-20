@@ -3,8 +3,8 @@ import { BsNut } from "react-icons/bs";
 import ToolCall from "../atoms/ToolCall";
 import ToolTip from "../atoms/ToolTip";
 import RemoteAction from "../atoms/RemoteAction";
-import GridConfig from "../molecules/GridConfig";
 import FunctionalModal from "../molecules/FunctionalModal";
+import GridSetter from "../molecules/GridSetter";
 
 export default function ConfigTool() {
 	const [showModal, setShowModal] = useState(false);
@@ -26,7 +26,13 @@ export default function ConfigTool() {
 					subtitle="Configure your workspace"
 					onClose={off}
 				>
-					<GridConfig />
+					<h3 className="font-medium mb-2">Canvas Size</h3>
+					<div className="w-1/2 grid grid-cols-4 gap-1">
+						<GridSetter value={8} />
+						<GridSetter value={16} />
+						<GridSetter value={32} />
+						<GridSetter value={64} />
+					</div>
 				</FunctionalModal>
 			)}
 		</>
