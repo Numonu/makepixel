@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { MdOutlineCancel } from "react-icons/md";
-import Modal from "../Modal";
+import Modal from "./Modal";
 
 type ModalTypes = {
 	children: ReactNode;
