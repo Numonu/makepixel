@@ -50,7 +50,7 @@ export default function DrawCanvas() {
 	return (
 		<canvas
 			id={CANVAS_ID}
-			className="bg-amber-500 cursor-crosshair mx-auto"
+			className="bg-transparent absolute cursor-crosshair"
 			style={{ imageRendering: "pixelated" }}
 			ref={canvasRef}
 			width={500}
