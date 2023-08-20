@@ -27,7 +27,7 @@ export default function GuideCanvas() {
 			}
             colorPong = !colorPong;
 		}
-	}, [draw]);
+	}, [draw , COLOR.a , COLOR.b]);
 
 	return (
 		<canvas
