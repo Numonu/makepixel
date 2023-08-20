@@ -1,4 +1,4 @@
-import GridSetter from "./molecules/GridSetter";
+import GridSetter from "./GridSetter";
 
 export default function GridConfig() {
 	return (
