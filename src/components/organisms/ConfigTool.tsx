@@ -3,7 +3,7 @@ import { BsNut } from "react-icons/bs";
 import ToolCall from "../atoms/ToolCall";
 import ToolTip from "../atoms/ToolTip";
 import RemoteAction from "../atoms/RemoteAction";
-import GridConfig from "../GridConfig";
+import GridConfig from "../molecules/GridConfig";
 import FunctionalModal from "../molecules/FunctionalModal";
 
 export default function ConfigTool() {
