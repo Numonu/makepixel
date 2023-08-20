@@ -11,7 +11,12 @@ export default function Modal({ children, onClose }: ModalTypes) {
 			className="bg-black bg-opacity-70 animate-visible fixed left-0 top-0 w-screen h-screen flex justify-center items-center backdrop-blur-sm z-30"
 			onClick={onClose}
 		>
-			<div onClick={(e) => e.stopPropagation()}>{children}</div>
+			<div
+				className="bg-neutral-50 w-[90%] max-w-[600px] p-4 rounded-md overflow-hidden"
+				onClick={(e) => e.stopPropagation()}
+			>
+				{children}
+			</div>
 		</div>,
 		document.body
 	);
