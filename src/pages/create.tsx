@@ -3,6 +3,7 @@ import Wrapper from "../components/atoms/Wrapper";
 import DrawToolBar from "../components/organisms/DrawToolBar";
 import DrawProvider from "../components/providers/DrawProvider";
 import DrawOptions from "../components/organisms/DrawOptions";
+import GuideCanvas from "../components/molecules/GuideCanvas";
 
 export default function Create() {
 	return (
@@ -16,12 +17,13 @@ export default function Create() {
 					collection
 				</h2>
 			</header>
-			<main className="grid pb-12 gap-4 grid-cols-1 lg:grid-cols-[1fr_min-content_1fr]">
+			<main className="max-w-[500px] mx-auto grid pb-12 gap-4 grid-cols-1 lg:max-w-none lg:grid-cols-[1fr_500px_1fr]">
 				<DrawProvider>
 					<section className="flex justify-center lg:justify-end lg:-order-1 lg:mx-0">
 						<DrawToolBar />
 					</section>
-					<section>
+					<section className="relative aspect-square">
+						<GuideCanvas/>
 						<DrawCanvas/>
 					</section>
 					<section>
