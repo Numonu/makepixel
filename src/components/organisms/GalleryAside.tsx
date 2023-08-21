@@ -15,8 +15,8 @@ export default function GalleryAside() {
 	};
 
 	return (
-		<aside className="pt-4">
-			<div className=" flex flex-col gap-1">
+		<aside className="h-min sticky top-20">
+			<div className="flex flex-col gap-1">
 				{asideFilters.map((e) => {
 					return (
 						<AsideButton
