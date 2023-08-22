@@ -5,18 +5,18 @@ import ToolTip from "../../../../global/components/atoms/ToolTip";
 import RemoteAction from "../../../../global/components/atoms/RemoteAction";
 import FunctionalModal from "../../../../global/components/molecules/FunctionalModal";
 import Tag from "../atoms/Tag";
-import { Link } from "react-router-dom";
 import { PiWarningOctagonLight } from "react-icons/pi";
 import { DRAW_TAGS } from "../../../../global/constants/DrawConstant";
+import To from "../../../../global/components/atoms/To";
 
 export default function UploadTool() {
 	const [showModal, setShowModal] = useState(false);
-	const [selectTag , setSelectTag] = useState("other");
+	const [selectTag, setSelectTag] = useState("other");
 
 	const on = () => setShowModal(true);
 	const off = () => setShowModal(false);
 
-	const updateTag = (newTag:string) => setSelectTag(newTag);
+	const updateTag = (newTag: string) => setSelectTag(newTag);
 
 	return (
 		<>
@@ -43,7 +43,12 @@ export default function UploadTool() {
 							<h3 className="mb-4">Select a tag</h3>
 							<div className="flex flex-wrap gap-4">
 								{DRAW_TAGS.map((e) => (
-									<Tag color="gray" value={e} onClick={updateTag} selected={selectTag == e}/>
+									<Tag
+										color="gray"
+										value={e}
+										onClick={updateTag}
+										selected={selectTag == e}
+									/>
 								))}
 							</div>
 						</div>
@@ -55,12 +60,7 @@ export default function UploadTool() {
 								<PiWarningOctagonLight />
 							</span>
 							By posting on pixelcrafters I am agreeing to the{" "}
-							<Link
-								to={""}
-								className="text-sky-500 hover:underline"
-							>
-								Terms and Conditions
-							</Link>
+							<To to="/">Terms and Conditions</To>
 						</span>
 					</form>
 				</FunctionalModal>
