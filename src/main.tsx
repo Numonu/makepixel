@@ -7,7 +7,7 @@ import { Toaster } from "sonner";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
 	<React.StrictMode>
-		<div className="bg-white text-neutral-900">
+		<div className="bg-white text-title ">
 			<Toaster/>
 			<Routing />
 		</div>
