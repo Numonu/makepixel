@@ -7,8 +7,8 @@ export default function Auth() {
 		<div className="max-w-[1500px]">
 			<main className="min-h-screen grid md:grid-cols-2 lg:grid-cols-[1fr_2fr]">
 				<aside className="px-4 flex flex-col items-center justify-center">
-					<header className="flex flex-col gap-2 items-center mb-16">
-						<Brand />
+					<header className="flex flex-col gap-2 items-center mb-20">
+						<Brand className="flex-col"/>
 						<h1 className="text-description text-center">
                             Join the world's most pixelated <br className="sm:hidden"/> pixel art community
 						</h1>
