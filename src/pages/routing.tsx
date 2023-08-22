@@ -1,8 +1,9 @@
 import { BrowserRouter , Routes , Route } from "react-router-dom";
-import GlobalHead from "../components/organisms/GlobalHead";
-import Create from "./create";
-import Gallery from "./gallery";
-import Post from "./post";
+import Create from "./create/create";
+import Gallery from "./gallery/gallery";
+import Post from "./post/post";
+import Auth from "./auth/auth";
+import GlobalHead from "../global/components/organisms/GlobalHead";
 
 export default function Routing(){
     return <BrowserRouter>
@@ -14,6 +15,7 @@ export default function Routing(){
                 </Route>
                 <Route path="/create" element={<Create/>}/>
             </Route>
+            <Route path="/auth" element={<Auth/>}/>
         </Routes>
     </BrowserRouter>
 }
