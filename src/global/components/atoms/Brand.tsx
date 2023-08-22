@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 
-export default function Brand() {
+type BrandTypes = {
+	className? : string,
+}
+
+export default function Brand({className}:BrandTypes) {
 	return (
-		<Link className="flex items-center gap-2" to={"/"}>
+		<Link className={`flex items-center gap-2 ${className}`} to={"/"}>
 			<span className="text-red-500 text-3xl">
 				<img
 					className="w-9"
