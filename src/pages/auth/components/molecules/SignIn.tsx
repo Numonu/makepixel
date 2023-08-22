@@ -1,32 +1,39 @@
 import { auth, googleProvider } from "../../../../lib/firebase.config";
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import Input from "../atoms/Input";
 import { FcGoogle } from "react-icons/fc";
 import { signInWithPopup } from "firebase/auth";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
+import { userContext } from "../../../../global/provider/context/userContext";
 
 export default function SignIn() {
-	//Estado para las Credenciales
+	//Contextos y Hooks
+	const navigate = useNavigate();
+	const user = useContext(userContext);
+	//Estados
+	const [sending, setSending] = useState(false);
+	//>Estado para las Credenciales
 	// const [email, setEmail] = useState("");
 	// const [password, setPassword] = useState("");
-	//
-	const [sending, setSending] = useState(false);
-	//
-	const navigate = useNavigate();
+	//Al encontrar un usuario activo lo redirigimos a su perfil
+	useEffect(() => {
+		if (user){
+			navigate("/profile");
+			toast.success(`Welcome back ${user.displayName}`);
+		}
+	}, [user , navigate]);
 
+	//Unirse usando Google
 	const joinWithGoogle = async () => {
 		setSending(true);
 		//
 		toast.promise(() => signInWithPopup(auth, googleProvider), {
-			success: () => {
-				navigate("/profile");
-				return "Success";
-			},
 			error: () => {
 				setSending(false);
-				return "Something went wrong"
+				return "Something went wrong";
 			},
+			success: "Success",
 			loading: "Sending...",
 		});
 		//
