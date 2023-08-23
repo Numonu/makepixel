@@ -14,7 +14,7 @@ const setAuthError = (
 	switch (error) {
 		//Email Errors
 		case "auth/user-not-found":
-			emailErrorMessage = "email not registered";
+			emailErrorMessage = "unregistered email";
 			break;
 		case "auth/invalid-email":
 			emailErrorMessage = "invalid email format";
@@ -24,7 +24,10 @@ const setAuthError = (
 			break;
 		//Password Errors
 		case "auth/invalid-password":
-			passwordErrorMessage = "incorrect password";
+			passwordErrorMessage = "invalid password";
+			break;
+        case "auth/weak-password":
+            passwordErrorMessage = "the password must be at least 6 characters";
 			break;
 		default:
 			break;
