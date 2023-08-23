@@ -1,5 +1,5 @@
 import Brand from "../../global/components/atoms/Brand";
-import SignIn from "./components/molecules/SignIn";
+import SignUp from "./components/molecules/SignUp";
 import To from "../../global/components/atoms/To";
 
 export default function Auth() {
@@ -10,10 +10,11 @@ export default function Auth() {
 					<header className="flex flex-col gap-2 items-center mb-20">
 						<Brand className="flex-col"/>
 						<h1 className="text-description text-center">
-                            Join the world's most pixelated <br className="sm:hidden"/> pixel art community
+							Create an account and join the world's most <br/>  
+							pixelated pixel art community
 						</h1>
 					</header>
-					<SignIn/>
+					<SignUp/>
                     <footer>
                         <span className="text-xs">Do you want to join as a guest ? <To to="/">Click Here</To></span>
                     </footer>
