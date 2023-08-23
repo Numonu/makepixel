@@ -2,20 +2,21 @@ import { auth, googleProvider } from "../../../../lib/firebase.config";
 import { useState, useContext, useEffect } from "react";
 import Input from "../atoms/Input";
 import { FcGoogle } from "react-icons/fc";
-import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { userContext } from "../../../../global/provider/context/userContext";
 import { setAuthError } from "../../utilities/errorAtlas";
 import PasswordInput from "../atoms/PasswordInput";
 
-export default function SignIn() {
+export default function SignUp() {
 	//Contextos y Hooks
 	const navigate = useNavigate();
 	const user = useContext(userContext);
 	//Estados
 	const [sending, setSending] = useState(false);
 	//Estados para el Formulario
+	const [username , setUserName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [errorMessage, setErrorMessage] = useState({
@@ -23,19 +24,23 @@ export default function SignIn() {
 		password: "",
 	});
 
-	//Al encontrar un usuario activo lo redirigimos a su perfil
+	//Al encontrar un usuario activo lo redirigimos a su perfil luego de actualizar su nombre
 	useEffect(() => {
 		if (user) {
-			navigate("/profile");
-			toast.success(`Welcome back ${user.displayName}`);
+			updateProfile(user , {
+				displayName : username
+			}).finally(() => {
+				navigate("/profile");
+				toast.success(`Welcome to spritecrafters ${user.displayName ?? ""}`);
+			});
 		}
-	}, [user, navigate]);
+	}, [user, navigate , username]);
 
 	//Unirse usando el Email
-	const joinWithEmail = async () => {
+	const signUpWithEmail = async () => {
 		setSending(true);
 		//
-		toast.promise(() => signInWithEmailAndPassword(auth, email, password), {
+		toast.promise(() => createUserWithEmailAndPassword(auth, email, password), {
 			error: (error) => {
 				setSending(false);
 				setAuthError(error.code, setErrorMessage);
@@ -67,10 +72,15 @@ export default function SignIn() {
 			className="w-full max-w-xs mb-6"
 			onSubmit={(e) => {
 				e.preventDefault();
-				joinWithEmail();
+				signUpWithEmail();
 			}}
 		>
 			<div className="mb-12 flex flex-col gap-6">
+			<Input
+					error=""
+					placeholder="username"
+					onChange={(e) => setUserName(e)}
+				/>
 				<Input
 					type="email"
 					placeholder="email"
@@ -88,7 +98,7 @@ export default function SignIn() {
 					className="bg-primary text-neutral-50 font-medium w-full py-2 border hover:bg-secondary disabled:opacity-50 transition-[colors_opacity]"
 					disabled={sending}
 				>
-					Sign In
+					Sign Up
 				</button>
 				<button
 					className="w-full py-2 flex justify-center gap-2 items-center border hover:bg-select disabled:opacity-50 transition-[colors_opacity]"
@@ -99,7 +109,7 @@ export default function SignIn() {
 					<span className="text-xl">
 						<FcGoogle />
 					</span>
-					Sign in with Google
+					Continue with Google
 				</button>
 			</div>
 		</form>
