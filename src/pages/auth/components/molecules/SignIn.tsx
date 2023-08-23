@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { userContext } from "../../../../global/provider/context/userContext";
 import { setAuthError } from "../../utilities/errorAtlas";
+import PasswordInput from "../atoms/PasswordInput";
 
 export default function SignIn() {
 	//Contextos y Hooks
@@ -76,8 +77,7 @@ export default function SignIn() {
 					error={errorMessage.email}
 					onChange={(e) => setEmail(e)}
 				/>
-				<Input
-					type="password"
+				<PasswordInput
 					placeholder="password"
 					error={errorMessage.password}
 					onChange={(e) => setPassword(e)}
