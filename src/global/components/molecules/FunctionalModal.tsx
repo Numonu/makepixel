@@ -23,12 +23,9 @@ export default function FunctionalModal({
 					</h2>
 					<p className="text-neutral-700">{subtitle}</p>
 				</div>
-				<span
-					className="text-neutral-500 text-3xl cursor-pointer"
-					onClick={onClose}
-				>
+				<button className="text-neutral-500 text-3xl" onClick={onClose}>
 					<MdOutlineCancel />
-				</span>
+				</button>
 			</header>
 			<hr className="my-3" />
 			<section>{children}</section>
