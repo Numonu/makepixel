@@ -10,8 +10,8 @@ export default function Auth() {
 	return (
 		<>
 			<div className="max-w-[1500px]">
-				<main className="min-h-screen grid md:grid-cols-2 lg:grid-cols-[1fr_2fr]">
-					<aside className="px-4 flex flex-col items-center justify-center">
+				<main className="h-screen grid md:grid-cols-2 lg:grid-cols-[1fr_2fr]">
+					<aside className="h-full py-16 px-4 flex flex-col items-center overflow-y-scroll">
 						<header className="flex flex-col gap-2 items-center mb-20">
 							<Brand className="flex-col" />
 							<h1 className="text-description text-center">
