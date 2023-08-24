@@ -17,12 +17,15 @@ const setAuthError = (
 			emailErrorMessage = "unregistered email";
 			break;
 		case "auth/invalid-email":
-			emailErrorMessage = "invalid email format";
+			emailErrorMessage = "invalid email";
 			break;
 		case "auth/email-already-exists":
 			emailErrorMessage = "this email is already in use";
 			break;
 		//Password Errors
+		case "auth/wrong-password":
+			passwordErrorMessage = "wrong password";
+			break;
 		case "auth/invalid-password":
 			passwordErrorMessage = "invalid password";
 			break;
@@ -30,6 +33,7 @@ const setAuthError = (
             passwordErrorMessage = "the password must be at least 6 characters";
 			break;
 		default:
+			console.error(error);
 			break;
 	}
 	//
