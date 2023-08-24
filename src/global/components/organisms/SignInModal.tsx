@@ -25,10 +25,10 @@ export default function SignInModal({ onClose }: SignInModalTypes) {
 				</div>
 				<header className="flex flex-col gap-2 items-center mb-20">
 					<Brand className="flex-col" />
-					<h1 className="text-description text-center">
+					<h2 className="text-description text-center">
 						Login and join the world's <br /> most pixelated
 						community pixelated community
-					</h1>
+					</h2>
 				</header>
 				<SignIn onSignIn={onClose} />
 				<footer>

@@ -9,13 +9,13 @@ export default function Create() {
 	return (
 		<Wrapper>
 			<header className="text-center mt-4 mb-16 lg:mb-14">
-				<h1 className="text-black mb-2 text-xl font-medium">
+				<h2 className="text-black mb-2 text-xl font-medium">
 					New Pixelart
-				</h1>
-				<h2 className="text-base font-normal">
+				</h2>
+				<h1 className="text-base font-normal">
 					Create a new pixelart and contribute to Pixelcrafters
 					collection
-				</h2>
+				</h1>
 			</header>
 			<main className="max-w-[500px] mx-auto grid pb-12 gap-4 grid-cols-1 lg:max-w-none lg:grid-cols-[1fr_500px_1fr]">
 				<DrawProvider>
