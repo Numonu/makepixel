@@ -11,10 +11,10 @@ type SignInModalTypes = {
 export default function SignInModal({ onClose }: SignInModalTypes) {
 	return (
 		<Modal
-			className="pt-8 pb-16"
+			className="pt-4 pb-16"
 			onClose={onClose}
 		>
-			<div className="px-4 flex flex-col items-center justify-center">
+			<div className="flex flex-col items-center justify-center">
 				<div className="flex w-full justify-end">
 					<button
 						className="text-neutral-500 text-3xl"
