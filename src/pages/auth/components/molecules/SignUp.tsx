@@ -2,7 +2,11 @@ import { auth, googleProvider } from "../../../../lib/firebase.config";
 import { useState, useContext, useEffect } from "react";
 import Input from "../atoms/Input";
 import { FcGoogle } from "react-icons/fc";
-import { createUserWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
+import {
+	createUserWithEmailAndPassword,
+	signInWithPopup,
+	updateProfile,
+} from "firebase/auth";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
 import { userContext } from "../../../../global/provider/context/userContext";
@@ -16,7 +20,7 @@ export default function SignUp() {
 	//Estados
 	const [sending, setSending] = useState(false);
 	//Estados para el Formulario
-	const [username , setUserName] = useState("");
+	const [username, setUserName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [errorMessage, setErrorMessage] = useState({
@@ -27,28 +31,36 @@ export default function SignUp() {
 	//Al encontrar un usuario activo lo redirigimos a su perfil luego de actualizar su nombre
 	useEffect(() => {
 		if (user) {
-			updateProfile(user , {
-				displayName : username
-			}).finally(() => {
+			if (user.displayName) {
+				toast.success(`Welcome to spritecrafters ${user.displayName}`);
 				navigate("/profile");
-				toast.success(`Welcome to spritecrafters ${user.displayName ?? ""}`);
-			});
+			} else {
+				updateProfile(user, {
+					displayName: username,
+				}).finally(() => {
+					navigate("/profile");
+					toast.success(`Welcome to spritecrafters ${user.displayName}`);
+				});
+			}
 		}
-	}, [user, navigate , username]);
+	}, [user, navigate, username]);
 
 	//Unirse usando el Email
 	const signUpWithEmail = async () => {
 		setSending(true);
 		//
-		toast.promise(() => createUserWithEmailAndPassword(auth, email, password), {
-			error: (error) => {
-				setSending(false);
-				setAuthError(error.code, setErrorMessage);
-				return "Something went wrong";
-			},
-			success: "Success",
-			loading: "Sending...",
-		});
+		toast.promise(
+			() => createUserWithEmailAndPassword(auth, email, password),
+			{
+				error: (error) => {
+					setSending(false);
+					setAuthError(error.code, setErrorMessage);
+					return "Something went wrong";
+				},
+				success: "Success",
+				loading: "Sending...",
+			}
+		);
 		//
 	};
 
@@ -76,7 +88,7 @@ export default function SignUp() {
 			}}
 		>
 			<div className="mb-12 flex flex-col gap-6">
-			<Input
+				<Input
 					error=""
 					placeholder="username"
 					onChange={(e) => setUserName(e)}
