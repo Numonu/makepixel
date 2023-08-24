@@ -8,11 +8,11 @@ type ModalTypes = {
 export default function Modal({ children, onClose }: ModalTypes) {
 	return createPortal(
 		<div
-			className="bg-black bg-opacity-70 animate-visible fixed left-0 top-0 w-screen h-screen flex justify-center items-center backdrop-blur-sm z-30"
+			className="bg-black bg-opacity-70 animate-visible fixed left-0 top-0 w-screen h-screen py-12 flex justify-center backdrop-blur-sm z-30 overflow-y-scroll"
 			onClick={onClose}
 		>
 			<div
-				className="bg-neutral-50 w-[90%] max-w-[600px] p-4 rounded-md overflow-hidden"
+				className="bg-neutral-50 w-[90%] h-max max-w-[600px] p-4 rounded-md"
 				onClick={(e) => e.stopPropagation()}
 			>
 				{children}
