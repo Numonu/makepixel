@@ -12,24 +12,26 @@ import { toast } from "sonner";
 import { userContext } from "../../../../global/provider/context/userContext";
 import useModal from "../../../../global/hooks/useModal";
 import SignInModal from "../../../../global/components/organisms/SignInModal";
-import useUpload, { SendTypes } from "../../hooks/useUpload";
-import { serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "../../../../lib/firebase.config";
 
 type UploadModalTypes = {
 	onClose: () => void;
 };
 export default function UploadModal({ onClose }: UploadModalTypes) {
 	const user = useContext(userContext);
+	//Datos de la publicacion
+	const [artTitle, setArtTitle] = useState("");
 	const [selectTag, setSelectTag] = useState("other");
+	//Eventos
 	const [loading, setLoading] = useState(false);
-
-	const { upload } = useUpload();
 	const { modal, openModal, closeModal } = useModal();
 
+	//Indica una etiqueta
 	const updateTag = (newTag: string) => setSelectTag(newTag);
 
-	//Requisitos previos a la publicacion
-	const prepare = () => {
+	//Publicacion y envio de datos al servidor
+	const publish = () => {
 		//Accion exclusiva para usuarios registrados
 		if (!user) {
 			onClose();
@@ -41,7 +43,8 @@ export default function UploadModal({ onClose }: UploadModalTypes) {
 		if (!CANVAS)
 			throw new Error("[!]No canvas element found with id ${CANVAS_ID}");
 		//Preparamos los datos a enviar
-		const SEND: SendTypes = {
+		const SEND = {
+			artTitle,
 			tag: selectTag,
 			ownerUid: user.uid,
 			timestamp: serverTimestamp(),
@@ -50,7 +53,7 @@ export default function UploadModal({ onClose }: UploadModalTypes) {
 		};
 		//Realizamos el envio con ayuda de sonner
 		setLoading(true);
-		toast.promise(() => upload(SEND), {
+		toast.promise(() => addDoc(collection(db, "gallery"), SEND), {
 			success: () => {
 				onClose();
 				setLoading(false);
@@ -75,8 +78,10 @@ export default function UploadModal({ onClose }: UploadModalTypes) {
 					<input
 						required
 						type="text"
+						value={artTitle}
 						placeholder="Name your masterpiece"
 						className="bg-neutral-200 w-1/2 p-2 mb-4 rounded-md "
+						onChange={(e) => setArtTitle(e.target.value)}
 					/>
 					<div className="mb-12">
 						<h3 className="mb-4">Select a tag</h3>
@@ -94,7 +99,7 @@ export default function UploadModal({ onClose }: UploadModalTypes) {
 					<button
 						className="bg-sky-400 text-white py-2 px-6 mb-2 rounded-md font-medium hover:bg-sky-500 disabled:opacity-50"
 						disabled={loading}
-						onClick={prepare}
+						onClick={publish}
 					>
 						Publish
 					</button>
