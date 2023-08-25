@@ -1,3 +1,6 @@
-export default function Separator() {
-	return <div className="bg-neutral-100 w-full py-[1px] my-2 rounded-full"></div>;
+type SeparatorTypes = {
+	className : string;
+}
+export default function Separator({className}:SeparatorTypes) {
+	return <hr className={`bg-neutral-100 w-full my-2 rounded-full ${className}`}></hr>;
 }
