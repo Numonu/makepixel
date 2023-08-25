@@ -1,4 +1,4 @@
-import { imageDataAreSame } from "../../../global/utilities/compare";
+import { imageDataAreSame } from "../utilities/imageCompare";
 
 export type SnapshotReduceTypes = (
 	state: SnapshotStateTypes,
