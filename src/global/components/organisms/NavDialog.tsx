@@ -13,6 +13,7 @@ export default function NavDialog() {
 	const user = useContext(userContext);
 	const [nav, setNav] = useState(navDefault);
 
+	//Enlace y representacion dinamica de una ruta
 	useEffect(() => {
 		if (user) {
 			setNav({

@@ -28,7 +28,7 @@ export default function FunctionalModal({
 				</button>
 			</header>
 			<hr className="my-3" />
-			<section>{children}</section>
+			<div>{children}</div>
 		</Modal>
 	);
 }
