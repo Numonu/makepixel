@@ -28,7 +28,7 @@ export default function SignUp() {
 		password: "",
 	});
 
-	//Al encontrar un usuario activo lo redirigimos a su perfil luego de actualizar su nombre
+	//Al encontrar un usuario activo lo redirigimos a su perfil e intentamos cambiar su nombre
 	useEffect(() => {
 		if (user) {
 			if (user.displayName) {

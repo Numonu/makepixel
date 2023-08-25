@@ -1,19 +1,32 @@
-import { AiOutlineLike } from "react-icons/ai";
-import { LiaCommentSolid } from "react-icons/lia";
+import { AiOutlineHeart, AiOutlineLike } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { userContext } from "../../../../global/provider/context/userContext";
 import { useContext } from "react";
 import useModal from "../../../../global/hooks/useModal";
 import SignInModal from "../../../../global/components/organisms/SignInModal";
+import { toast } from "sonner";
 
 export default function ArtCard() {
 	const user = useContext(userContext);
-	const {modal , openModal , closeModal} = useModal();
+	const { modal, openModal, closeModal } = useModal();
+
+	const noUser = () => {
+		if (!user) {
+			openModal(); return true;
+		}
+		return false;
+	};
 
 	const like = () => {
-		if (!user) {
-			openModal();
-		}
+		if(noUser())return;
+		//
+		toast.success("like");
+	};
+
+	const favorite = () => {
+		if(noUser())return;
+		//
+		toast.success("add to favorites");
 	};
 
 	return (
@@ -34,21 +47,24 @@ export default function ArtCard() {
 							<span className="text-lg">
 								<AiOutlineLike />
 							</span>
-							<span>123</span>
+							123
 						</button>
-						<Link
-							to={"/gallery/123"}
-							className="border-neutral-300 p-2 flex gap-2 items-center border rounded-lg text-lg active:scale-90 hover:text-sky-500 hover:border-sky-500 transition-transform"
+						<button
+							className="border-neutral-300 py-1 px-2 flex gap-2 items-center border rounded-lg text-lg active:scale-90 hover:text-sky-500 hover:border-sky-500 transition-transform"
+							onClick={favorite}
 						>
-							<LiaCommentSolid />
-						</Link>
+							<AiOutlineHeart />
+						</button>
 					</div>
-					<Link to={"/"} className="text-sm hover:text-sky-500">
+					<Link
+						to={"/profile/nameowo"}
+						className="text-sm hover:text-sky-500"
+					>
 						@Felipix
 					</Link>
 				</div>
 			</article>
-			{modal && <SignInModal onClose={closeModal}/>}
+			{modal && <SignInModal onClose={closeModal} />}
 		</>
 	);
 }

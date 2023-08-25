@@ -25,7 +25,7 @@ export default function SignIn({ onSignIn }: SignInTypes) {
 		password: "",
 	});
 
-	//Al encontrar un usuario activo lo redirigimos a su perfil luego de actualizar su nombre
+	//Al encontrar un usuario activo lo saludamos y cerramos el modal
 	useEffect(() => {
 		if (user) {
 			toast.success(`Welcome back ${user.displayName}`);
