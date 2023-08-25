@@ -15,19 +15,19 @@ export default function GridSetter({ value }: GridSetterTypes) {
     
 	if (SELECT) {
 		return (
-			<div
+			<button
 				className="bg-sky-300 group p-1 cursor-pointer rounded-lg transition-colors"
 				onClick={updateGridSize}
 			>
 				<div className="bg-sky-200 aspect-square flex justify-center items-center rounded-md">
 					<span className="text-sky-400 text-2xl">{value}</span>
 				</div>
-			</div>
+			</button>
 		);
 	}
 
 	return (
-		<div
+		<button
 			className="group p-1 cursor-pointer rounded-lg transition-colors hover:bg-sky-300"
 			onClick={updateGridSize}
 		>
@@ -36,6 +36,6 @@ export default function GridSetter({ value }: GridSetterTypes) {
 					{value}
 				</span>
 			</div>
-		</div>
+		</button>
 	);
 }

@@ -1,13 +1,12 @@
 import { DrawContextTypes } from "../context/drawContext";
 import { Tool } from "../enums/drawTools";
-import { Vector2 } from "../../../global/types/vectors";
 import { repeatThis } from "../../../global/utilities/loops";
 import { CanvasStateTypes } from "../hooks/useCanvas";
 
 const executeAction = (
 	canvas: CanvasStateTypes,
 	draw: DrawContextTypes,
-	pos: Vector2
+	pos: {x:number,y:number}
 ) => {
 	const PIXEL_SIZE = canvas.pixelSize;
 

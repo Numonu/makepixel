@@ -1,5 +1,5 @@
 import { DRAW_TAGS } from "../../../../global/constants/DrawConstant";
-import { asideFilters } from "../../../create/constants/asideFilters";
+import { asideFilters } from "../constants/asideFilters";
 import AsideButton from "../atoms/AsideButton";
 import { useState } from "react";
 export default function GalleryAside() {

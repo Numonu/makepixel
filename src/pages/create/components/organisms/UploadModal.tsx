@@ -88,7 +88,6 @@ export default function UploadModal({ onClose }: UploadModalTypes) {
 						<div className="flex flex-wrap gap-4">
 							{DRAW_TAGS.map((e) => (
 								<Tag
-									color="gray"
 									value={e}
 									onClick={updateTag}
 									selected={selectTag == e}
