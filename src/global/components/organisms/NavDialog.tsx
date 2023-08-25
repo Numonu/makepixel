@@ -1,9 +1,29 @@
-import Dialog from "../molecules/Dialog";
+import { useContext, useState, useEffect } from "react";
 import { PiDotsThreeOutlineThin, PiDotsThreeOutlineFill } from "react-icons/pi";
+import { userContext } from "../../provider/context/userContext";
+import Dialog from "../molecules/Dialog";
 import NavLink from "../atoms/NavLink";
 import Separator from "../atoms/Separator";
 
+const navDefault = {
+	link: "/auth",
+	label: "Sign Up",
+};
 export default function NavDialog() {
+	const user = useContext(userContext);
+	const [nav, setNav] = useState(navDefault);
+
+	useEffect(() => {
+		if (user) {
+			setNav({
+				link: `/profile/${user.uid}`,
+				label: "Profile",
+			});
+		} else {
+			setNav(navDefault);
+		}
+	}, [user]);
+
 	return (
 		<Dialog
 			offElement={
@@ -21,7 +41,7 @@ export default function NavDialog() {
 				<ul className="flex flex-col items-stretch gap-[0.1rem] text-sm">
 					<NavLink to="/">Gallery</NavLink>
 					<NavLink to="/create">Create</NavLink>
-					<NavLink to="/profile">Profile</NavLink>
+					<NavLink to={nav.link}>{nav.label}</NavLink>
 					<li>
 						<Separator />
 					</li>
