@@ -6,7 +6,7 @@ import ToolCall from "../atoms/ToolCall";
 import ToolTip from "../../../../global/components/atoms/ToolTip";
 import { useContext } from "react";
 import RemoteAction from "../../../../global/components/atoms/RemoteAction";
-import ToolSetter from "../molecules/ToolSetter";
+import ToolSetter from "../atoms/ToolSetter";
 import DownloadTool from "../molecules/DownloadTool";
 import ConfigTool from "./ConfigTool";
 import UploadTool from "./UploadTool";
