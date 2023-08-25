@@ -2,7 +2,6 @@ import { useRef, useState, useContext } from "react";
 import useCanvas, { CanvasStateTypes } from "../../hooks/useCanvas";
 import useSnapshot from "../../hooks/useSnapshot";
 import { executeAction } from "../../utilities/canvasActionts";
-import { Vector2 } from "../../../../global/types/vectors";
 import { DrawContextTypes, drawContext } from "../../context/drawContext";
 import { CANVAS_ID } from "../../../../global/constants/DrawConstant";
 
@@ -22,7 +21,7 @@ export default function DrawCanvas() {
 	};
 
 	//Normalizar la posicion del mouse
-	const normalizeMousePos = (pos: Vector2) => {
+	const normalizeMousePos = (pos : {x:number,y:number}) => {
 		const CANVAS_RECT = canvas.element!.getBoundingClientRect();
 		const PIXEL_SIZE = canvas.pixelSize;
 		return {
