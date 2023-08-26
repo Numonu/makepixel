@@ -20,12 +20,12 @@ export default function Profile() {
 							"url(../../../public/images/picture.jpg)",
 					}}
 				/>
-				<div className="flex flex-col gap-4 text-center">
+				<div className="flex items-center flex-col gap-4 text-center">
 					<h1 className="text-xl">@{uid}</h1>
-					<p className="text-description text-sm">
+					<p className="text-description max-w-[400px] text-sm">
 						Hi , I am using Pixelcrafters
 					</p>
-					<nav className="flex justify-center gap-4">
+					<nav className="flex flex-wrap items-center justify-center gap-4">
 						<SocialButton icon={<AiOutlineInstagram />}>
 							Instagram
 						</SocialButton>
@@ -39,8 +39,7 @@ export default function Profile() {
 			<main className="flex flex-col gap-8">
 				<section>
 					<h2 className="mb-4 capitalize text-xl">top rated</h2>
-					<div className="grid grid-cols-5 gap-6">
-						<ArtCard />
+					<div className="grid grid-cols-1 gap-6 min-[360px]:grid-cols-2 md:grid-cols-4">
 						<ArtCard />
 						<ArtCard />
 						<ArtCard />
@@ -49,7 +48,7 @@ export default function Profile() {
 				</section>
 				<section>
 					<h2 className="mb-4 capitalize text-xl">all work</h2>
-					<div className="grid grid-cols-5 gap-6">
+					<div className="grid grid-cols-1 gap-6 min-[360px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
 						<ArtCard />
 						<ArtCard />
 						<ArtCard />
