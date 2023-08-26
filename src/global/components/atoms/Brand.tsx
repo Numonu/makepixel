@@ -6,7 +6,7 @@ type BrandTypes = {
 
 export default function Brand({ className }: BrandTypes) {
 	return (
-		<Link className={`flex items-center gap-2 ${className}`} to={"/"}>
+		<Link className={`flex shrink-0 items-center gap-2 ${className}`} to={"/"}>
 			<img
 				className="w-9"
 				src="images/pixelcrafters_icon.png"
