@@ -7,13 +7,13 @@ import { useParams } from "react-router-dom";
 import { DataTypes } from "../../hooks/useBio";
 
 type BioTypes = {
-    data : DataTypes
+	data: DataTypes;
 	onEdit: () => void;
 };
-export default function Bio({ data , onEdit }: BioTypes) {
+export default function Bio({ data, onEdit }: BioTypes) {
 	const { uid } = useParams();
 	const user = useContext(userContext);
-    
+
 	const profileOwner = user?.uid == uid;
 
 	return (
@@ -22,24 +22,29 @@ export default function Bio({ data , onEdit }: BioTypes) {
 			<p className="text-description max-w-[400px] text-sm">
 				{data.description}
 			</p>
-			<nav className="flex flex-wrap items-center justify-center gap-4">
-				{data.link.instagram && (
-					<SocialButton
-						href={data.link.instagram}
-						icon={<AiOutlineInstagram />}
-					>
-						Instagram
-					</SocialButton>
-				)}
-				{data.link.youtube && (
-					<SocialButton
-						href={data.link.youtube}
-						icon={<AiOutlineYoutube />}
-					>
-						Youtube
-					</SocialButton>
-				)}
-			</nav>
+			{(data.link.instagram || data.link.youtube) && (
+				<nav className="flex flex-wrap items-center justify-center gap-4">
+					{data.link.instagram && (
+						<SocialButton
+							link="https://www.instagram.com/"
+							user={data.link.instagram}
+							icon={<AiOutlineInstagram />}
+						>
+							Instagram
+						</SocialButton>
+					)}
+					{data.link.youtube && (
+						<SocialButton
+							link="https://www.youtube.com/"
+							user={data.link.youtube}
+							icon={<AiOutlineYoutube />}
+						>
+							Youtube
+						</SocialButton>
+					)}
+				</nav>
+			)}
+
 			{profileOwner && (
 				<button
 					className="text-primary w-max flex gap-2 items-center hover:underline"
