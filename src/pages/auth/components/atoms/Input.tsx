@@ -39,7 +39,7 @@ export default function Input({
 					}`}
 				>
 					{placeholder}
-				</span>git 
+				</span>
 				<input
 					className="text-title min-w-0 grow outline-none text-base"
 					type={type}
