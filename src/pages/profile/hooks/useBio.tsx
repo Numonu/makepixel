@@ -22,7 +22,7 @@ export default function useBio(uid: string) {
 					const DATA = result.data() as DataTypes;
 					saveStorage(uid!, DATA);
 					updateBio(DATA);
-				} else throw new Error("[!]User not found");
+				}
 			});
 		}
 	}, [bioData, uid]);
