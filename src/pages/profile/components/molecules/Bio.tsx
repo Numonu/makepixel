@@ -3,8 +3,12 @@ import { AiOutlineInstagram, AiOutlineYoutube } from "react-icons/ai";
 import SocialButton from "../atoms/SocialButton";
 import { BsPencilSquare } from "react-icons/bs";
 import { userContext } from "../../../../global/provider/context/userContext";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import {RxExit} from "react-icons/rx";
 import { DataTypes } from "../../hooks/useBio";
+import { auth } from "../../../../lib/firebase.config";
+import { toast } from "sonner";
+import { toastError } from "../../../../global/utilities/comunToast";
 
 type BioTypes = {
 	data: DataTypes;
@@ -12,9 +16,20 @@ type BioTypes = {
 };
 export default function Bio({ data, onEdit }: BioTypes) {
 	const { uid } = useParams();
+	const navigate = useNavigate();
 	const user = useContext(userContext);
 
 	const profileOwner = user?.uid == uid;
+
+	const SignOut = async () => {
+		try {
+			await auth.signOut();
+			navigate("/");
+			toast.success("closed account");
+		} catch (error) {
+			toastError.base();
+		}
+	}
 
 	return (
 		<>
@@ -46,13 +61,22 @@ export default function Bio({ data, onEdit }: BioTypes) {
 			)}
 
 			{profileOwner && (
-				<button
-					className="text-primary w-max flex gap-2 items-center hover:underline"
-					onClick={onEdit}
-				>
-					<BsPencilSquare />
-					Edit profile
-				</button>
+				<footer className="flex gap-4 flex-wrap">
+					<button
+						className="text-red-500 w-max flex gap-2 items-center hover:underline"
+						onClick={SignOut}
+					>
+						<RxExit />
+						Close Account
+					</button>
+					<button
+						className="text-primary w-max flex gap-2 items-center hover:underline"
+						onClick={onEdit}
+					>
+						<BsPencilSquare />
+						Edit profile
+					</button>
+				</footer>
 			)}
 		</>
 	);
