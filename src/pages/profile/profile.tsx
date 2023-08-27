@@ -6,10 +6,13 @@ import ProfileSkeleton from "./components/atoms/ProfileSkeleton";
 
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import {useContext} from "react";
 import useBio, { DataTypes } from "./hooks/useBio";
+import { userContext } from "../../global/provider/context/userContext";
 
 export default function Profile() {
 	const { uid } = useParams();
+	const user = useContext(userContext);
 	const [settings, setSettings] = useState(false);
 
 	const { bioData, setBioData } = useBio(uid!);
@@ -28,9 +31,9 @@ export default function Profile() {
 		<Wrapper>
 			<header className="pt-16 flex flex-col items-center gap-6">
 				<img
-					className="max-w-[200px] aspect-square rounded-[30%] bg-cover text-transparent"
-					src={""}
-					alt={`profile image of example`}
+					className="max-w-[200px] w-full aspect-square rounded-[30%] bg-cover text-transparent"
+					src={user?.photoURL ?? ""}
+					alt={`profile image of ${user?.displayName}`}
 					style={{
 						backgroundImage:
 							"url(../../../public/images/picture.jpg)",
