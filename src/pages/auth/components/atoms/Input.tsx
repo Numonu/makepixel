@@ -3,7 +3,8 @@ import { PiSealWarningBold } from "react-icons/pi";
 
 type InputTypes = {
 	placeholder: string;
-	required? : boolean;
+	maxLength?: number;
+	required?: boolean;
 	error?: string;
 	type?: string;
 	value?: string;
@@ -15,6 +16,7 @@ export default function Input({
 	error,
 	onChange,
 	value,
+	maxLength,
 	type = "text",
 	required = true,
 }: InputTypes) {
@@ -26,7 +28,7 @@ export default function Input({
 	return (
 		<div>
 			<label
-				className={`text-neutral-700 mb-1 pb-1 px-2 flex gap-4 border-b transition-colors ${
+				className={`text-neutral-700 mb-1 pb-1 px-2 flex items-baseline gap-4 border-b transition-colors ${
 					focus && "border-primary"
 				}`}
 				onFocus={on}
@@ -44,10 +46,16 @@ export default function Input({
 					className="text-title min-w-0 grow outline-none text-base"
 					type={type}
 					value={value}
+					maxLength={maxLength}
 					required={required}
 					id={placeholder + "_"}
 					onChange={(e) => onChange(e.target.value)}
 				/>
+				{(value && maxLength) && (
+					<span className="text-xs">
+						{value.length}/{maxLength}
+					</span>
+				)}
 			</label>
 			<span
 				className={`text-red-500 flex gap-1 items-center lowercase ${
