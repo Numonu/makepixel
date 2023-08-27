@@ -23,10 +23,10 @@ type SettingsTypes = {
 export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 	const { uid } = useParams();
 
-	const [username, setUsername] = useState(data.username);
-	const [description, setDescription] = useState(data.description);
-	const [youtube, setYoutube] = useState(data.link.youtube);
-	const [instagram, setInstagram] = useState(data.link.instagram);
+	const [name, setName] = useState(data.name);
+	const [bio, setBio] = useState(data.bio);
+	const [youtube, setYoutube] = useState(data.social.youtube);
+	const [instagram, setInstagram] = useState(data.social.instagram);
 
 	//Envia los datos y actualiza de manera local
 	const save = async () => {
@@ -43,9 +43,9 @@ export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 
 	//Prepara los datos para el envio
 	const takeSend = () => ({
-		username : cutString(username , NAME_MAX),
-		description : cutString(description , BIO_MAX),
-		link: {
+		name: cutString(name, NAME_MAX),
+		bio: cutString(bio, BIO_MAX),
+		social: {
 			youtube,
 			instagram,
 		},
@@ -62,29 +62,29 @@ export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 			<div className="mb-6">
 				<h2 className="mb-4 capitalize">personal data</h2>
 				<Input
-					value={username}
+					value={name}
 					maxLength={NAME_MAX}
 					placeholder="name"
-					onChange={(e) => setUsername(e)}
+					onChange={(e) => setName(e)}
 				/>
 				<Input
 					placeholder="bio"
-					value={description}
+					value={bio}
 					maxLength={BIO_MAX}
-					onChange={(e) => setDescription(e)}
+					onChange={(e) => setBio(e)}
 				/>
 			</div>
 			<div className="mb-6 flex flex-col gap-4">
 				<h2 className="capitalize">social accounts</h2>
 				<InputLink
-					icon={<BsInstagram/>}
+					icon={<BsInstagram />}
 					required={false}
 					value={instagram}
 					placeholder="https://www.instagram.com/"
 					onChange={(e) => setInstagram(e)}
 				/>
 				<InputLink
-					icon={<BsYoutube/>}
+					icon={<BsYoutube />}
 					required={false}
 					value={youtube}
 					placeholder="https://www.youtube.com/"
