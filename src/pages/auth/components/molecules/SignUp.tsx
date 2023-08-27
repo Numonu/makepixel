@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 import { userContext } from "../../../../global/provider/context/userContext";
 import { setAuthError } from "../../utilities/errorAtlas";
 import PasswordInput from "../atoms/PasswordInput";
+import { NAME_MAX } from "../../../../global/constants/limits";
+import { cutString } from "../../../../global/utilities/usefulString";
 
 export default function SignUp() {
 	//Contextos y Hooks
@@ -36,10 +38,12 @@ export default function SignUp() {
 				navigate("/profile");
 			} else {
 				updateProfile(user, {
-					displayName: username,
+					displayName: cutString(username, NAME_MAX),
 				}).finally(() => {
 					navigate("/profile");
-					toast.success(`Welcome to spritecrafters ${user.displayName}`);
+					toast.success(
+						`Welcome to spritecrafters ${user.displayName}`
+					);
 				});
 			}
 		}
@@ -90,7 +94,9 @@ export default function SignUp() {
 			<div className="mb-12 flex flex-col gap-6">
 				<Input
 					error=""
-					placeholder="username"
+					value={username}
+					placeholder="name"
+					maxLength={NAME_MAX}
 					onChange={(e) => setUserName(e)}
 				/>
 				<Input
