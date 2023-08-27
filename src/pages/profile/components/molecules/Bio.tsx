@@ -19,7 +19,7 @@ export default function Bio({ data, onEdit }: BioTypes) {
 	return (
 		<>
 			<h1 className="text-xl">@{data.username}</h1>
-			<p className="text-description max-w-[400px] text-sm">
+			<p className="text-description max-w-[400px] text-sm lg:max-w-[600px]">
 				{data.description}
 			</p>
 			{(data.link.instagram || data.link.youtube) && (
