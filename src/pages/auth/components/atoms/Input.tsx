@@ -3,16 +3,20 @@ import { PiSealWarningBold } from "react-icons/pi";
 
 type InputTypes = {
 	placeholder: string;
-	error: string;
+	required? : boolean;
+	error?: string;
 	type?: string;
-	onChange : (value:string) => void;
+	value?: string;
+	onChange: (value: string) => void;
 };
 
 export default function Input({
 	placeholder,
 	error,
 	onChange,
+	value,
 	type = "text",
+	required = true,
 }: InputTypes) {
 	const [focus, setFocus] = useState(false);
 
@@ -38,19 +42,22 @@ export default function Input({
 				</span>
 				<input
 					className="text-title grow outline-none text-base"
-					required
 					type={type}
+					value={value}
+					required={required}
 					id={placeholder + "_"}
-					onChange={e => onChange(e.target.value)}
+					onChange={(e) => onChange(e.target.value)}
 				/>
 			</label>
-			<span className={`text-red-500 flex gap-1 items-center lowercase ${!error && "opacity-0"}`}>
+			<span
+				className={`text-red-500 flex gap-1 items-center lowercase ${
+					!error && "opacity-0"
+				}`}
+			>
 				<span className="text-lg">
 					<PiSealWarningBold />
 				</span>
-				<span className="text-sm">
-					{error}
-				</span>
+				<span className="text-sm">{error}</span>
 			</span>
 		</div>
 	);
