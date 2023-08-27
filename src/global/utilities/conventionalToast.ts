@@ -5,11 +5,14 @@ const FAIL_MESSAGE = "something went wrong";
 const SUCCES_MESSAGE = "success";
 const LOAD_MESSAGE = "loading...";
 //metodos
-const errorToast = () => toast.error(FAIL_MESSAGE);
+const toastError = {
+    base : () => toast.error(FAIL_MESSAGE),
+    network : () => toast.error("We are having problems, please try again later"),
+}
 
 export {
     FAIL_MESSAGE,
     SUCCES_MESSAGE,
     LOAD_MESSAGE,
-    errorToast
+    toastError
 }
