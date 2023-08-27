@@ -1,12 +1,28 @@
+import Bio from "./components/molecules/Bio";
+import Settings from "./components/molecules/Settings";
 import Wrapper from "../../global/components/atoms/Wrapper";
 import ArtCard from "../gallery/components/organisms/ArtCard";
-import { AiOutlineInstagram, AiOutlineYoutube } from "react-icons/ai";
-import SocialButton from "./components/atoms/SocialButton";
+import ProfileSkeleton from "./components/atoms/ProfileSkeleton";
+
+import { useState } from "react";
 import { useParams } from "react-router-dom";
+import useBio, { DataTypes } from "./hooks/useBio";
 
 export default function Profile() {
-    
 	const { uid } = useParams();
+	const [settings, setSettings] = useState(false);
+
+	const { bioData, setBioData } = useBio(uid!);
+
+	const on = () => setSettings(true);
+	const off = () => setSettings(false);
+
+	const updateAndClose = (data: DataTypes) => {
+		setBioData(data);
+		off();
+	};
+
+	if (!bioData) return <ProfileSkeleton />;
 
 	return (
 		<Wrapper>
@@ -21,18 +37,15 @@ export default function Profile() {
 					}}
 				/>
 				<div className="flex items-center flex-col gap-4 text-center">
-					<h1 className="text-xl">@{uid}</h1>
-					<p className="text-description max-w-[400px] text-sm">
-						Hi , I am using Pixelcrafters
-					</p>
-					<nav className="flex flex-wrap items-center justify-center gap-4">
-						<SocialButton icon={<AiOutlineInstagram />}>
-							Instagram
-						</SocialButton>
-						<SocialButton icon={<AiOutlineYoutube />}>
-							Youtube
-						</SocialButton>
-					</nav>
+					{settings ? (
+						<Settings
+							data={bioData}
+							onCancel={off}
+							onSave={updateAndClose}
+						/>
+					) : (
+						<Bio data={bioData} onEdit={on} />
+					)}
 				</div>
 			</header>
 			<hr className="my-8" />
