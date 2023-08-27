@@ -1,4 +1,4 @@
-import { DRAW_TAGS } from "../../../../global/constants/DrawConstant";
+import { DRAW_TAGS } from "../../../../global/constants/draw";
 import { asideFilters } from "../../constants/asideFilters";
 import AsideButton from "../atoms/AsideButton";
 import { useState } from "react";

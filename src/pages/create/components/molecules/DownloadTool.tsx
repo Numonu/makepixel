@@ -2,7 +2,7 @@ import ToolTip from "../../../../global/components/atoms/ToolTip";
 import {BsDownload} from "react-icons/bs";
 import ToolCall from "../atoms/ToolCall";
 import RemoteAction from "../../../../global/components/atoms/RemoteAction";
-import { CANVAS_ID } from "../../../../global/constants/DrawConstant";
+import { CANVAS_ID } from "../../../../global/constants/draw";
 
 export default function DownloadTool() {
     const downloadCanvasImage = () => {

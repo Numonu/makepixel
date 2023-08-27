@@ -3,7 +3,7 @@ import useCanvas, { CanvasStateTypes } from "../../hooks/useCanvas";
 import useSnapshot from "../../hooks/useSnapshot";
 import { executeAction } from "../../utilities/canvasActionts";
 import { DrawContextTypes, drawContext } from "../../context/drawContext";
-import { CANVAS_ID } from "../../../../global/constants/DrawConstant";
+import { CANVAS_ID } from "../../../../global/constants/draw";
 
 export default function DrawCanvas() {
 	const canvasRef = useRef(null);

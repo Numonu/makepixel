@@ -1,7 +1,7 @@
 import {
 	CANVAS_ID,
 	DRAW_TAGS,
-} from "../../../../global/constants/DrawConstant";
+} from "../../../../global/constants/draw";
 import { useContext, useState } from "react";
 import { PiWarningOctagonLight } from "react-icons/pi";
 import FunctionalModal from "../../../../global/components/molecules/FunctionalModal";
