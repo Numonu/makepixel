@@ -1,3 +1,5 @@
+//Constantes generales usadas en contexto de dibujo o relacionados
+
 const CANVAS_ID = "drawCanvas";
 
 const DRAW_TAGS = [
