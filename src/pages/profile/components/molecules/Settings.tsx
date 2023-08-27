@@ -12,6 +12,8 @@ import {
 import { saveStorage } from "../../utilities/storage";
 import InputLink from "../atoms/InputLink";
 import { BsInstagram, BsYoutube } from "react-icons/bs";
+import { BIO_MAX, NAME_MAX } from "../../../../global/constants/limits";
+import { cutString } from "../../../../global/utilities/usefulString";
 
 type SettingsTypes = {
 	data: DataTypes;
@@ -41,8 +43,8 @@ export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 
 	//Prepara los datos para el envio
 	const takeSend = () => ({
-		username,
-		description,
+		username : cutString(username , NAME_MAX),
+		description : cutString(description , BIO_MAX),
 		link: {
 			youtube,
 			instagram,
@@ -61,12 +63,14 @@ export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 				<h2 className="mb-4 capitalize">personal data</h2>
 				<Input
 					value={username}
+					maxLength={NAME_MAX}
 					placeholder="name"
 					onChange={(e) => setUsername(e)}
 				/>
 				<Input
-					value={description}
 					placeholder="bio"
+					value={description}
+					maxLength={BIO_MAX}
 					onChange={(e) => setDescription(e)}
 				/>
 			</div>
