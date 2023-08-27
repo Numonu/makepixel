@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import {
 	FAIL_MESSAGE,
 	LOAD_MESSAGE,
-} from "../../../../global/utilities/conventionalToast";
+} from "../../../../global/utilities/comunToast";
 import { saveStorage } from "../../utilities/storage";
 import InputLink from "../atoms/InputLink";
 import { BsInstagram, BsYoutube } from "react-icons/bs";

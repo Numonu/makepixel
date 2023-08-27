@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from "react";
 import { db } from "../../../lib/firebase.config";
 import { userContext } from "../../../global/provider/context/userContext";
 import { toast } from "sonner";
-import { toastError } from "../../../global/utilities/conventionalToast";
+import { toastError } from "../../../global/utilities/comunToast";
 
 export type DataTypes = {
 	name: string;

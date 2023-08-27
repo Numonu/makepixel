@@ -7,7 +7,7 @@ import { PiWarningOctagonLight } from "react-icons/pi";
 import FunctionalModal from "../../../../global/components/molecules/FunctionalModal";
 import Tag from "../atoms/Tag";
 import To from "../../../../global/components/atoms/To";
-import { FAIL_MESSAGE } from "../../../../global/utilities/conventionalToast";
+import { FAIL_MESSAGE } from "../../../../global/utilities/comunToast";
 import { toast } from "sonner";
 import { userContext } from "../../../../global/provider/context/userContext";
 import useModal from "../../../../global/hooks/useModal";

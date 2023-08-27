@@ -14,7 +14,7 @@ import { setAuthError } from "../../utilities/errorAtlas";
 import PasswordInput from "../atoms/PasswordInput";
 import { NAME_MAX } from "../../../../global/constants/limits";
 import { cutString } from "../../../../global/utilities/usefulString";
-import { FAIL_MESSAGE } from "../../../../global/utilities/conventionalToast";
+import { FAIL_MESSAGE } from "../../../../global/utilities/comunToast";
 
 export default function SignUp() {
 	//Contextos y Hooks
