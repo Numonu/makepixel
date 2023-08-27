@@ -18,25 +18,25 @@ export default function Bio({ data, onEdit }: BioTypes) {
 
 	return (
 		<>
-			<h1 className="text-xl">@{data.username}</h1>
+			<h1 className="text-xl">@{data.name}</h1>
 			<p className="text-description max-w-[400px] text-sm lg:max-w-[600px]">
-				{data.description}
+				{data.bio}
 			</p>
-			{(data.link.instagram || data.link.youtube) && (
+			{(data.social.instagram || data.social.youtube) && (
 				<nav className="flex flex-wrap items-center justify-center gap-4">
-					{data.link.instagram && (
+					{data.social.instagram && (
 						<SocialButton
 							link="https://www.instagram.com/"
-							user={data.link.instagram}
+							user={data.social.instagram}
 							icon={<AiOutlineInstagram />}
 						>
 							Instagram
 						</SocialButton>
 					)}
-					{data.link.youtube && (
+					{data.social.youtube && (
 						<SocialButton
 							link="https://www.youtube.com/"
-							user={data.link.youtube}
+							user={data.social.youtube}
 							icon={<AiOutlineYoutube />}
 						>
 							Youtube
