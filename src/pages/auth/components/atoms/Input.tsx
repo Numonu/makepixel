@@ -39,9 +39,9 @@ export default function Input({
 					}`}
 				>
 					{placeholder}
-				</span>
+				</span>git 
 				<input
-					className="text-title grow outline-none text-base"
+					className="text-title min-w-0 grow outline-none text-base"
 					type={type}
 					value={value}
 					required={required}
