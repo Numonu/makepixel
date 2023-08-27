@@ -14,6 +14,7 @@ import { setAuthError } from "../../utilities/errorAtlas";
 import PasswordInput from "../atoms/PasswordInput";
 import { NAME_MAX } from "../../../../global/constants/limits";
 import { cutString } from "../../../../global/utilities/usefulString";
+import { FAIL_MESSAGE } from "../../../../global/utilities/conventionalToast";
 
 export default function SignUp() {
 	//Contextos y Hooks
@@ -35,12 +36,12 @@ export default function SignUp() {
 		if (user) {
 			if (user.displayName) {
 				toast.success(`Welcome to spritecrafters ${user.displayName}`);
-				navigate("/profile");
+				navigate(`/profile/${user.uid}`);
 			} else {
 				updateProfile(user, {
 					displayName: cutString(username, NAME_MAX),
 				}).finally(() => {
-					navigate("/profile");
+					navigate(`/profile/${user.uid}`);
 					toast.success(
 						`Welcome to spritecrafters ${user.displayName}`
 					);
@@ -59,7 +60,7 @@ export default function SignUp() {
 				error: (error) => {
 					setSending(false);
 					setAuthError(error.code, setErrorMessage);
-					return "Something went wrong";
+					return FAIL_MESSAGE;
 				},
 				success: "Success",
 				loading: "Sending...",
@@ -75,7 +76,7 @@ export default function SignUp() {
 		toast.promise(() => signInWithPopup(auth, googleProvider), {
 			error: () => {
 				setSending(false);
-				return "Something went wrong";
+				return FAIL_MESSAGE;
 			},
 			success: "Success",
 			loading: "Sending...",
