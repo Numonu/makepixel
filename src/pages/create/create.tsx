@@ -4,6 +4,7 @@ import GuideCanvas from "./components/molecules/GuideCanvas";
 import DrawToolBar from "./components/organisms/DrawToolBar";
 import DrawOptions from "./components/organisms/DrawOptions";
 import DrawProvider from "./providers/DrawProvider";
+import RemoteProvider from "../../global/provider/RemoteProvider";
 
 export default function Create() {
 	return (
@@ -20,15 +21,17 @@ export default function Create() {
 			<main className="max-w-[500px] mx-auto grid pb-12 gap-4 grid-cols-1 lg:max-w-none lg:grid-cols-[1fr_500px_1fr]">
 				<DrawProvider>
 					<section className="flex justify-center lg:justify-end lg:-order-1 lg:mx-0">
-						<DrawToolBar />
+						<RemoteProvider>
+							<DrawToolBar />
+						</RemoteProvider>
 					</section>
 					<section className="relative aspect-square">
-						<GuideCanvas/>
-						<DrawCanvas/>
+						<GuideCanvas />
+						<DrawCanvas />
 					</section>
 					<section>
 						<div className="border-neutral-300 w-min min-w-[200px] h-full p-2 rounded-md border">
-							<DrawOptions/>
+							<DrawOptions />
 						</div>
 					</section>
 				</DrawProvider>
