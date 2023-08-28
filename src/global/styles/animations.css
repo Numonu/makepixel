@@ -25,3 +25,26 @@
         opacity: 1;
     }
 }
+
+.animate-glare{
+    position: relative;
+    overflow: hidden;
+}
+.animate-glare::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(90deg , transparent , rgb(243, 243, 243) , transparent);
+    animation: glare 1s linear infinite;
+}
+@keyframes glare {
+    from{
+        transform: translateX(-100%);
+    }
+    to{
+        transform: translateX(100%);
+    }
+}
