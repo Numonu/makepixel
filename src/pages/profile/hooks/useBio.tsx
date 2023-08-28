@@ -1,5 +1,5 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { loadStorage, saveStorage } from "../utilities/storage";
+import { loadSession, saveSession } from "../utilities/storage";
 import { useState, useEffect, useContext } from "react";
 import { db } from "../../../lib/firebase.config";
 import { userContext } from "../../../global/provider/context/userContext";
@@ -16,7 +16,7 @@ export type DataTypes = {
 };
 export default function useBio(uid: string) {
 	const user = useContext(userContext);
-	const [bioData, setBioData] = useState(loadStorage(uid));
+	const [bioData, setBioData] = useState(loadSession(uid));
 
 	//En caso de no tener datos locales lo cargaremos de firestore
 	useEffect(() => {
@@ -25,7 +25,7 @@ export default function useBio(uid: string) {
 				.then((result) => {
 					if (result.exists()) {
 						const DATA = result.data() as DataTypes;
-						saveStorage(uid!, DATA);
+						saveSession(uid!, DATA);
 						updateBio(DATA);
 					}
 					//si no encontramos datos , los creamos (si es nuestro perfil)
@@ -41,7 +41,7 @@ export default function useBio(uid: string) {
 							setDoc(doc(db, "users", uid), send)
 								.then(() => {
 									updateBio(send);
-									saveStorage(uid!, send);
+									saveSession(uid!, send);
 								})
 								.catch(toastError.network);
 						} else toast.error("This user does not exist");

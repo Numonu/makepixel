@@ -9,7 +9,7 @@ import {
 	FAIL_MESSAGE,
 	LOAD_MESSAGE,
 } from "../../../../global/utilities/comunToast";
-import { saveStorage } from "../../utilities/storage";
+import { saveSession } from "../../utilities/storage";
 import InputLink from "../atoms/InputLink";
 import { BsInstagram, BsYoutube } from "react-icons/bs";
 import { BIO_MAX, NAME_MAX } from "../../../../global/constants/limits";
@@ -33,7 +33,7 @@ export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 		toast.promise(() => setDoc(doc(db, "users", uid!), takeSend()), {
 			success: () => {
 				onSave(takeSend());
-				saveStorage(uid!, takeSend());
+				saveSession(uid!, takeSend());
 				return "updated profile";
 			},
 			error: FAIL_MESSAGE,
