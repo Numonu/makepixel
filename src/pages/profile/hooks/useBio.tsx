@@ -29,28 +29,27 @@ export default function useBio(uid: string) {
 						updateBio(DATA);
 					}
 					//si no encontramos datos , los creamos (si es nuestro perfil)
-					else createNewUser();
+					else {
+						if (uid == user?.uid) {
+							//preparamos los datos de un usuario nuevo
+							const send = {
+								name: user.displayName ?? "New User",
+								bio: "Hi, I am new to Spritecrafters",
+								social: { instagram: "", youtube: "" },
+							};
+							//Creamos un nuevo perfil de usuario
+							setDoc(doc(db, "users", uid), send)
+								.then(() => {
+									updateBio(send);
+									saveStorage(uid!, send);
+								})
+								.catch(toastError.network);
+						} else toast.error("This user does not exist");
+					}
 				})
 				.catch(toastError.network);
 		}
 	}, [bioData, uid, user]);
-
-	//Creamos un nuevo perfil de usuario
-	const createNewUser = () => {
-		if (uid == user?.uid) {
-			const send = {
-				name: user.displayName ?? "New User",
-				bio: "Hi, I am new to Spritecrafters",
-				social: { instagram: "", youtube: "" },
-			};
-			setDoc(doc(db, "users", uid), send)
-				.then(() => {
-					updateBio(send);
-					saveStorage(uid!, send);
-				})
-				.catch(toastError.network);
-		} else toast.error("This user does not exist");
-	};
 
 	//Actualza el estado con los datos de la biografia del usuario
 	const updateBio = (newData: DataTypes) => {
