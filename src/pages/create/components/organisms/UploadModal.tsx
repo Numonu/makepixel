@@ -14,6 +14,7 @@ import useModal from "../../../../global/hooks/useModal";
 import SignInModal from "../../../../global/components/organisms/SignInModal";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../../../../lib/firebase.config";
+import { ArtData } from "../../../../global/constants/types";
 
 type UploadModalTypes = {
 	onClose: () => void;
@@ -21,7 +22,7 @@ type UploadModalTypes = {
 export default function UploadModal({ onClose }: UploadModalTypes) {
 	const user = useContext(userContext);
 	//Datos de la publicacion
-	const [artTitle, setArtTitle] = useState("");
+	const [title, setTitle] = useState("");
 	const [selectTag, setSelectTag] = useState("other");
 	//Eventos
 	const [loading, setLoading] = useState(false);
@@ -43,13 +44,14 @@ export default function UploadModal({ onClose }: UploadModalTypes) {
 		if (!CANVAS)
 			throw new Error("[!]No canvas element found with id ${CANVAS_ID}");
 		//Preparamos los datos a enviar
-		const SEND = {
-			artTitle,
+		const SEND:ArtData = {
+			title,
+			likes : 0,
 			tag: selectTag,
-			ownerUid: user.uid,
+			uid: user.uid,
 			timestamp: serverTimestamp(),
-			ownerName: user.displayName as string,
-			image: CANVAS.toDataURL("image/png"),
+			name: user.displayName as string,
+			url: CANVAS.toDataURL("image/png"),
 		};
 		//Realizamos el envio con ayuda de sonner
 		setLoading(true);
@@ -78,10 +80,10 @@ export default function UploadModal({ onClose }: UploadModalTypes) {
 					<input
 						required
 						type="text"
-						value={artTitle}
+						value={title}
 						placeholder="Name your masterpiece"
 						className="bg-neutral-200 w-1/2 p-2 mb-4 rounded-md "
-						onChange={(e) => setArtTitle(e.target.value)}
+						onChange={(e) => setTitle(e.target.value)}
 					/>
 					<div className="mb-12">
 						<h3 className="mb-4">Select a tag</h3>
