@@ -1,8 +1,8 @@
-.animate-reveal{
+.animate-spawn{
     transform-origin: right top;
-    animation : reveal .2s ease;
+    animation : spawn .2s ease;
 }
-@keyframes reveal {
+@keyframes spawn {
     from{
         opacity: 0;
         scale: .5;
@@ -13,11 +13,11 @@
     }
 }
 
-.animate-visible{
-    animation : visible .2s ease;
+.animate-reveal{
+    animation : reveal .2s ease;
 
 }
-@keyframes visible {
+@keyframes reveal {
     from{
         opacity: 0;
     }
