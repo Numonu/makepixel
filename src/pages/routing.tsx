@@ -13,6 +13,8 @@ export default function Routing() {
 				<Routes>
 					<Route path="/" element={<GlobalHead />}>
 						<Route index element={<Gallery />} />
+						<Route path="/gallery/:filter" element={<Gallery />} />
+						<Route path="/gallery/:filter/:tag" element={<Gallery />} />
 						<Route path="/create" element={<Create />} />
 						<Route path="/profile/:uid" element={<Profile />} />
 					</Route>
