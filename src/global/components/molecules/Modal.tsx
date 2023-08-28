@@ -9,7 +9,7 @@ type ModalTypes = {
 export default function Modal({ children, className, onClose }: ModalTypes) {
 	return createPortal(
 		<article
-			className="bg-black bg-opacity-70 animate-visible fixed left-0 top-0 w-screen h-screen py-12 flex justify-center backdrop-blur-sm z-30 overflow-y-scroll"
+			className="bg-black bg-opacity-70 animate-reveal fixed left-0 top-0 w-screen h-screen py-12 flex justify-center backdrop-blur-sm z-30 overflow-y-scroll"
 			onClick={onClose}
 		>
 			<div

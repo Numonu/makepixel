@@ -38,7 +38,7 @@ export default function NavDialog() {
 				</span>
 			}
 		>
-			<nav className="border-neutral-100 bg-white w-max border p-2 rounded-lg animate-reveal">
+			<nav className="border-neutral-100 bg-white w-max border p-2 rounded-lg animate-spawn">
 				<ul className="flex flex-col items-stretch gap-[0.1rem] text-sm">
 					<NavLink to="/">Gallery</NavLink>
 					<NavLink to="/create">Create</NavLink>
