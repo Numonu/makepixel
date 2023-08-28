@@ -1,9 +1,11 @@
+import { FieldValue } from "firebase/firestore";
+
 type ArtData = {
 	title: string;
 	likes: number;
 	tag: string;
 	uid: string;
-	timestamp: string;
+	timestamp: FieldValue | string;
 	name: string;
 	url: string;
 };
