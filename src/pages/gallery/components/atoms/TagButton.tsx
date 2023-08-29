@@ -8,7 +8,7 @@ type TagButtonTypes = {
 };
 export default function TagButton({ filter, tag, value }: TagButtonTypes) {
 	const SELECTED = tag === value;
-	const redirect = filter ? `/gallery/${value}/${tag}`: `/gallery/new/${value}`;
+	const redirect = filter ? `/gallery/${filter}/${value}`: `/gallery/new/${value}`;
 	return (
 		<Link
 			to={redirect}
