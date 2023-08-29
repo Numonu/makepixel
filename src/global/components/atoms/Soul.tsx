@@ -1,7 +1,10 @@
-type SoulTypes = {
-    className?:string
-}
+import { ReactNode } from "react";
 
-export default function Soul({className}:SoulTypes){
-    return <div className={`bg-neutral-200 animate-glare ${className}`}></div>
+type SoulTypes = {
+	children?: ReactNode;
+	className?: string;
+};
+
+export default function Soul({ children , className }: SoulTypes) {
+	return <div className={`bg-neutral-200 animate-glare ${className}`}>{children}</div>;
 }
