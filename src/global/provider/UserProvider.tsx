@@ -1,7 +1,7 @@
 import { User } from "firebase/auth";
 import { ReactNode, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth/cordova";
-import { auth } from "../../lib/firebase.config";
+import { auth } from "../../config/firebase.config";
 import { userContext } from "./context/userContext";
 
 type UserProviderTypes = {
