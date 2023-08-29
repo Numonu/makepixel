@@ -1,20 +1,15 @@
-import {
-	CANVAS_ID,
-	DRAW_TAGS,
-} from "../../../../global/constants/draw";
+import { CANVAS_ID, DRAW_TAGS } from "../../../../global/constants/draw";
 import { useContext, useState } from "react";
-import { PiWarningOctagonLight } from "react-icons/pi";
 import FunctionalModal from "../../../../global/components/molecules/FunctionalModal";
 import Tag from "../atoms/Tag";
-import To from "../../../../global/components/atoms/To";
 import { FAIL_MESSAGE } from "../../../../global/utilities/comunToast";
 import { toast } from "sonner";
 import { userContext } from "../../../../global/provider/context/userContext";
 import useModal from "../../../../global/hooks/useModal";
 import SignInModal from "../../../../global/components/organisms/SignInModal";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { db } from "../../../../lib/firebase.config";
-import { ArtData } from "../../../../global/constants/types";
+import { db } from "../../../../config/firebase.config";
+import { ArtDataTypes } from "../../../../global/constants/types";
 
 type UploadModalTypes = {
 	onClose: () => void;
@@ -44,9 +39,9 @@ export default function UploadModal({ onClose }: UploadModalTypes) {
 		if (!CANVAS)
 			throw new Error("[!]No canvas element found with id ${CANVAS_ID}");
 		//Preparamos los datos a enviar
-		const SEND:ArtData = {
+		const SEND: ArtDataTypes = {
 			title,
-			likes : 0,
+			likes: 0,
 			tag: selectTag,
 			uid: user.uid,
 			timestamp: serverTimestamp(),
@@ -104,13 +99,6 @@ export default function UploadModal({ onClose }: UploadModalTypes) {
 					>
 						Publish
 					</button>
-					<span className="flex items-center gap-1 text-xs">
-						<span className="inline-block text-base">
-							<PiWarningOctagonLight />
-						</span>
-						By posting on pixelcrafters I am agreeing to the{" "}
-						<To to="/">Terms and Conditions</To>
-					</span>
 				</form>
 			</FunctionalModal>
 			{modal && <SignInModal onClose={closeModal} />}
