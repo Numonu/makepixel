@@ -1,6 +1,6 @@
 import { FieldValue } from "firebase/firestore";
 
-type ArtData = {
+type ArtDataTypes = {
 	title: string;
 	likes: number;
 	tag: string;
@@ -10,4 +10,4 @@ type ArtData = {
 	url: string;
 };
 
-export type { ArtData };
+export type { ArtDataTypes };
