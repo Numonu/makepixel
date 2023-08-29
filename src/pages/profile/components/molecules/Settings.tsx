@@ -2,7 +2,7 @@ import { useState } from "react";
 import { DataTypes } from "../../hooks/useBio";
 import Input from "../../../auth/components/atoms/Input";
 import { doc, setDoc } from "firebase/firestore";
-import { db } from "../../../../lib/firebase.config";
+import { db } from "../../../../config/firebase.config";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 import {

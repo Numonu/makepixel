@@ -4,9 +4,9 @@ import SocialButton from "../atoms/SocialButton";
 import { BsPencilSquare } from "react-icons/bs";
 import { userContext } from "../../../../global/provider/context/userContext";
 import { useNavigate, useParams } from "react-router-dom";
-import {RxExit} from "react-icons/rx";
+import { RxExit } from "react-icons/rx";
 import { DataTypes } from "../../hooks/useBio";
-import { auth } from "../../../../lib/firebase.config";
+import { auth } from "../../../../config/firebase.config";
 import { toast } from "sonner";
 import { toastError } from "../../../../global/utilities/comunToast";
 
@@ -29,12 +29,12 @@ export default function Bio({ data, onEdit }: BioTypes) {
 		} catch (error) {
 			toastError.base();
 		}
-	}
+	};
 
 	return (
 		<>
 			<h1 className="text-xl">@{data.name}</h1>
-			<p className="text-description max-w-[400px] text-sm lg:max-w-[600px]">
+			<p className="text-description max-w-[400px] text-base lg:max-w-[600px]">
 				{data.bio}
 			</p>
 			{(data.social.instagram || data.social.youtube) && (

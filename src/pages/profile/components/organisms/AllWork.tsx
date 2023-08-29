@@ -5,7 +5,7 @@ import Repeat from "../../../../global/components/atoms/Repeat";
 import ArtCardSoul from "../../../gallery/components/molecules/ArtCardSoul";
 import ArtCard from "../../../gallery/components/organisms/ArtCard";
 import { collection, getDocs, limit, orderBy, query, where } from "firebase/firestore";
-import { db } from "../../../../lib/firebase.config";
+import { db } from "../../../../config/firebase.config";
 
 export default function AllWork() {
 	const { uid } = useParams();

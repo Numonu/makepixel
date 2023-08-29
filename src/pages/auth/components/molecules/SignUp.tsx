@@ -1,4 +1,4 @@
-import { auth, googleProvider } from "../../../../lib/firebase.config";
+import { auth, googleProvider } from "../../../../config/firebase.config";
 import { useState, useContext, useEffect } from "react";
 import Input from "../atoms/Input";
 import { FcGoogle } from "react-icons/fc";
@@ -9,12 +9,12 @@ import {
 } from "firebase/auth";
 import { toast } from "sonner";
 import { useNavigate } from "react-router-dom";
-import { userContext } from "../../../../global/provider/context/userContext";
-import { setAuthError } from "../../utilities/errorAtlas";
 import PasswordInput from "../atoms/PasswordInput";
+import { setAuthError } from "../../utilities/errorAtlas";
 import { NAME_MAX } from "../../../../global/constants/limits";
 import { cutString } from "../../../../global/utilities/usefulString";
 import { FAIL_MESSAGE } from "../../../../global/utilities/comunToast";
+import { userContext } from "../../../../global/provider/context/userContext";
 
 export default function SignUp() {
 	//Contextos y Hooks

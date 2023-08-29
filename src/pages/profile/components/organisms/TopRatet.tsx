@@ -12,7 +12,7 @@ import {
 	query,
 	where,
 } from "firebase/firestore";
-import { db } from "../../../../lib/firebase.config";
+import { db } from "../../../../config/firebase.config";
 
 export default function TopRated() {
 	const { uid } = useParams();

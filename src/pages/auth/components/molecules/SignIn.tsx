@@ -1,4 +1,4 @@
-import { auth, googleProvider } from "../../../../lib/firebase.config";
+import { auth, googleProvider } from "../../../../config/firebase.config";
 import { useState, useContext, useEffect } from "react";
 import Input from "../atoms/Input";
 import { FcGoogle } from "react-icons/fc";

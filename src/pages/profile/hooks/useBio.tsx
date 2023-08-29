@@ -1,7 +1,7 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { loadSession, saveSession } from "../utilities/storage";
 import { useState, useEffect, useContext } from "react";
-import { db } from "../../../lib/firebase.config";
+import { db } from "../../../config/firebase.config";
 import { userContext } from "../../../global/provider/context/userContext";
 import { toast } from "sonner";
 import { toastError } from "../../../global/utilities/comunToast";
