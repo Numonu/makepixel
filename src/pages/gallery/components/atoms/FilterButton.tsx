@@ -10,8 +10,8 @@ type FilterButtonTypes = {
 	focusIcon?: ReactNode;
 };
 export default function FilterButton({
+	filter = "new",
 	value,
-	filter,
 	icon,
 	tag,
 	focusIcon,
