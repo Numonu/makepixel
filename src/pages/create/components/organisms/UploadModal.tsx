@@ -75,7 +75,12 @@ export default function UploadModal({ onClose }: UploadModalTypes) {
 				subtitle="Share your art with thousands of other users and pixelart lovers."
 				onClose={onClose}
 			>
-				<form onSubmit={(e) => e.preventDefault()}>
+				<form
+					onSubmit={(e) => {
+						e.preventDefault();
+						publish();
+					}}
+				>
 					<input
 						required
 						type="text"
@@ -94,12 +99,16 @@ export default function UploadModal({ onClose }: UploadModalTypes) {
 									selected={selectTag == e}
 								/>
 							))}
+							<Tag
+								value={"other"}
+								onClick={updateTag}
+								selected={selectTag == "other"}
+							/>
 						</div>
 					</div>
 					<button
 						className="bg-sky-400 text-white py-2 px-6 mb-2 rounded-md font-medium hover:bg-sky-500 disabled:opacity-50"
 						disabled={loading}
-						onClick={publish}
 					>
 						Publish
 					</button>
