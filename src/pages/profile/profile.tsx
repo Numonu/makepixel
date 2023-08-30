@@ -29,7 +29,7 @@ export default function Profile() {
 	if (!bioData) return <ProfileSkeleton />;
 
 	return (
-		<Wrapper className="min-h-screen">
+		<Wrapper className="min-h-screen pb-16">
 			<header className="pt-16 flex flex-col items-center gap-6">
 				<img
 					className="max-w-[200px] w-full aspect-square rounded-[30%] bg-cover text-transparent"
