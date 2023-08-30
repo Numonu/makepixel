@@ -23,6 +23,7 @@ export default function GridGallery() {
 	};
 
 	useEffect(() => {
+		setArts(null);
 		const q = query(collection(db, "gallery"), getSort());
 		getDocs(q).then((queryResult) => {
 			const result: ArtDataTypes[] = [];
