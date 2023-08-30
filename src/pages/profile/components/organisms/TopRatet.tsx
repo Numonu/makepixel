@@ -13,28 +13,36 @@ import {
 	where,
 } from "firebase/firestore";
 import { db } from "../../../../config/firebase.config";
+import { saveSession, loadSession } from "../../utilities/storage";
 
 export default function TopRated() {
 	const { uid } = useParams();
-
-	const [arts, setArts] = useState<ArtDataTypes[] | null>(null);
+	const sessionKey = "topRated" + uid!;
+	const [arts, setArts] = useState<ArtDataTypes[] | null>(
+		loadSession(sessionKey)
+	);
 
 	//Obtenemos los trabajos del usuario (max:4)
 	useEffect(() => {
-		const q = query(
-			collection(db, "gallery"),
-			where("uid", "==", uid),
-			orderBy("likes", "desc"),
-			limit(4)
-		);
-		getDocs(q).then((snapshot) => {
-			const result: ArtDataTypes[] = [];
-			snapshot.forEach((e) => {
-				result.push(e.data() as ArtDataTypes);
+		//Si no tenemos datos locales , los pedimos de firebase
+		if (arts == null) {
+			const q = query(
+				collection(db, "gallery"),
+				where("uid", "==", uid),
+				orderBy("likes", "desc"),
+				limit(4)
+			);
+			getDocs(q).then((snapshot) => {
+				const result: ArtDataTypes[] = [];
+				snapshot.forEach((e) => {
+					result.push(e.data() as ArtDataTypes);
+				});
+				setArts(result);
+				saveSession(sessionKey, result);
 			});
-			setArts(result);
-		});
-	}, [uid]);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	//Durante la carga
 	if (!arts) {

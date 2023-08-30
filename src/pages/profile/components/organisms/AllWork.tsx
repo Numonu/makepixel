@@ -4,30 +4,44 @@ import { useParams } from "react-router-dom";
 import Repeat from "../../../../global/components/atoms/Repeat";
 import ArtCardSoul from "../../../gallery/components/molecules/ArtCardSoul";
 import ArtCard from "../../../gallery/components/organisms/ArtCard";
-import { collection, getDocs, limit, orderBy, query, where } from "firebase/firestore";
+import {
+	collection,
+	getDocs,
+	limit,
+	orderBy,
+	query,
+	where,
+} from "firebase/firestore";
 import { db } from "../../../../config/firebase.config";
+import { loadSession, saveSession } from "../../utilities/storage";
 
 export default function AllWork() {
 	const { uid } = useParams();
-
-	const [arts, setArts] = useState<ArtDataTypes[] | null>(null);
+	const sessionKey = "allWork" + uid!;
+	const [arts, setArts] = useState<ArtDataTypes[] | null>(
+		loadSession(sessionKey)
+	);
 
 	//Obtenemos los trabajos del usuario (max:4)
 	useEffect(() => {
-		const q = query(
-			collection(db, "gallery"),
-			where("uid", "==", uid),
-            orderBy("timestamp" ,"desc"),
-			limit(8)
-		);
-		getDocs(q).then((snapshot) => {
-			const result: ArtDataTypes[] = [];
-			snapshot.forEach((e) => {
-				result.push(e.data() as ArtDataTypes);
+		if (arts == null) {
+			const q = query(
+				collection(db, "gallery"),
+				where("uid", "==", uid),
+				orderBy("timestamp", "desc"),
+				limit(8)
+			);
+			getDocs(q).then((snapshot) => {
+				const result: ArtDataTypes[] = [];
+				snapshot.forEach((e) => {
+					result.push(e.data() as ArtDataTypes);
+				});
+				saveSession(sessionKey , result);
+				setArts(result);
 			});
-			setArts(result);
-		});
-	}, [uid]);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	//Durante la carga
 	if (!arts) {
