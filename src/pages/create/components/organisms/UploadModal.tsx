@@ -10,6 +10,7 @@ import SignInModal from "../../../../global/components/organisms/SignInModal";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../../../../config/firebase.config";
 import { ArtDataTypes } from "../../../../global/constants/types";
+import { ALL_WORK_KEY, TOP_WORK_KEY } from "../../../constants/session";
 
 type UploadModalTypes = {
 	onClose: () => void;
@@ -53,6 +54,10 @@ export default function UploadModal({ onClose }: UploadModalTypes) {
 			success: () => {
 				onClose();
 				setLoading(false);
+				//eliminamos los datos antiguos (para que aparesca el nuevo arte)
+				sessionStorage.removeItem(ALL_WORK_KEY + user.uid);
+				sessionStorage.removeItem(TOP_WORK_KEY + user.uid);
+				//
 				return "successfully published";
 			},
 			error: () => {
