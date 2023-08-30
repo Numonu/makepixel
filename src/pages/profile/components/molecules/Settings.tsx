@@ -12,7 +12,7 @@ import {
 import { saveSession } from "../../utilities/storage";
 import InputLink from "../atoms/InputLink";
 import { BsInstagram, BsYoutube } from "react-icons/bs";
-import { BIO_MAX, NAME_MAX } from "../../../../global/constants/limits";
+import { BIO_MAX } from "../../../../global/constants/limits";
 import { cutString } from "../../../../global/utilities/usefulString";
 
 type SettingsTypes = {
@@ -23,7 +23,6 @@ type SettingsTypes = {
 export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 	const { uid } = useParams();
 
-	const [name, setName] = useState(data.name);
 	const [bio, setBio] = useState(data.bio);
 	const [youtube, setYoutube] = useState(data.social.youtube);
 	const [instagram, setInstagram] = useState(data.social.instagram);
@@ -43,7 +42,7 @@ export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 
 	//Prepara los datos para el envio
 	const takeSend = () => ({
-		name: cutString(name, NAME_MAX),
+		name: data.name,
 		bio: cutString(bio, BIO_MAX),
 		social: {
 			youtube,
@@ -61,12 +60,6 @@ export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 		>
 			<div className="mb-6">
 				<h2 className="mb-4 capitalize">personal data</h2>
-				<Input
-					value={name}
-					maxLength={NAME_MAX}
-					placeholder="name"
-					onChange={(e) => setName(e)}
-				/>
 				<Input
 					placeholder="bio"
 					value={bio}
