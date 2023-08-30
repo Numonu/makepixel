@@ -10,7 +10,6 @@ const DRAW_TAGS = [
     "creature",
     "lettering",
     "props",
-    "other"
 ]
 export {
     CANVAS_ID,
