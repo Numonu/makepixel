@@ -5,10 +5,20 @@ type TagButtonTypes = {
 	value: string;
 	filter: galleryParamTypes;
 	tag: galleryParamTypes;
+	to?: string;
+	selected?:boolean;
 };
-export default function TagButton({ filter, tag, value }: TagButtonTypes) {
-	const SELECTED = tag === value;
-	const redirect = filter ? `/gallery/${filter}/${value}`: `/gallery/new/${value}`;
+export default function TagButton({ filter, tag, value, to , selected }: TagButtonTypes) {
+	const SELECTED = selected ?? tag === value;
+	let redirect: string;
+
+	if (to) redirect = to;
+	else {
+		redirect = filter
+			? `/gallery/${filter}/${value}`
+			: `/gallery/new/${value}`;
+	}
+
 	return (
 		<Link
 			to={redirect}
