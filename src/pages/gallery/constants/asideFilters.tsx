@@ -6,7 +6,6 @@ import {
 	AiOutlineHeart,
 	AiOutlineStar,
 } from "react-icons/ai";
-import { PiSpiral, PiSpiralLight } from "react-icons/pi";
 
 const asideFilters = [
 	{
@@ -18,11 +17,6 @@ const asideFilters = [
 		icon: <AiOutlineStar />,
 		focusIcon: <AiFillStar />,
 		value: "top",
-	},
-	{
-		icon: <PiSpiralLight />,
-		focusIcon: <PiSpiral />,
-		value: "random",
 	},
 	{
 		icon: <AiOutlineHeart />,
