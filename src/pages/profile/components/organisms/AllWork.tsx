@@ -14,10 +14,11 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../../config/firebase.config";
 import { loadSession, saveSession } from "../../utilities/storage";
+import { ALL_WORK_KEY } from "../../../constants/session";
 
 export default function AllWork() {
 	const { uid } = useParams();
-	const sessionKey = "allWork" + uid!;
+	const sessionKey = ALL_WORK_KEY + uid!;
 	const [arts, setArts] = useState<ArtDataTypes[] | null>(
 		loadSession(sessionKey)
 	);

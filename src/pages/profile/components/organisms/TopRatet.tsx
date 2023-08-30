@@ -14,10 +14,11 @@ import {
 } from "firebase/firestore";
 import { db } from "../../../../config/firebase.config";
 import { saveSession, loadSession } from "../../utilities/storage";
+import { TOP_WORK_KEY } from "../../../constants/session";
 
 export default function TopRated() {
 	const { uid } = useParams();
-	const sessionKey = "topRated" + uid!;
+	const sessionKey = TOP_WORK_KEY + uid!;
 	const [arts, setArts] = useState<ArtDataTypes[] | null>(
 		loadSession(sessionKey)
 	);
