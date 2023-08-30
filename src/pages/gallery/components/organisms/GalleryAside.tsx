@@ -1,47 +1,33 @@
+import { useParams } from "react-router-dom";
 import { DRAW_TAGS } from "../../../../global/constants/draw";
 import { asideFilters } from "../../constants/asideFilters";
-import AsideButton from "../atoms/AsideButton";
-import { useState } from "react";
+import FilterButton from "../atoms/FilterButton";
+import TagButton from "../atoms/TagButton";
+
 export default function GalleryAside() {
 
-	const [primaryFilter, setPrimaryFilter] = useState("new");
-	const [secondaryFilter, setSecondaryFilter] = useState("other");
-
-	const updatePrimaryFilter = (newSelected: string) => {
-		setPrimaryFilter(newSelected);
-	};
-	const updateSecondaryFilter = (newSelected: string) => {
-		setSecondaryFilter(newSelected);
-	};
+	const {filter , tag} = useParams();
 
 	return (
 		<aside className="h-min sticky top-20">
 			<div className="flex flex-col gap-1">
 				{asideFilters.map((e) => {
 					return (
-						<AsideButton
+						<FilterButton
 							icon={e.icon}
 							focusIcon={e.focusIcon}
-							focus={primaryFilter}
 							value={e.value}
-							onClick={updatePrimaryFilter}
+							tag={tag}
+							filter={filter}
 						/>
 					);
 				})}
 			</div>
 			<hr className="my-2" />
 			<div className="flex flex-col gap-1">
+				<TagButton value={"all"} to={`/gallery/${filter}`} selected={tag == undefined} filter={filter} tag={tag} />
 				{DRAW_TAGS.map((e) => {
-					return (
-						<button
-							className={`w-full py-2 px-4 text-sm text-start capitalize opacity-80 rounded-full hover:bg-neutral-100 ${
-								e === secondaryFilter && "bg-neutral-200 hover:bg-neutral-200"
-							}`}
-							onClick={() => updateSecondaryFilter(e)}
-						>
-							{e}
-						</button>
-					);
+					return <TagButton value={e} filter={filter} tag={tag} />;
 				})}
 			</div>
 		</aside>
