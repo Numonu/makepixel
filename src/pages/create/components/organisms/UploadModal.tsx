@@ -30,7 +30,6 @@ export default function UploadModal({ onClose }: UploadModalTypes) {
 	const publish = () => {
 		//Accion exclusiva para usuarios registrados
 		if (!user) {
-			onClose();
 			openModal();
 			return;
 		}
