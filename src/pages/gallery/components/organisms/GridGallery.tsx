@@ -26,7 +26,7 @@ export default function GridGallery() {
 	useEffect(() => {
 		//Carga de favoritos
 		if(filter == "favorites"){
-			setArts(loadStorage("favorites"));
+			setArts(loadStorage("favorites") ?? []);
 			return;
 		}
 		//
@@ -36,7 +36,6 @@ export default function GridGallery() {
 			const result: ArtDataTypes[] = [];
 			queryResult.forEach((e) => result.push(e.data() as ArtDataTypes));
 			setArts(result);
-			console.log(result);
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [filter]);
@@ -58,7 +57,7 @@ export default function GridGallery() {
 					else return e.tag == tag;
 				})
 				.map((e) => (
-					<ArtCard data={e} />
+					<ArtCard key={e.id} data={e} />
 				))}
 		</main>
 	);
