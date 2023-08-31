@@ -6,6 +6,7 @@ import { ArtDataTypes } from "../../../../global/constants/types";
 import ArtCardSoul from "../molecules/ArtCardSoul";
 import Repeat from "../../../../global/components/atoms/Repeat";
 import { useParams } from "react-router-dom";
+import { loadStorage } from "../../../profile/utilities/storage";
 
 export default function GridGallery() {
 	const { filter, tag } = useParams();
@@ -23,6 +24,12 @@ export default function GridGallery() {
 	};
 
 	useEffect(() => {
+		//Carga de favoritos
+		if(filter == "favorites"){
+			setArts(loadStorage("favorites"));
+			return;
+		}
+		//
 		setArts(null);
 		const q = query(collection(db, "gallery"), getSort());
 		getDocs(q).then((queryResult) => {
