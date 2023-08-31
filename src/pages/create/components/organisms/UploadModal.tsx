@@ -1,4 +1,5 @@
 import { CANVAS_ID, DRAW_TAGS } from "../../../../global/constants/draw";
+import { v4 as uuidv4 } from 'uuid';
 import { useContext, useState } from "react";
 import FunctionalModal from "../../../../global/components/molecules/FunctionalModal";
 import Tag from "../atoms/Tag";
@@ -7,7 +8,7 @@ import { toast } from "sonner";
 import { userContext } from "../../../../global/provider/context/userContext";
 import useModal from "../../../../global/hooks/useModal";
 import SignInModal from "../../../../global/components/organisms/SignInModal";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { doc, serverTimestamp, setDoc } from "firebase/firestore";
 import { db } from "../../../../config/firebase.config";
 import { ArtDataTypes } from "../../../../global/constants/types";
 import { ALL_WORK_KEY, TOP_WORK_KEY } from "../../../constants/session";
@@ -38,19 +39,22 @@ export default function UploadModal({ onClose }: UploadModalTypes) {
 		const CANVAS = document.getElementById(CANVAS_ID) as HTMLCanvasElement;
 		if (!CANVAS)
 			throw new Error("[!]No canvas element found with id ${CANVAS_ID}");
+		//Preparamos el ID unico de la publicacion
+		const ID = uuidv4();
 		//Preparamos los datos a enviar
 		const SEND: ArtDataTypes = {
 			title,
-			likes: 0,
+			likes: [],
 			tag: selectTag,
 			uid: user.uid,
+			id : ID,
 			timestamp: serverTimestamp(),
 			name: user.displayName as string,
 			url: CANVAS.toDataURL("image/png"),
 		};
 		//Realizamos el envio con ayuda de sonner
 		setLoading(true);
-		toast.promise(() => addDoc(collection(db, "gallery"), SEND), {
+		toast.promise(() => setDoc(doc(db, "gallery" , ID), SEND), {
 			success: () => {
 				onClose();
 				setLoading(false);
