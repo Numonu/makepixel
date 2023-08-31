@@ -19,20 +19,20 @@ export default function ArtCard({ data }: ArtCardTypes) {
 	const [liked , setLiked] = useState(data.likes.some(e => e == user?.uid));
 	const [likes , setLikes] = useState(data.likes.length);
 
-	const ID = data.title + data.uid;
-	const favoriteList: string[] = loadStorage("favorites") ?? [];
-
-	const [favorite, setFavorite] = useState(
-		favoriteList.some((e) => e === ID) ?? false
-	);
+	const loaded = loadStorage("favorites") as ArtDataTypes[];
+	const [favorite , setFavorite] = useState(loaded.some(e => e.id == data.id));
 
 
 	const sendLike = () => {
+		//No se puede dar like si no estamos registrados
 		if(user == null){
 			openModal();
 			return;
 		}
+		//No se puede dar like si ya le dimos antes
 		if(data.likes.some(e => e == user.uid) || liked)return;
+
+		//Damos like por primera vez
 		updateDoc(doc(db , "gallery" , data.id) , {
 			likes : arrayUnion(user!.uid)
 		})
@@ -47,11 +47,14 @@ export default function ArtCard({ data }: ArtCardTypes) {
 			return;
 		}
 		if (favorite) {
-			const updated = favoriteList.filter((e) => e !== ID);
-			saveStorage("favorites", updated);
+			const loaded:ArtDataTypes[] = loadStorage("favorites");
+			const orderFocus = loaded.findIndex(e => e.id == data.id);
+			loaded.splice(orderFocus , 1);
+			//
+			saveStorage("favorites", loaded);
 			setFavorite(false);
 		} else {
-			saveStorage("favorites", [...favoriteList, ID]);
+			saveStorage("favorites", [...loadStorage("favorites") ?? [], data]);
 			setFavorite(true);
 		}
 	};
