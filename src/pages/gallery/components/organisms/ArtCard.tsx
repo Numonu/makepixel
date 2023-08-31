@@ -1,32 +1,59 @@
 import { AiOutlineHeart, AiOutlineLike } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { userContext } from "../../../../global/provider/context/userContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import useModal from "../../../../global/hooks/useModal";
 import SignInModal from "../../../../global/components/organisms/SignInModal";
-import { toast } from "sonner";
+import { loadStorage, saveStorage } from "../../../profile/utilities/storage";
+import { ArtDataTypes } from "../../../../global/constants/types";
+import { arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { db } from "../../../../config/firebase.config";
 
-export default function ArtCard() {
+type ArtCardTypes = {
+	data: ArtDataTypes
+};
+export default function ArtCard({ data }: ArtCardTypes) {
 	const user = useContext(userContext);
 	const { modal, openModal, closeModal } = useModal();
 
-	const noUser = () => {
-		if (!user) {
-			openModal(); return true;
+	const [liked , setLiked] = useState(data.likes.some(e => e == user?.uid));
+	const [likes , setLikes] = useState(data.likes.length);
+
+	const ID = data.title + data.uid;
+	const favoriteList: string[] = loadStorage("favorites") ?? [];
+
+	const [favorite, setFavorite] = useState(
+		favoriteList.some((e) => e === ID) ?? false
+	);
+
+
+	const sendLike = () => {
+		if(user == null){
+			openModal();
+			return;
 		}
-		return false;
+		if(data.likes.some(e => e == user.uid) || liked)return;
+		updateDoc(doc(db , "gallery" , data.id) , {
+			likes : arrayUnion(user!.uid)
+		})
+		setLikes(likes + 1);
+		setLiked(true);
 	};
 
-	const like = () => {
-		if(noUser())return;
-		//
-		toast.success("like");
-	};
-
-	const favorite = () => {
-		if(noUser())return;
-		//
-		toast.success("add to favorites");
+	//Agregar o quitar de este post de nuestros favoritos
+	const toggleFavorite = () => {
+		if(user == null){
+			openModal();
+			return;
+		}
+		if (favorite) {
+			const updated = favoriteList.filter((e) => e !== ID);
+			saveStorage("favorites", updated);
+			setFavorite(false);
+		} else {
+			saveStorage("favorites", [...favoriteList, ID]);
+			setFavorite(true);
+		}
 	};
 
 	return (
@@ -34,33 +61,37 @@ export default function ArtCard() {
 			<article className="max-w-full">
 				<img
 					className="w-full aspect-square mb-4"
-					src="https://cdn.pixabay.com/photo/2023/08/10/20/10/shark-8182315_960_720.jpg"
-					alt="imagen de ejemplo"
+					src={data.url}
+					alt={data.title}
 					style={{ imageRendering: "pixelated" }}
 				/>
 				<div className="w-full flex gap-6 justify-between items-center">
 					<div className="flex gap-2">
 						<button
-							className="border-neutral-300 p-2 flex gap-2 items-center border rounded-lg text-lg active:scale-90 hover:text-sky-500 hover:border-sky-500 transition-transform"
-							onClick={like}
+							className={`border-neutral-300 p-2 flex gap-2 items-center border rounded-lg text-lg active:scale-90 transition-transform ${liked ? "text-sky-500 border-sky-500" : "hover:text-sky-500 hover:border-sky-500"}`}
+							onClick={sendLike}
 						>
 							<AiOutlineLike />
 							<span className="text-sm hidden min-[450px]:block">
-								123
+								{likes}
 							</span>
 						</button>
 						<button
-							className="border-neutral-300 p-2 flex gap-2 items-center border rounded-lg text-lg active:scale-90 hover:text-sky-500 hover:border-sky-500 transition-transform"
-							onClick={favorite}
+							className={`border-neutral-300 p-2 flex gap-2 items-center rounded-lg text-lg active:scale-90 transition-transform ${
+								favorite
+									? "text-white bg-red-500"
+									: "hover:text-sky-500 hover:border-sky-500 border"
+							}`}
+							onClick={toggleFavorite}
 						>
 							<AiOutlineHeart />
 						</button>
 					</div>
 					<Link
-						to={"/profile/nameowo"}
+						to={`/profile/${data.uid}`}
 						className="text-sm text-ellipsis whitespace-nowrap overflow-hidden hover:text-sky-500"
 					>
-						@Felipix
+						@{data.name}
 					</Link>
 				</div>
 			</article>
