@@ -19,7 +19,7 @@ export default function ArtCard({ data }: ArtCardTypes) {
 	const [liked , setLiked] = useState(data.likes.some(e => e == user?.uid));
 	const [likes , setLikes] = useState(data.likes.length);
 
-	const loaded = loadStorage("favorites") as ArtDataTypes[];
+	const loaded:ArtDataTypes[] = loadStorage("favorites") ?? [];
 	const [favorite , setFavorite] = useState(loaded.some(e => e.id == data.id));
 
 
