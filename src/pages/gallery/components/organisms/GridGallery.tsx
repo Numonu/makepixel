@@ -50,7 +50,7 @@ export default function GridGallery() {
 		);
 
 	return (
-		<main className="grid grid-cols-4 gap-6">
+		<main className="grid grid-cols-4 gap-6 mb-16">
 			{arts
 				.filter((e) => {
 					if (!tag) return true;
