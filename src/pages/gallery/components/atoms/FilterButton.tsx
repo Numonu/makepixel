@@ -22,12 +22,12 @@ export default function FilterButton({
 	return (
 		<Link
 			to={redirect}
-			className={`w-full pl-2 pr-8 py-2 flex items-center gap-2 text-2xl rounded-lg hover:bg-neutral-100 ${
+			className={`w-1/4 py-2 px-4 max-w-[100px] flex flex-col items-center gap-2 text-xl rounded-lg hover:bg-neutral-100 lg:flex-row lg:max-w-none lg:w-full lg:text-2xl ${
 				SELECTED && "bg-neutral-200 hover:bg-neutral-200"
 			} `}
 		>
 			{SELECTED ? focusIcon : icon}
-			<span className="text-lg capitalize">{value}</span>
+			<span className="text-sm capitalize lg:text-lg">{value}</span>
 		</Link>
 	);
 }

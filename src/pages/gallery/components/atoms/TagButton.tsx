@@ -22,7 +22,7 @@ export default function TagButton({ filter, tag, value, to , selected }: TagButt
 	return (
 		<Link
 			to={redirect}
-			className={`w-full py-2 px-4 text-sm text-start capitalize opacity-80 rounded-full hover:bg-neutral-100 ${
+			className={`w-auto py-2 px-4 text-sm text-start capitalize opacity-80 rounded-full hover:bg-neutral-100 ${
 				SELECTED && "bg-neutral-200 hover:bg-neutral-200"
 			}`}
 		>

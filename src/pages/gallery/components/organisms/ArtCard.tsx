@@ -75,7 +75,7 @@ export default function ArtCard({ data }: ArtCardTypes) {
 							onClick={sendLike}
 						>
 							<AiOutlineLike />
-							<span className="text-sm hidden min-[450px]:block">
+							<span className="text-sm hidden min-[360px]:block">
 								{likes}
 							</span>
 						</button>
