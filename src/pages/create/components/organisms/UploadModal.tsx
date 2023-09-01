@@ -96,8 +96,9 @@ export default function UploadModal({ onClose }: UploadModalTypes) {
 					<div className="mb-12">
 						<h3 className="mb-4">Select a tag</h3>
 						<div className="flex flex-wrap gap-4">
-							{DRAW_TAGS.map((e) => (
+							{DRAW_TAGS.map((e,i) => (
 								<Tag
+									key={i}
 									value={e}
 									onClick={updateTag}
 									selected={selectTag == e}
