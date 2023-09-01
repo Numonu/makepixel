@@ -20,7 +20,7 @@ const executeAction = (
 		case Tool.Eraser:
 			repeatThis(() => {
 				canvas.context!.clearRect(pos.x, pos.y, PIXEL_SIZE, PIXEL_SIZE);
-			}, 2);
+			}, 4);
 			break;
 		case Tool.Picker:
 			{
