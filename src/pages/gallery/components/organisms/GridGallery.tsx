@@ -134,7 +134,7 @@ export default function GridGallery() {
 		);
 
 	return (
-		<main className="grid gap-6 mb-16 min-[500px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+		<main className="mb-28 grid gap-6 min-[500px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 			{arts
 				.filter((e) => {
 					if (!tag) return true;
