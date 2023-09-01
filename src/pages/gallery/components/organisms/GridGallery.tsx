@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 import ArtCard from "./ArtCard";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import {
+	collection,
+	getDocs,
+	query,
+	orderBy,
+	limit,
+	QueryDocumentSnapshot,
+	startAfter,
+	QuerySnapshot,
+} from "firebase/firestore";
 import { db } from "../../../../config/firebase.config";
 import { ArtDataTypes } from "../../../../global/constants/types";
 import ArtCardSoul from "../molecules/ArtCardSoul";
@@ -10,8 +19,16 @@ import { loadStorage } from "../../../profile/utilities/storage";
 
 export default function GridGallery() {
 	const { filter, tag } = useParams();
+	//Estado que contiene el arreglo de nuestras publicaciones
 	const [arts, setArts] = useState<ArtDataTypes[] | null>(null);
+	//Estado para guardar un cursor de paginacion
+	const [lastArtQueried, setLastArtQueried] = useState<null | QueryDocumentSnapshot>(null);
+	//Estado para controlar los esqueletos de carga
+	const [paginationSoul, setPaginationSoul] = useState(false);
+	//Limite de peticion por paginacion
+	const QUERY_LIMIT = 8;
 
+	//Obtener el moto de ordenamiento para la query
 	const getSort = () => {
 		switch (filter) {
 			case "new":
@@ -24,26 +41,84 @@ export default function GridGallery() {
 	};
 
 	useEffect(() => {
-		//Carga de favoritos
-		if(filter == "favorites"){
+		//Con un filtro de favoritos , cargamos de manera local
+		if (filter == "favorites") {
 			setArts(loadStorage("favorites") ?? []);
 			return;
 		}
-		//
 		setArts(null);
-		const q = query(collection(db, "gallery"), getSort());
+		//Pedimos las publicaciones
+		const q = query(
+			collection(db, "gallery"),
+			getSort(),
+			limit(QUERY_LIMIT)
+		);
 		getDocs(q).then((queryResult) => {
-			const result: ArtDataTypes[] = [];
-			queryResult.forEach((e) => result.push(e.data() as ArtDataTypes));
-			setArts(result);
+			//Exito en el pedido , ahora lo aplicamos al estado
+			setArts(getDocArr(queryResult));
+			//Designamos el ultimo obtenido para usarlo de punto de inicio en la siguiente paginacion
+			saveLastData(queryResult);
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [filter]);
 
+	//Paginacion
+	useEffect(() => {
+		//Callback asociado al evento de scroll
+		const handleScroll = () => {
+			const isScrolledToBottom =
+				window.innerHeight + window.scrollY >=
+				document.body.offsetHeight;
+
+			if (!isScrolledToBottom || !lastArtQueried) return;
+
+			//Pedimos las publicaciones
+			setPaginationSoul(true);
+			const q = query(
+				collection(db, "gallery"),
+				getSort(),
+				startAfter(lastArtQueried),
+				limit(QUERY_LIMIT)
+			);
+			getDocs(q).then((queryResult) => {
+				//Exito en el pedido , ahora lo fusionamos con el estado previo
+				const result = getDocArr(queryResult);
+				//Si hubo nuevos resultados lo aplicamos al estado
+				if (result && result.length) {
+					const fusion = [...(arts ?? []) , ...result];
+					setArts(fusion);
+					//Designamos el ultimo obtenido para usarlo de punto de inicio en la siguiente paginacion
+					saveLastData(queryResult);
+				}
+				else setPaginationSoul(false);
+			});
+		};
+		//Agregamos un listener al scroll
+		window.addEventListener("scroll", handleScroll);
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [lastArtQueried]);
+
+	//Guardamos el ultimo snapshot de la query pasada como argumento
+	const saveLastData = (data: QuerySnapshot) => {
+		const lastVisible = data.docs[data.docs.length - 1];
+		setLastArtQueried(lastVisible);
+		setPaginationSoul(false);
+	};
+
+	//Retornamos un arreglo de Documentos
+	const getDocArr = (data: QuerySnapshot) => {
+		const result: ArtDataTypes[] = [];
+		data.forEach((e) => result.push(e.data() as ArtDataTypes));
+		return result;
+	};
+
 	if (!arts)
 		return (
 			<main className="grid grid-cols-4 gap-6">
-				<Repeat repeat={16}>
+				<Repeat repeat={QUERY_LIMIT}>
 					<ArtCardSoul />
 				</Repeat>
 			</main>
@@ -59,6 +134,12 @@ export default function GridGallery() {
 				.map((e) => (
 					<ArtCard key={e.id} data={e} />
 				))}
+			{/* Eskeleto para los datos paginados */}
+			{paginationSoul && (
+				<Repeat repeat={QUERY_LIMIT}>
+					<ArtCardSoul />
+				</Repeat>
+			)}
 		</main>
 	);
 }
