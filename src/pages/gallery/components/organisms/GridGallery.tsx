@@ -23,10 +23,13 @@ export default function GridGallery() {
 	const [arts, setArts] = useState<ArtDataTypes[] | null>(null);
 	//Estado para guardar un cursor de paginacion
 	const [lastArtQueried, setLastArtQueried] = useState<null | QueryDocumentSnapshot>(null);
+	//Estado para saber si ya no hay mas datos que mostrar
+	const [fullArts , setFullArts] = useState(false);
 	//Estado para controlar los esqueletos de carga
 	const [paginationSoul, setPaginationSoul] = useState(false);
 	//Limite de peticion por paginacion
 	const QUERY_LIMIT = 8;
+	
 
 	//Obtener el moto de ordenamiento para la query
 	const getSort = () => {
@@ -41,6 +44,7 @@ export default function GridGallery() {
 	};
 
 	useEffect(() => {
+		setFullArts(false);
 		//Con un filtro de favoritos , cargamos de manera local
 		if (filter == "favorites") {
 			setArts(loadStorage("favorites") ?? []);
@@ -83,14 +87,19 @@ export default function GridGallery() {
 			getDocs(q).then((queryResult) => {
 				//Exito en el pedido , ahora lo fusionamos con el estado previo
 				const result = getDocArr(queryResult);
-				//Si hubo nuevos resultados lo aplicamos al estado
 				if (result && result.length) {
+					//Si hubo nuevos resultados lo aplicamos al estado
 					const fusion = [...(arts ?? []) , ...result];
 					setArts(fusion);
 					//Designamos el ultimo obtenido para usarlo de punto de inicio en la siguiente paginacion
 					saveLastData(queryResult);
+
+					setPaginationSoul(false);
 				}
-				else setPaginationSoul(false);
+				else {
+					setPaginationSoul(false);
+					setFullArts(true);
+				}
 			});
 		};
 		//Agregamos un listener al scroll
@@ -135,7 +144,7 @@ export default function GridGallery() {
 					<ArtCard key={e.id} data={e} />
 				))}
 			{/* Eskeleto para los datos paginados */}
-			{paginationSoul && (
+			{(paginationSoul && !fullArts) && (
 				<Repeat repeat={QUERY_LIMIT}>
 					<ArtCardSoul />
 				</Repeat>
