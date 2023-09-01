@@ -5,6 +5,7 @@ import Auth from "./auth/auth";
 import GlobalHead from "../global/components/organisms/GlobalHead";
 import UserProvider from "../global/provider/UserProvider";
 import Profile from "./profile/profile";
+import Terms from "./terms/terms";
 
 export default function Routing() {
 	return (
@@ -17,6 +18,7 @@ export default function Routing() {
 						<Route path="/gallery/:filter/:tag" element={<Gallery />} />
 						<Route path="/create" element={<Create />} />
 						<Route path="/profile/:uid" element={<Profile />} />
+						<Route path="/terms" element={<Terms />} />
 					</Route>
 					<Route path="/auth" element={<Auth />} />
 				</Routes>
