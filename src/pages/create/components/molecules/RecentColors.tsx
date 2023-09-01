@@ -12,7 +12,7 @@ export default function RecentColors() {
 		<div className="flex flex-wrap gap-2">
 			{draw!.color.history.map((e,i) => {
 				if(e === null){
-					return <div className="bg-neutral-200 w-6 aspect-square rounded-full"></div>
+					return <div key={i} className="bg-neutral-200 w-6 aspect-square rounded-full"></div>
 				}
 				return (
 					<button
