@@ -8,7 +8,6 @@ export default function BrushOptions() {
 	const draw = useContext(drawContext);
 
 	const updateColor = (newColor: string) => {
-		console.log(newColor);
 		draw!.color.update(newColor);
 	};
 
