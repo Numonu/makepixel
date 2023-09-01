@@ -27,15 +27,22 @@ export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 	const [youtube, setYoutube] = useState(data.social.youtube);
 	const [instagram, setInstagram] = useState(data.social.instagram);
 
+	const [loading , setLoading] = useState(false);
+
 	//Envia los datos y actualiza de manera local
 	const save = async () => {
+		setLoading(true);
 		toast.promise(() => setDoc(doc(db, "users", uid!), takeSend()), {
 			success: () => {
+				setLoading(false);
 				onSave(takeSend());
 				saveSession(uid!, takeSend());
 				return "updated profile";
 			},
-			error: FAIL_MESSAGE,
+			error: () => {
+				setLoading(false);
+				return FAIL_MESSAGE;
+			},
 			loading: LOAD_MESSAGE,
 		});
 	};
@@ -87,12 +94,13 @@ export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 			<footer className="flex justify-end gap-2">
 				<button
 					type="button"
-					className="p-2 px-5 rounded-md border hover:bg-hover transition-colors"
+					className="p-2 px-5 rounded-md border hover:bg-hover transition-colors disabled:opacity-50"
+					disabled={loading}
 					onClick={onCancel}
 				>
 					Cancel
 				</button>
-				<button className="text-neutral-50 bg-primary p-2 px-5 rounded-md hover:bg-secondary transition-colors">
+				<button className="text-neutral-50 bg-primary p-2 px-5 rounded-md hover:bg-secondary transition-colors disabled:opacity-50" disabled={loading}>
 					Save
 				</button>
 			</footer>
