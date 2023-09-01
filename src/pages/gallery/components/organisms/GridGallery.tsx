@@ -28,7 +28,7 @@ export default function GridGallery() {
 	//Estado para controlar los esqueletos de carga
 	const [paginationSoul, setPaginationSoul] = useState(false);
 	//Limite de peticion por paginacion
-	const QUERY_LIMIT = 8;
+	const QUERY_LIMIT = 12;
 	
 
 	//Obtener el moto de ordenamiento para la query
