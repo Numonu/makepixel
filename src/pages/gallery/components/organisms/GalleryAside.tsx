@@ -10,7 +10,7 @@ export default function GalleryAside() {
 
 	return (
 		<aside className="bg-white h-min lg:sticky lg:top-20">
-			<div className="bg-white border-t w-full py-4 fixed bottom-0 flex justify-evenly gap-4 lg:static lg:flex-col">
+			<div className="bg-white border-t w-full py-4 fixed bottom-0 flex justify-evenly gap-4 lg:static lg:flex-col lg:border-none">
 				{asideFilters.map((e) => {
 					return (
 						<FilterButton
@@ -24,7 +24,7 @@ export default function GalleryAside() {
 					);
 				})}
 			</div>
-			<hr className="hidden my-2" />
+			<hr className="hidden my-2 lg:block" />
 			<div className="flex flex-wrap gap-1 lg:flex-col">
 				<TagButton value={"all"} to={`/gallery/${filter}`} selected={tag == undefined} filter={filter} tag={tag} />
 				{DRAW_TAGS.map((e) => {
