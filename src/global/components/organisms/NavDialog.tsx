@@ -38,7 +38,7 @@ export default function NavDialog() {
 				</span>
 			}
 		>
-			<nav className="border-neutral-100 bg-white w-max border p-2 rounded-lg animate-spawn">
+			<nav className="border-neutral-100 bg-white shadow-xl w-max border p-2 rounded-lg animate-spawn">
 				<ul className="flex flex-col items-stretch text-sm">
 					<NavLink to="/">Gallery</NavLink>
 					<NavLink to="/create">Create</NavLink>
@@ -46,12 +46,8 @@ export default function NavDialog() {
 					<li>
 						<Separator />
 					</li>
-					<NavLink to="/">About</NavLink>
-					<NavLink to="/create">Instagram</NavLink>
-					<li>
-						<Separator />
-					</li>
-					<NavLink to="/">Terms of Service</NavLink>
+					<NavLink to="/about">About</NavLink>
+					<NavLink to="/terms">Terms of Service</NavLink>
 				</ul>
 			</nav>
 		</Dialog>
