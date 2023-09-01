@@ -47,7 +47,6 @@ export const snapshotReduce: SnapshotReduceTypes = (
 		}
 		//Movemos el foco al snapshot anterior
 		case "previus": {
-            console.log("previus");
 			const NEW_ORDER = Math.max(0, state.listFocus - 1);
 			return {
 				...state,
@@ -56,7 +55,6 @@ export const snapshotReduce: SnapshotReduceTypes = (
 		}
 		//Movemos el foco al snapshot siguiente
 		case "advance": {
-            console.log("advance");
 			const NEW_ORDER = Math.min(
 				Math.max(0,state.list.length - 1),
 				state.listFocus + 1
