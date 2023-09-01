@@ -9,7 +9,7 @@ export default function NavLink({ children, to = "#" }: NavLinkTypes) {
 	return (
 		<li>
 			<Link
-				className="inline-block w-full py-1 pl-2 pr-3 rounded-md cursor-pointer hover:bg-neutral-100 transition-colors"
+				className="inline-block w-full py-2 pl-2 pr-6 rounded-md cursor-pointer hover:bg-neutral-100 transition-colors"
 				to={to}
 			>
 				{children}
