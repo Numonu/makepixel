@@ -8,6 +8,7 @@ import { loadStorage, saveStorage } from "../../../profile/utilities/storage";
 import { ArtDataTypes } from "../../../../global/constants/types";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../../config/firebase.config";
+import { ALL_WORK_KEY, TOP_WORK_KEY } from "../../../constants/session";
 
 type ArtCardTypes = {
 	data: ArtDataTypes
@@ -35,7 +36,12 @@ export default function ArtCard({ data }: ArtCardTypes) {
 		//Damos like por primera vez
 		updateDoc(doc(db , "gallery" , data.id) , {
 			likes : arrayUnion(user!.uid)
+		}).then(() => {
+			//Si hubo exito , eliminamos los datos locales de este usuario
+			sessionStorage.removeItem(ALL_WORK_KEY + data.uid);
+			sessionStorage.removeItem(TOP_WORK_KEY + data.uid);
 		})
+		//El like no espera la promesa , es inmediata
 		setLikes(likes + 1);
 		setLiked(true);
 	};
