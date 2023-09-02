@@ -9,7 +9,7 @@ export default function GalleryAside() {
 	const {filter , tag} = useParams();
 
 	return (
-		<aside className="bg-white h-min pr-4 lg:sticky lg:top-20 lg:overflow-y-scroll lg:h-screen">
+		<aside className="bg-white h-min pr-4 lg:sticky lg:top-20 lg:overflow-y-auto lg:h-[calc(100vh-5rem)]">
 			<div className="bg-white border-t w-full py-4 fixed bottom-0 z-10 flex justify-evenly gap-4 lg:static lg:flex-col lg:border-none lg:py-0">
 				{asideFilters.map((e) => {
 					return (
