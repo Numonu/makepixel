@@ -6,6 +6,7 @@ import DrawOptions from "./components/organisms/DrawOptions";
 import DrawProvider from "./providers/DrawProvider";
 import RemoteProvider from "../../global/provider/RemoteProvider";
 import { PiDevicesDuotone } from "react-icons/pi";
+import { Link } from "react-router-dom";
 
 export default function Create() {
 	return (
@@ -40,14 +41,15 @@ export default function Create() {
 				</main>
 			</Wrapper>
 			{/* fallback para pantallas demaciado estrechas */}
-			<div className="min-[534px]:hidden py-6">
+			<div className="min-[534px]:hidden py-6 text-center ">
 				<div className="bg-red-500 text-white w-max mb-2 mx-auto p-2 aspect-square rounded-full text-4xl">
 					<PiDevicesDuotone />
 				</div>
-				<h1 className="text-red-500 text-center font-medium">
+				<h1 className="text-red-500 font-medium mb-4">
 					Our integrated pixelart editor <br /> is best used on a
 					larger device!
 				</h1>
+				<Link className="text-sm underline" to="/">back to gallery</Link>
 			</div>
 		</>
 	);
