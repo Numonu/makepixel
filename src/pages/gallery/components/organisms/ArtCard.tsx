@@ -97,6 +97,7 @@ export default function ArtCard({ data }: ArtCardTypes) {
 						</button>
 					</div>
 					<Link
+						translate="no"
 						to={`/profile/${data.uid}`}
 						className="text-sm text-ellipsis whitespace-nowrap overflow-hidden hover:text-sky-500"
 					>

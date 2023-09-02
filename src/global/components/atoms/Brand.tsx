@@ -12,7 +12,7 @@ export default function Brand({ className }: BrandTypes) {
 				src="images/pixelcrafters_icon.png"
 				style={{ imageRendering: "pixelated" }}
 			/>
-			<span className="hidden text-2xl sm:block capitalize">
+			<span className="hidden text-2xl sm:block capitalize" translate="no">
 				Spritecrafters
 			</span>
 		</Link>

@@ -6,7 +6,7 @@ export default function About() {
 		<Wrapper className="max-w-[600px] py-12 px-4 flex flex-col gap-4">
 			<div>
                 <img className="mb-2 mx-auto max-w-[50px]" src="images/pixelcrafters_icon.png" alt="pixelcrafters icon" />
-				<h1 className="mb-4 text-xl text-center">Pixelcrafters</h1>
+				<h1 className="mb-4 text-xl text-center" translate="no">Spritecrafters</h1>
 				<p className="text-description mb-6 text-sm">
 					Pixelcrafters is an open collection of pixelart style art,
 					created by Juan Villegas. Pixelcrafters is also a small
