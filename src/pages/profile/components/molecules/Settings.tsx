@@ -12,6 +12,9 @@ import {
 import { saveSession } from "../../utilities/storage";
 import InputLink from "../atoms/InputLink";
 import { BsInstagram, BsYoutube } from "react-icons/bs";
+import {BiLogoPatreon} from "react-icons/bi";
+import {FaTiktok} from "react-icons/fa";
+import {FiTwitter} from "react-icons/fi"
 import { BIO_MAX } from "../../../../global/constants/limits";
 import { cutString } from "../../../../global/utilities/usefulString";
 
@@ -24,8 +27,13 @@ export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 	const { uid } = useParams();
 
 	const [bio, setBio] = useState(data.bio);
-	const [youtube, setYoutube] = useState(data.social.youtube);
-	const [instagram, setInstagram] = useState(data.social.instagram);
+	//Redes sociales
+	const [youtube, setYoutube] = useState(data.social.youtube ?? "");
+	const [instagram, setInstagram] = useState(data.social.instagram ?? "");
+	const [tiktok, setTiktok] = useState(data.social.tiktok ?? "");
+	const [twitter, setTwitter] = useState(data.social.tiktok ?? "");
+	const [patreon, setPatreon] = useState(data.social.patreon ?? "");
+
 
 	const [loading , setLoading] = useState(false);
 
@@ -54,6 +62,9 @@ export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 		social: {
 			youtube,
 			instagram,
+			tiktok,
+			patreon,
+			twitter
 		},
 	});
 
@@ -89,6 +100,27 @@ export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 					value={youtube}
 					placeholder="https://www.youtube.com/"
 					onChange={(e) => setYoutube(e)}
+				/>
+				<InputLink
+					icon={<FiTwitter />}
+					required={false}
+					value={twitter}
+					placeholder="https://twitter.com/"
+					onChange={(e) => setTwitter(e)}
+				/>
+				<InputLink
+					icon={<BiLogoPatreon />}
+					required={false}
+					value={patreon}
+					placeholder="https://patreon.com/"
+					onChange={(e) => setPatreon(e)}
+				/>
+				<InputLink
+					icon={<FaTiktok />}
+					required={false}
+					value={tiktok}
+					placeholder="https://tiktok.com/"
+					onChange={(e) => setTiktok(e)}
 				/>
 			</div>
 			<footer className="flex justify-end gap-2">

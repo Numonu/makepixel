@@ -1,5 +1,8 @@
 import { useContext } from "react";
 import { AiOutlineInstagram, AiOutlineYoutube } from "react-icons/ai";
+import { BiLogoPatreon } from "react-icons/bi";
+import { FaTiktok } from "react-icons/fa";
+import { FiTwitter } from "react-icons/fi";
 import SocialButton from "../atoms/SocialButton";
 import { BsPencilSquare } from "react-icons/bs";
 import { userContext } from "../../../../global/provider/context/userContext";
@@ -31,13 +34,20 @@ export default function Bio({ data, onEdit }: BioTypes) {
 		}
 	};
 
+	const someSocialLink =
+		data.social.instagram ||
+		data.social.youtube ||
+		data.social.twitter ||
+		data.social.patreon ||
+		data.social.tiktok;
+
 	return (
 		<>
 			<h1 className="text-xl">@{data.name}</h1>
 			<p className="text-description max-w-[400px] text-base lg:max-w-[600px]">
 				{data.bio}
 			</p>
-			{(data.social.instagram || data.social.youtube) && (
+			{someSocialLink && (
 				<nav className="flex flex-wrap items-center justify-center gap-4">
 					{data.social.instagram && (
 						<SocialButton
@@ -55,6 +65,33 @@ export default function Bio({ data, onEdit }: BioTypes) {
 							icon={<AiOutlineYoutube />}
 						>
 							Youtube
+						</SocialButton>
+					)}
+					{data.social.twitter && (
+						<SocialButton
+							link="https://twitter.com/"
+							user={data.social.twitter}
+							icon={<FiTwitter />}
+						>
+							Twitter
+						</SocialButton>
+					)}
+					{data.social.patreon && (
+						<SocialButton
+							link="https://patreon.com/"
+							user={data.social.patreon}
+							icon={<BiLogoPatreon />}
+						>
+							Patreon
+						</SocialButton>
+					)}
+					{data.social.tiktok && (
+						<SocialButton
+							link="https://tiktok.com/"
+							user={data.social.tiktok}
+							icon={<FaTiktok />}
+						>
+							TikTok
 						</SocialButton>
 					)}
 				</nav>

@@ -12,6 +12,9 @@ export type DataTypes = {
 	social: {
 		instagram: string;
 		youtube: string;
+		twitter : string;
+		patreon : string;
+		tiktok : string;
 	};
 };
 export default function useBio(uid: string) {
@@ -35,7 +38,7 @@ export default function useBio(uid: string) {
 							const send = {
 								name: user.displayName ?? "New User",
 								bio: "Hi, I am new to Spritecrafters",
-								social: { instagram: "", youtube: "" },
+								social: { instagram: "", youtube: "" , twitter : "" , tiktok : "" , patreon : "" },
 							};
 							//Creamos un nuevo perfil de usuario
 							setDoc(doc(db, "users", uid), send)
@@ -59,6 +62,9 @@ export default function useBio(uid: string) {
 			social: {
 				instagram: newData.social.instagram,
 				youtube: newData.social.youtube,
+				twitter: newData.social.twitter,
+				patreon : newData.social.patreon,
+				tiktok : newData.social.tiktok
 			},
 		});
 	};
