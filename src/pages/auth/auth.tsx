@@ -10,7 +10,7 @@ export default function Auth() {
 	return (
 		<>
 			<div className="max-w-[1500px]">
-				<main className="h-screen grid md:grid-cols-2 lg:grid-cols-[1fr_2fr]">
+				<main className="min-h-screen md:h-screen grid md:grid-cols-2 lg:grid-cols-[1fr_2fr]">
 					<aside className="h-full py-16 px-4 flex flex-col items-center overflow-y-scroll">
 						<header className="flex flex-col gap-2 items-center mb-20">
 							<Brand className="flex-col" />
@@ -31,7 +31,7 @@ export default function Auth() {
 						</footer>
 					</aside>
 					<div
-						className="bg-cover -order-1 md:order-1"
+						className="h-[10rem] bg-cover -order-1 md:order-1 md:h-auto"
 						style={{
 							imageRendering: "pixelated",
 							backgroundImage:
