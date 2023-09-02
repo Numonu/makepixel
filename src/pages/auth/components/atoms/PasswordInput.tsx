@@ -40,7 +40,7 @@ export default function PasswordInput({
 					{placeholder}
 				</label>
 				<input
-					className="text-title grow outline-none text-base"
+					className="text-title min-w-0 grow outline-none text-base"
 					required
 					type={reveal ? "text" : "password"}
 					id={placeholder + "_"}
