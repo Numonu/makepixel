@@ -70,7 +70,7 @@ export default function AllWork() {
 			<h2 className="mb-4 capitalize text-xl">all work</h2>
 			<div className="grid grid-cols-1 gap-6 min-[360px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
 				{arts.map((e: ArtDataTypes) => (
-					<ArtCard data={e} />
+					<ArtCard key={e.id} data={e} />
 				))}
 			</div>
 		</section>

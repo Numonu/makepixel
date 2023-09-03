@@ -67,7 +67,7 @@ export default function TopRated() {
 			<h2 className="mb-4 capitalize text-xl">top rated</h2>
 			<div className="w-full grid grid-cols-1 gap-6 min-[360px]:grid-cols-2 md:grid-cols-4">
 				{arts.map((e: ArtDataTypes) => (
-					<ArtCard data={e} />
+					<ArtCard key={e.id} data={e} />
 				))}
 			</div>
 		</section>
