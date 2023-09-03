@@ -17,7 +17,7 @@ export default function Create() {
 						New Pixelart
 					</h2>
 					<h1 className="text-base font-normal">
-						Create a new pixelart and contribute to Pixelcrafters
+						Create a new pixelart and contribute to Spritecrafters
 						collection
 					</h1>
 				</header>
