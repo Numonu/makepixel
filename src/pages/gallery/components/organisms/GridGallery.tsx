@@ -42,7 +42,7 @@ export default function GridGallery() {
 				return orderBy("timestamp", "desc");
 		}
 	};
-
+	//Carga inicial de las publicaciones que hace uso del filtro
 	useEffect(() => {
 		setFullArts(false);
 		//Con un filtro de favoritos , cargamos de manera local
@@ -93,10 +93,12 @@ export default function GridGallery() {
 					setArts(fusion);
 					//Designamos el ultimo obtenido para usarlo de punto de inicio en la siguiente paginacion
 					saveLastData(queryResult);
-
 					setPaginationSoul(false);
+					//No hay mas datos que pedir , se cancela el esqueleto
+					if(result.length < QUERY_LIMIT)setFullArts(true);
 				}
 				else {
+					//No hay mas datos que pedir , se cancela el esqueleto
 					setPaginationSoul(false);
 					setFullArts(true);
 				}
