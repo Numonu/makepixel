@@ -3,6 +3,7 @@ import { initializeApp  } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
+import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -26,15 +27,21 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
-
-
 // Initialize Google Auth Provider
 const googleProvider = new GoogleAuthProvider();
+//Initialize App Check
+const appCheck = initializeAppCheck(app, {
+  provider: new ReCaptchaV3Provider('6LeZtvknAAAAAAnjsjCxNfb7pIstk67FloGhwc7w'),
 
+  // Optional argument. If true, the SDK automatically refreshes App Check
+  // tokens as needed.
+  isTokenAutoRefreshEnabled: true
+});
 
 export {
     app,
     db,
     auth,
-    googleProvider
+    googleProvider,
+    appCheck
 }
