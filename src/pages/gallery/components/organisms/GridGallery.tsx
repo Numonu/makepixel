@@ -6,8 +6,6 @@ import {
 	query,
 	orderBy,
 	limit,
-	QueryDocumentSnapshot,
-	startAfter,
 	QuerySnapshot,
 } from "firebase/firestore";
 import { db } from "../../../../config/firebase.config";
@@ -16,20 +14,14 @@ import ArtCardSoul from "../molecules/ArtCardSoul";
 import Repeat from "../../../../global/components/atoms/Repeat";
 import { useParams } from "react-router-dom";
 import { loadStorage } from "../../../profile/utilities/storage";
+import { usePagination } from "../../hooks/usePagination";
 
 export default function GridGallery() {
 	const { filter, tag } = useParams();
 	//Estado que contiene el arreglo de nuestras publicaciones
 	const [arts, setArts] = useState<ArtDataTypes[] | null>(null);
-	//Estado para guardar un cursor de paginacion
-	const [lastArtQueried, setLastArtQueried] = useState<null | QueryDocumentSnapshot>(null);
-	//Estado para saber si ya no hay mas datos que mostrar
-	const [fullArts , setFullArts] = useState(false);
-	//Estado para controlar los esqueletos de carga
-	const [paginationSoul, setPaginationSoul] = useState(false);
 	//Limite de peticion por paginacion
 	const QUERY_LIMIT = 12;
-	
 
 	//Obtener el moto de ordenamiento para la query
 	const getSort = () => {
@@ -42,6 +34,13 @@ export default function GridGallery() {
 				return orderBy("timestamp", "desc");
 		}
 	};
+
+	const { fullArts, setFullArts, setLastDocument, paginationSoul } =
+		usePagination(arts, setArts, {
+			queryLenght: 12,
+			sortMode: getSort,
+		});
+
 	//Carga inicial de las publicaciones que hace uso del filtro
 	useEffect(() => {
 		setFullArts(false);
@@ -61,63 +60,11 @@ export default function GridGallery() {
 			//Exito en el pedido , ahora lo aplicamos al estado
 			setArts(getDocArr(queryResult));
 			//Designamos el ultimo obtenido para usarlo de punto de inicio en la siguiente paginacion
-			saveLastData(queryResult);
+			const lastVisible = queryResult.docs[queryResult.docs.length - 1];
+			setLastDocument(lastVisible);
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [filter]);
-
-	//Paginacion
-	useEffect(() => {
-		//Callback asociado al evento de scroll
-		const handleScroll = () => {
-			const isScrolledToBottom =
-				window.innerHeight + window.scrollY >=
-				document.body.offsetHeight;
-
-			if (!isScrolledToBottom || !lastArtQueried) return;
-
-			//Pedimos las publicaciones
-			setPaginationSoul(true);
-			const q = query(
-				collection(db, "gallery"),
-				getSort(),
-				startAfter(lastArtQueried),
-				limit(QUERY_LIMIT)
-			);
-			getDocs(q).then((queryResult) => {
-				//Exito en el pedido , ahora lo fusionamos con el estado previo
-				const result = getDocArr(queryResult);
-				if (result && result.length) {
-					//Si hubo nuevos resultados lo aplicamos al estado
-					const fusion = [...(arts ?? []) , ...result];
-					setArts(fusion);
-					//Designamos el ultimo obtenido para usarlo de punto de inicio en la siguiente paginacion
-					saveLastData(queryResult);
-					setPaginationSoul(false);
-					//No hay mas datos que pedir , se cancela el esqueleto
-					if(result.length < QUERY_LIMIT)setFullArts(true);
-				}
-				else {
-					//No hay mas datos que pedir , se cancela el esqueleto
-					setPaginationSoul(false);
-					setFullArts(true);
-				}
-			});
-		};
-		//Agregamos un listener al scroll
-		window.addEventListener("scroll", handleScroll);
-		return () => {
-			window.removeEventListener("scroll", handleScroll);
-		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [lastArtQueried]);
-
-	//Guardamos el ultimo snapshot de la query pasada como argumento
-	const saveLastData = (data: QuerySnapshot) => {
-		const lastVisible = data.docs[data.docs.length - 1];
-		setLastArtQueried(lastVisible);
-		setPaginationSoul(false);
-	};
 
 	//Retornamos un arreglo de Documentos
 	const getDocArr = (data: QuerySnapshot) => {
@@ -146,7 +93,7 @@ export default function GridGallery() {
 					<ArtCard key={e.id} data={e} />
 				))}
 			{/* Eskeleto para los datos paginados */}
-			{(paginationSoul && !fullArts) && (
+			{paginationSoul && !fullArts && (
 				<Repeat repeat={QUERY_LIMIT}>
 					<ArtCardSoul />
 				</Repeat>
