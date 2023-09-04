@@ -7,17 +7,21 @@ import { toast } from "sonner";
 import { toastError } from "../../../global/utilities/comunToast";
 
 export type DataTypes = {
+	avatar: string;
 	name: string;
 	bio: string;
 	social: {
 		instagram: string;
 		youtube: string;
-		twitter : string;
-		patreon : string;
-		tiktok : string;
+		twitter: string;
+		patreon: string;
+		tiktok: string;
 	};
 };
-export default function useBio(uid: string) {
+export default function useBio(uid: string): {
+	bioData: DataTypes;
+	setBioData: React.Dispatch<DataTypes>;
+} {
 	const user = useContext(userContext);
 	const [bioData, setBioData] = useState(loadSession(uid));
 
@@ -36,9 +40,16 @@ export default function useBio(uid: string) {
 						if (uid == user?.uid) {
 							//preparamos los datos de un usuario nuevo
 							const send = {
+								avatar: "",
 								name: user.displayName ?? "New User",
 								bio: "Hi, I am new to Spritecrafters",
-								social: { instagram: "", youtube: "" , twitter : "" , tiktok : "" , patreon : "" },
+								social: {
+									instagram: "",
+									youtube: "",
+									twitter: "",
+									tiktok: "",
+									patreon: "",
+								},
 							};
 							//Creamos un nuevo perfil de usuario
 							setDoc(doc(db, "users", uid), send)
@@ -57,14 +68,15 @@ export default function useBio(uid: string) {
 	//Actualza el estado con los datos de la biografia del usuario
 	const updateBio = (newData: DataTypes) => {
 		setBioData({
+			avatar: newData.avatar,
 			name: newData.name,
 			bio: newData.bio,
 			social: {
 				instagram: newData.social.instagram,
 				youtube: newData.social.youtube,
 				twitter: newData.social.twitter,
-				patreon : newData.social.patreon,
-				tiktok : newData.social.tiktok
+				patreon: newData.social.patreon,
+				tiktok: newData.social.tiktok,
 			},
 		});
 	};

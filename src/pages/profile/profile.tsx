@@ -16,7 +16,7 @@ export default function Profile() {
 	const user = useContext(userContext);
 	const [settings, setSettings] = useState(false);
 
-	const { bioData, setBioData } = useBio(uid!);
+	const { bioData, setBioData} = useBio( uid!);
 
 	const on = () => setSettings(true);
 	const off = () => setSettings(false);
@@ -33,11 +33,10 @@ export default function Profile() {
 			<header className="pt-16 flex flex-col items-center gap-6">
 				<img
 					className="max-w-[200px] w-full aspect-square rounded-[30%] bg-cover text-transparent"
-					src={user?.photoURL ?? ""}
+					src={"data:image/png;base64," + bioData.avatar}
 					alt={`profile image of ${user?.displayName}`}
 					style={{
-						backgroundImage:
-							"url(/images/picture.jpg)",
+						backgroundImage: "url(/images/picture.jpg)",
 					}}
 				/>
 				<div className="flex items-center flex-col gap-4 text-center">

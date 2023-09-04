@@ -12,11 +12,12 @@ import {
 import { saveSession } from "../../utilities/storage";
 import InputLink from "../atoms/InputLink";
 import { BsInstagram, BsYoutube } from "react-icons/bs";
-import {BiLogoPatreon} from "react-icons/bi";
-import {FaTiktok} from "react-icons/fa";
-import {FiTwitter} from "react-icons/fi"
+import { BiLogoPatreon } from "react-icons/bi";
+import { FaTiktok } from "react-icons/fa";
+import { FiTwitter } from "react-icons/fi";
 import { BIO_MAX } from "../../../../global/constants/limits";
 import { cutString } from "../../../../global/utilities/usefulString";
+import InputFile from "../atoms/InputFile";
 
 type SettingsTypes = {
 	data: DataTypes;
@@ -25,17 +26,17 @@ type SettingsTypes = {
 };
 export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 	const { uid } = useParams();
-
+	//Primary user information
+	const [avatar, setAvatar] = useState("");
 	const [bio, setBio] = useState(data.bio);
 	//Redes sociales
-	const [youtube, setYoutube] = useState(data.social.youtube ?? "");
-	const [instagram, setInstagram] = useState(data.social.instagram ?? "");
-	const [tiktok, setTiktok] = useState(data.social.tiktok ?? "");
-	const [twitter, setTwitter] = useState(data.social.tiktok ?? "");
-	const [patreon, setPatreon] = useState(data.social.patreon ?? "");
+	const [youtube, setYoutube] = useState(data.social.youtube);
+	const [instagram, setInstagram] = useState(data.social.instagram);
+	const [tiktok, setTiktok] = useState(data.social.tiktok);
+	const [twitter, setTwitter] = useState(data.social.tiktok);
+	const [patreon, setPatreon] = useState(data.social.patreon);
 
-
-	const [loading , setLoading] = useState(false);
+	const [loading, setLoading] = useState(false);
 
 	//Envia los datos y actualiza de manera local
 	const save = async () => {
@@ -57,6 +58,7 @@ export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 
 	//Prepara los datos para el envio
 	const takeSend = () => ({
+		avatar : avatar || data.avatar,
 		name: data.name,
 		bio: cutString(bio, BIO_MAX),
 		social: {
@@ -64,10 +66,10 @@ export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 			instagram,
 			tiktok,
 			patreon,
-			twitter
+			twitter,
 		},
 	});
-
+	
 	return (
 		<form
 			className="w-screen max-w-[400px] text-start"
@@ -76,8 +78,9 @@ export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 				save();
 			}}
 		>
-			<div className="mb-6">
-				<h2 className="mb-4 capitalize">personal data</h2>
+			<div className="mb-6 flex flex-col gap-4">
+				<h2 className="capitalize">personal data</h2>
+				<InputFile tip="< 500kb" amount={1} mbLimit={.5} onChange={e => setAvatar(e)}/>
 				<Input
 					placeholder="bio"
 					value={bio}
@@ -132,7 +135,10 @@ export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 				>
 					Cancel
 				</button>
-				<button className="text-neutral-50 bg-primary p-2 px-5 rounded-md hover:bg-secondary transition-colors disabled:opacity-50" disabled={loading}>
+				<button
+					className="text-neutral-50 bg-primary p-2 px-5 rounded-md hover:bg-secondary transition-colors disabled:opacity-50"
+					disabled={loading}
+				>
 					Save
 				</button>
 			</footer>
