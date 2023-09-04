@@ -33,7 +33,7 @@ export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 	const [youtube, setYoutube] = useState(data.social.youtube);
 	const [instagram, setInstagram] = useState(data.social.instagram);
 	const [tiktok, setTiktok] = useState(data.social.tiktok);
-	const [twitter, setTwitter] = useState(data.social.tiktok);
+	const [twitter, setTwitter] = useState(data.social.twitter);
 	const [patreon, setPatreon] = useState(data.social.patreon);
 
 	const [loading, setLoading] = useState(false);
