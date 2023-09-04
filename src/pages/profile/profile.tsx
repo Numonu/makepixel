@@ -5,15 +5,12 @@ import ProfileSkeleton from "./components/atoms/ProfileSkeleton";
 
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useContext } from "react";
 import useBio, { DataTypes } from "./hooks/useBio";
-import { userContext } from "../../global/provider/context/userContext";
 import TopRated from "./components/organisms/TopRatet";
 import AllWork from "./components/organisms/AllWork";
 
 export default function Profile() {
 	const { uid } = useParams();
-	const user = useContext(userContext);
 	const [settings, setSettings] = useState(false);
 
 	const { bioData, setBioData} = useBio( uid!);
@@ -34,7 +31,7 @@ export default function Profile() {
 				<img
 					className="max-w-[200px] w-full aspect-square rounded-[30%] bg-cover text-transparent"
 					src={"data:image/png;base64," + bioData.avatar}
-					alt={`profile image of ${user?.displayName}`}
+					alt={`profile image of ${bioData.name}`}
 					style={{
 						backgroundImage: "url(/images/picture.jpg)",
 					}}
