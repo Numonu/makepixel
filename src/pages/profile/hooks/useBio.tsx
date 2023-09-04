@@ -63,7 +63,13 @@ export default function useBio(uid: string): {
 				})
 				.catch(toastError.network);
 		}
-	}, [bioData, uid, user]);
+		
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	useEffect(() => {
+		setBioData(loadSession(uid));
+	} , [uid]);
 
 	//Actualza el estado con los datos de la biografia del usuario
 	const updateBio = (newData: DataTypes) => {

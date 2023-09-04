@@ -44,6 +44,11 @@ export default function AllWork() {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	useEffect(() => {
+		setArts(loadSession(sessionKey));
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	} ,[uid]);
+
 	//Durante la carga
 	if (!arts) {
 		return (
