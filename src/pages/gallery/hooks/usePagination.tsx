@@ -18,6 +18,7 @@ type UsePaginationTypes = (
 	configuration: {
 		queryLenght: number;
 		sortMode: () => QueryOrderByConstraint;
+		onPaginate? : (data:ArtDataTypes[]) => void;
 	}
 ) => {
     fullArts : boolean,
@@ -69,17 +70,22 @@ export const usePagination: UsePaginationTypes = (state, setter, configuration) 
 					const fusion = [...(state ?? []), ...result];
 					setter(fusion);
 
+					//Si tenemos un callback lo llamamos
+					if(configuration.onPaginate) configuration.onPaginate(fusion);
+
 					//Designamos el ultimo obtenido para usarlo de punto de inicio en la siguiente paginacion
 					const last = queryResult.docs[queryResult.docs.length - 1];
 					setLastDocument(last);
 
-					//No hay mas datos que pedir , se cancela el esqueleto
+					//Una vez todo terminado quitamos el esqueleto
+					setPaginationSoul(false);
+
+					//No hay mas datos que pedir , cancelamos futuros esqueletos
 					if (result.length < configuration.queryLenght){
-                        setPaginationSoul(false);
                         setFullArts(true);
                     }
 				} else {
-					//No hay mas datos que pedir y se cancela el esqueleto
+					//No hay mas datos que pedir, quitamos el esqueleto actual y cancelamos los siguientes
 					setPaginationSoul(false);
 					setFullArts(true);
 				}
