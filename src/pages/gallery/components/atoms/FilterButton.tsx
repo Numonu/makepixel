@@ -26,7 +26,9 @@ export default function FilterButton({
 				SELECTED && "bg-neutral-200 hover:bg-neutral-200"
 			} `}
 		>
-			{SELECTED ? focusIcon : icon}
+			<span className="shrink-0">
+				{SELECTED ? focusIcon : icon}
+			</span>
 			<span className="text-sm capitalize lg:text-lg">{value}</span>
 		</Link>
 	);
