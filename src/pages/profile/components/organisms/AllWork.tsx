@@ -15,13 +15,20 @@ import {
 import { db } from "../../../../config/firebase.config";
 import { loadSession, saveSession } from "../../utilities/storage";
 import { ALL_WORK_KEY } from "../../../constants/session";
+import { usePagination } from "../../../gallery/hooks/usePagination";
 
 export default function AllWork() {
+	const QUERY_LIMIT = 12;
 	const { uid } = useParams();
 	const sessionKey = ALL_WORK_KEY + uid!;
 	const [arts, setArts] = useState<ArtDataTypes[] | null>(
 		loadSession(sessionKey)
 	);
+	const { paginationSoul, fullArts , setLastDocument } = usePagination(arts, setArts, {
+		queryLenght: QUERY_LIMIT,
+		sortMode: () => orderBy("timestamp", "desc"),
+		onPaginate : (data) => saveSession(sessionKey, data)
+	});
 
 	//Obtenemos los trabajos del usuario (max:4)
 	useEffect(() => {
@@ -30,24 +37,25 @@ export default function AllWork() {
 				collection(db, "gallery"),
 				where("uid", "==", uid),
 				orderBy("timestamp", "desc"),
-				limit(8)
+				limit(QUERY_LIMIT)
 			);
 			getDocs(q).then((snapshot) => {
 				const result: ArtDataTypes[] = [];
 				snapshot.forEach((e) => {
 					result.push(e.data() as ArtDataTypes);
 				});
-				saveSession(sessionKey , result);
+				setLastDocument(snapshot.docs[snapshot.docs.length - 1]);
+				saveSession(sessionKey, result);
 				setArts(result);
 			});
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
 		setArts(loadSession(sessionKey));
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	} ,[uid]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [uid]);
 
 	//Durante la carga
 	if (!arts) {
@@ -55,7 +63,7 @@ export default function AllWork() {
 			<section>
 				<h2 className="mb-4 capitalize text-xl">all work</h2>
 				<div className="grid grid-cols-1 gap-6 min-[430px]:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-					<Repeat repeat={10}>
+					<Repeat repeat={QUERY_LIMIT}>
 						<ArtCardSoul />
 					</Repeat>
 				</div>
@@ -77,6 +85,11 @@ export default function AllWork() {
 				{arts.map((e: ArtDataTypes) => (
 					<ArtCard key={e.id} data={e} />
 				))}
+				{(paginationSoul && !fullArts) && (
+					<Repeat repeat={QUERY_LIMIT}>
+						<ArtCardSoul />
+					</Repeat>
+				)}
 			</div>
 		</section>
 	);
