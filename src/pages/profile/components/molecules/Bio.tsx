@@ -98,16 +98,16 @@ export default function Bio({ data, onEdit }: BioTypes) {
 			)}
 
 			{profileOwner && (
-				<footer className="flex gap-4 flex-wrap">
+				<footer className="flex gap-6 flex-wrap">
 					<button
-						className="text-red-500 w-max flex gap-2 items-center hover:underline"
+						className="text-gray-600 w-max flex gap-2 items-center hover:underline"
 						onClick={SignOut}
 					>
 						<RxExit />
 						Close Account
 					</button>
 					<button
-						className="text-primary w-max flex gap-2 items-center hover:underline"
+						className="text-white bg-primary w-max p-2 flex gap-2 items-center rounded-md hover:bg-secondary transition-colors"
 						onClick={onEdit}
 					>
 						<BsPencilSquare />
