@@ -104,7 +104,7 @@ export default function Bio({ data, onEdit }: BioTypes) {
 						onClick={SignOut}
 					>
 						<RxExit />
-						Close Account
+						Log out
 					</button>
 					<button
 						className="text-white bg-primary w-max p-2 flex gap-2 items-center rounded-md hover:bg-secondary transition-colors"
