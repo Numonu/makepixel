@@ -1,4 +1,5 @@
 import Wrapper from "../../global/components/atoms/Wrapper";
+import { APP_NAME } from "../../global/constants/names";
 
 export default function Terms() {
 	return (
@@ -6,7 +7,7 @@ export default function Terms() {
 			<div>
 				<h1 className="text-xl mb-4">Terms of Service</h1>
 				<p className="text-description text-sm">
-					Welcome to Spritecrafters. By accessing or using our website,
+					Welcome to {APP_NAME}. By accessing or using our website,
 					you agree to be bound by these Terms of Service. If you do
 					not agree to these terms, you may not access or use our
 					website.

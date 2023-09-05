@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { APP_NAME } from "../../constants/names";
 
 type BrandTypes = {
 	className?: string;
@@ -13,7 +14,7 @@ export default function Brand({ className }: BrandTypes) {
 				style={{ imageRendering: "pixelated" }}
 			/>
 			<span className="hidden text-2xl sm:block capitalize" translate="no">
-				Spritecrafters
+				{APP_NAME}
 			</span>
 		</Link>
 	);

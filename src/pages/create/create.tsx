@@ -7,6 +7,7 @@ import DrawProvider from "./providers/DrawProvider";
 import RemoteProvider from "../../global/provider/RemoteProvider";
 import { PiDevicesDuotone } from "react-icons/pi";
 import { Link } from "react-router-dom";
+import { APP_NAME } from "../../global/constants/names";
 
 export default function Create() {
 	return (
@@ -17,8 +18,7 @@ export default function Create() {
 						New Pixelart
 					</h2>
 					<h1 className="text-base font-normal">
-						Create a new pixelart and contribute to Spritecrafters
-						collection
+						Create a new pixelart and contribute to {APP_NAME} collection
 					</h1>
 				</header>
 				<main className="max-w-[500px] mx-auto grid pb-12 gap-4 grid-cols-1 lg:max-w-none lg:grid-cols-[1fr_500px_1fr]">

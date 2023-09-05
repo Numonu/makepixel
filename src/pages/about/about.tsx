@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Wrapper from "../../global/components/atoms/Wrapper";
 import Brand from "../../global/components/atoms/Brand";
+import { APP_NAME } from "../../global/constants/names";
 
 export default function About() {
 	return (
@@ -8,8 +9,8 @@ export default function About() {
 			<div>
                 <Brand className="flex-col mb-4"/> 
 				<p className="text-description mb-6 text-sm">
-					Spritecrafters is an open collection of pixelart style art,
-					created by Juan Villegas. Spritecrafters is also a small
+					{APP_NAME} is an open collection of pixelart style art,
+					created by Juan Villegas. {APP_NAME} is also a small
 					personal project created to provide a simple and intuitive
 					space for artists everywhere to share their creations. It is
 					hoped that the collection will grow and that hundreds of
