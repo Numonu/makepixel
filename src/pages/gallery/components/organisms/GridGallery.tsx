@@ -75,7 +75,7 @@ export default function GridGallery() {
 
 	if (!arts)
 		return (
-			<main className="grid gap-6 mb-16 min-[360px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+			<main className="grid gap-6 mb-16 min-[430px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 				<Repeat repeat={QUERY_LIMIT}>
 					<ArtCardSoul />
 				</Repeat>
@@ -83,7 +83,7 @@ export default function GridGallery() {
 		);
 
 	return (
-		<main className="mb-28 grid gap-6 min-[360px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+		<main className="mb-28 grid gap-6 min-[430px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 			{arts
 				.filter((e) => {
 					if (!tag) return true;
