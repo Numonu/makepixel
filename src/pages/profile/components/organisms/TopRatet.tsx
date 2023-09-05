@@ -22,6 +22,7 @@ export default function TopRated() {
 	const [arts, setArts] = useState<ArtDataTypes[] | null>(
 		loadSession(sessionKey)
 	);
+	const QUERY_LIMIT = 4;
 
 	//Obtenemos los trabajos del usuario (max:4)
 	useEffect(() => {
@@ -31,7 +32,7 @@ export default function TopRated() {
 				collection(db, "gallery"),
 				where("uid", "==", uid),
 				orderBy("likes", "desc"),
-				limit(4)
+				limit(QUERY_LIMIT)
 			);
 			getDocs(q).then((snapshot) => {
 				const result: ArtDataTypes[] = [];
@@ -56,7 +57,7 @@ export default function TopRated() {
 			<section>
 				<h2 className="mb-4 capitalize text-xl">top rated</h2>
 				<div className="w-full grid grid-cols-1 gap-6 min-[430px]:grid-cols-2 md:grid-cols-4">
-					<Repeat repeat={4}>
+					<Repeat repeat={QUERY_LIMIT}>
 						<ArtCardSoul />
 					</Repeat>
 				</div>
