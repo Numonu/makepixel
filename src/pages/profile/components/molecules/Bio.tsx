@@ -43,7 +43,7 @@ export default function Bio({ data, onEdit }: BioTypes) {
 
 	return (
 		<>
-			<h1 className="text-xl">@{data.name}</h1>
+			<h1 className="text-xl" translate="no">@{data.name}</h1>
 			<p className="text-description max-w-[400px] text-base lg:max-w-[600px]">
 				{data.bio}
 			</p>
