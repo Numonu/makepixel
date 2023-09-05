@@ -51,7 +51,7 @@ export default function SignUp() {
 	}, [user, navigate, username]);
 
 	//Unirse usando el Email
-	const signUpWithEmail = async () => {
+	const signUpWithEmail = () => {
 		if(sending) return; //Anti manipulacion de bot HTML
 		setSending(true);
 		toast.promise(
@@ -70,7 +70,7 @@ export default function SignUp() {
 	};
 
 	//Unirse usando Google
-	const joinWithGoogle = async () => {
+	const joinWithGoogle = () => {
 		setSending(true);
 		//
 		toast.promise(() => signInWithPopup(auth, googleProvider), {
