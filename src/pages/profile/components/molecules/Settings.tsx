@@ -40,6 +40,7 @@ export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 
 	//Envia los datos y actualiza de manera local
 	const save = async () => {
+		if(loading)return; //Anti manipulacion de bot HTML
 		setLoading(true);
 		toast.promise(() => setDoc(doc(db, "users", uid!), takeSend()), {
 			success: () => {

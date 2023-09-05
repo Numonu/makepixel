@@ -30,6 +30,7 @@ export default function UploadModal({ onClose }: UploadModalTypes) {
 
 	//Publicacion y envio de datos al servidor
 	const publish = () => {
+		if(loading)return; //Anti manipulacion de bot HTML
 		//Accion exclusiva para usuarios registrados
 		if (!user) {
 			openModal();

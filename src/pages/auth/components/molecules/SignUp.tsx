@@ -52,8 +52,8 @@ export default function SignUp() {
 
 	//Unirse usando el Email
 	const signUpWithEmail = async () => {
+		if(sending) return; //Anti manipulacion de bot HTML
 		setSending(true);
-		//
 		toast.promise(
 			() => createUserWithEmailAndPassword(auth, email, password),
 			{
