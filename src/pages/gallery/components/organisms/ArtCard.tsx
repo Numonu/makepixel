@@ -9,6 +9,7 @@ import { ArtDataTypes } from "../../../../global/constants/types";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "../../../../config/firebase.config";
 import { ALL_WORK_KEY, TOP_WORK_KEY } from "../../../constants/session";
+import { toast } from "sonner";
 
 type ArtCardTypes = {
 	data: ArtDataTypes
@@ -52,6 +53,7 @@ export default function ArtCard({ data }: ArtCardTypes) {
 			openModal();
 			return;
 		}
+		//Quitamos de favoritos
 		if (favorite) {
 			const loaded:ArtDataTypes[] = loadStorage("favorites");
 			const orderFocus = loaded.findIndex(e => e.id == data.id);
@@ -59,9 +61,12 @@ export default function ArtCard({ data }: ArtCardTypes) {
 			//
 			saveStorage("favorites", loaded);
 			setFavorite(false);
+		//Agrgamos a favoritos
 		} else {
 			saveStorage("favorites", [...loadStorage("favorites") ?? [], data]);
 			setFavorite(true);
+			//
+			toast.success("added to favorites");
 		}
 	};
 
