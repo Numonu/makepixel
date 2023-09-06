@@ -8,6 +8,7 @@ body {
 
 html {
     font-size: 14px;
+    scrollbar-gutter: stable;
 }
 
 button:disabled{
