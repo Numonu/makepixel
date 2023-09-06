@@ -18,7 +18,6 @@ const firebaseConfig = {
   storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
   messagingSenderId: import.meta.env.VITE_MESSAGIN_SENDER_ID,
   appId: import.meta.env.VITE_APP_ID,
-  measurementId: import.meta.env.VITE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
@@ -31,7 +30,7 @@ const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 //Initialize App Check
 const appCheck = initializeAppCheck(app, {
-  provider: new ReCaptchaV3Provider('6LeZtvknAAAAAAnjsjCxNfb7pIstk67FloGhwc7w'),
+  provider: new ReCaptchaV3Provider('6LcyBQIoAAAAAGqYBypTSZqytj-JUWe1HGPDQB_h'),
 
   // Optional argument. If true, the SDK automatically refreshes App Check
   // tokens as needed.
