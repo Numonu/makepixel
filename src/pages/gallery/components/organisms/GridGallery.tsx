@@ -15,6 +15,7 @@ import Repeat from "../../../../global/components/atoms/Repeat";
 import { useParams } from "react-router-dom";
 import { loadStorage } from "../../../profile/utilities/storage";
 import { usePagination } from "../../hooks/usePagination";
+import { toastError } from "../../../../global/utilities/comunToast";
 
 export default function GridGallery() {
 	const { filter, tag } = useParams();
@@ -62,7 +63,7 @@ export default function GridGallery() {
 			//Designamos el ultimo obtenido para usarlo de punto de inicio en la siguiente paginacion
 			const lastVisible = queryResult.docs[queryResult.docs.length - 1];
 			setLastDocument(lastVisible);
-		});
+		}).catch(toastError.network);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [filter]);
 

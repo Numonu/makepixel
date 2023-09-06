@@ -16,6 +16,7 @@ import { db } from "../../../../config/firebase.config";
 import { loadSession, saveSession } from "../../utilities/storage";
 import { ALL_WORK_KEY } from "../../../constants/session";
 import { usePagination } from "../../../gallery/hooks/usePagination";
+import { toastError } from "../../../../global/utilities/comunToast";
 
 export default function AllWork() {
 	const QUERY_LIMIT = 12;
@@ -48,7 +49,7 @@ export default function AllWork() {
 				setLastDocument(snapshot.docs[snapshot.docs.length - 1]);
 				saveSession(sessionKey, result);
 				setArts(result);
-			});
+			}).catch(toastError.network);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
