@@ -38,7 +38,7 @@ export default function GridGallery() {
 	const { fullArts, setFullArts, setLastDocument, paginationSoul } =
 		usePagination(arts, setArts, {
 			queryLenght: 12,
-			sortMode: getSort,
+			sortMode: getSort(),
 		});
 
 	//Carga inicial de las publicaciones que hace uso del filtro

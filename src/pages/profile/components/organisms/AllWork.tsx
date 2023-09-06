@@ -26,8 +26,9 @@ export default function AllWork() {
 	);
 	const { paginationSoul, fullArts , setLastDocument } = usePagination(arts, setArts, {
 		queryLenght: QUERY_LIMIT,
-		sortMode: () => orderBy("timestamp", "desc"),
-		onPaginate : (data) => saveSession(sessionKey, data)
+		sortMode: orderBy("timestamp", "desc"),
+		whereMode : where("uid" , "==" , uid),
+		onPaginate : (data) => saveSession(sessionKey, data),
 	});
 
 	//Obtenemos los trabajos del usuario (max:4)
@@ -54,6 +55,7 @@ export default function AllWork() {
 
 	useEffect(() => {
 		setArts(loadSession(sessionKey));
+		console.log("loaded session from " + sessionKey);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [uid]);
 
