@@ -52,7 +52,7 @@ export default function Input({
 					onChange={(e) => onChange(e.target.value)}
 				/>
 				{(value && maxLength) && (
-					<span className="text-xs">
+					<span className="w-max text-xs">
 						{value.length}/{maxLength}
 					</span>
 				)}
