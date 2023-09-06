@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import Wrapper from "../../global/components/atoms/Wrapper";
 import Brand from "../../global/components/atoms/Brand";
 import { APP_NAME } from "../../global/constants/names";
+import WhiteLink from "../../global/components/atoms/WhiteLink";
 
 export default function About() {
 	return (
@@ -16,7 +16,7 @@ export default function About() {
 					hoped that the collection will grow and that hundreds of
 					people will use it as a space to share and enjoy pixelart.
 				</p>
-                <Link className="mx-auto text-sm underline" to="/create">contribute now</Link>
+				<WhiteLink to="/create">create new pixel art</WhiteLink>
 			</div>
 		</Wrapper>
 	);
