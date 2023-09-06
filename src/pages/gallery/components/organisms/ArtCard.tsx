@@ -76,7 +76,7 @@ export default function ArtCard({ data }: ArtCardTypes) {
 				<img
 					className="w-full aspect-square mb-4"
 					src={data.url}
-					alt={data.title}
+					alt={"pixel art image of " + data.title}
 					style={{ imageRendering: "pixelated" }}
 				/>
 				<div className="w-full flex gap-6 justify-between items-center">
