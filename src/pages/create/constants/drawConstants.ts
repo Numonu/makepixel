@@ -1,0 +1,5 @@
+const RECENT_COLORS_LENGTH = 24;
+
+export {
+    RECENT_COLORS_LENGTH
+}
