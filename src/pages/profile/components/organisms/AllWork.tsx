@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { ArtDataTypes } from "../../../../global/constants/types";
 import { useParams } from "react-router-dom";
 import Repeat from "../../../../global/components/atoms/Repeat";
@@ -17,20 +17,28 @@ import { loadSession, saveSession } from "../../utilities/storage";
 import { ALL_WORK_KEY } from "../../../constants/session";
 import { usePagination } from "../../../gallery/hooks/usePagination";
 import { toastError } from "../../../../global/utilities/comunToast";
+import { userContext } from "../../../../global/provider/context/userContext";
+import WhiteLink from "../../../../global/components/atoms/WhiteLink";
+import { AiOutlineInfoCircle } from "react-icons/ai";
 
 export default function AllWork() {
 	const QUERY_LIMIT = 12;
 	const { uid } = useParams();
+	const user = useContext(userContext);
 	const sessionKey = ALL_WORK_KEY + uid!;
 	const [arts, setArts] = useState<ArtDataTypes[] | null>(
 		loadSession(sessionKey)
 	);
-	const { paginationSoul, fullArts , setLastDocument } = usePagination(arts, setArts, {
-		queryLenght: QUERY_LIMIT,
-		sortMode: orderBy("timestamp", "desc"),
-		whereMode : where("uid" , "==" , uid),
-		onPaginate : (data) => saveSession(sessionKey, data),
-	});
+	const { paginationSoul, fullArts, setLastDocument } = usePagination(
+		arts,
+		setArts,
+		{
+			queryLenght: QUERY_LIMIT,
+			sortMode: orderBy("timestamp", "desc"),
+			whereMode: where("uid", "==", uid),
+			onPaginate: (data) => saveSession(sessionKey, data),
+		}
+	);
 
 	//Obtenemos los trabajos del usuario (max:4)
 	useEffect(() => {
@@ -41,15 +49,17 @@ export default function AllWork() {
 				orderBy("timestamp", "desc"),
 				limit(QUERY_LIMIT)
 			);
-			getDocs(q).then((snapshot) => {
-				const result: ArtDataTypes[] = [];
-				snapshot.forEach((e) => {
-					result.push(e.data() as ArtDataTypes);
-				});
-				setLastDocument(snapshot.docs[snapshot.docs.length - 1]);
-				saveSession(sessionKey, result);
-				setArts(result);
-			}).catch(toastError.network);
+			getDocs(q)
+				.then((snapshot) => {
+					const result: ArtDataTypes[] = [];
+					snapshot.forEach((e) => {
+						result.push(e.data() as ArtDataTypes);
+					});
+					setLastDocument(snapshot.docs[snapshot.docs.length - 1]);
+					saveSession(sessionKey, result);
+					setArts(result);
+				})
+				.catch(toastError.network);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
@@ -74,12 +84,31 @@ export default function AllWork() {
 		);
 	}
 	//Si el usuario NO tiene publicaciones
-	if (!arts.length)
+	if (!arts.length) {
+		//Mensaje personalizado si es nuestro perfil
+		if (user?.uid == uid)
+			return (
+				<div className="flex gap-2 flex-col justify-center items-center text-center">
+					<span>
+						You have not published anything yet
+					</span>
+					<WhiteLink to="/create">
+						create your first publication here
+					</WhiteLink>
+				</div>
+			);
+		//Mensaje ambiguo para perfiles agenos
 		return (
-			<h2 className="text-neutral-400 text-center capitalize">
-				this user still has nothing to show...
-			</h2>
+			<div className="text-amber-500 flex gap-2 items-center text-center">
+				<span className="text-xl">
+					<AiOutlineInfoCircle/> 
+				</span>
+				<span>
+					This user has not posted anything...
+				</span>
+			</div>
 		);
+	}
 	//Si el usuario SI tiene publicaciones
 	return (
 		<section>
@@ -88,7 +117,7 @@ export default function AllWork() {
 				{arts.map((e: ArtDataTypes) => (
 					<ArtCard key={e.id} data={e} />
 				))}
-				{(paginationSoul && !fullArts) && (
+				{paginationSoul && !fullArts && (
 					<Repeat repeat={QUERY_LIMIT}>
 						<ArtCardSoul />
 					</Repeat>
