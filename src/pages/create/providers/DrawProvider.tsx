@@ -2,6 +2,7 @@ import { ReactNode, useReducer, useState } from "react";
 import { Tool } from "../enums/drawTools";
 import { snapshotReduce } from "../reducers/snapshotReduce";
 import { drawContext } from "../context/drawContext";
+import { RECENT_COLORS_LENGTH } from "../constants/drawConstants";
 
 type DrawProviderTypes = {
 	children: ReactNode;
@@ -16,7 +17,7 @@ export default function DrawProvider({ children }: DrawProviderTypes) {
 	const [currentColor , setCurrentColor] = useState("#262626");
 
 	//list of recently used colors
-	const [colorHistory , setColorHistory] = useState(new Array(6).fill(null));
+	const [colorHistory , setColorHistory] = useState(new Array(RECENT_COLORS_LENGTH).fill(null));
 
 	//the current active tool
 	const [currentTool, setCurrentTool] = useState(Tool.Brush);
@@ -51,7 +52,7 @@ export default function DrawProvider({ children }: DrawProviderTypes) {
 	const addColorToHistory = (newColor : string) => {
 		if(newColor === colorHistory[0]) return;
 		const NEW_LIST = [newColor,...colorHistory , ];
-		if(NEW_LIST.length > 6)NEW_LIST.pop();
+		if(NEW_LIST.length > RECENT_COLORS_LENGTH)NEW_LIST.pop();
 		setColorHistory(NEW_LIST);
 	}
 
