@@ -6,5 +6,5 @@ type WhiteLinkTypes = {
     to:string
 }
 export default function WhiteLink({children , to}:WhiteLinkTypes){
-    return <Link className="text-sm underline" to={to}>{children}</Link>
+    return <Link className="text-sm underline hover:text-primary" to={to}>{children}</Link>
 }
