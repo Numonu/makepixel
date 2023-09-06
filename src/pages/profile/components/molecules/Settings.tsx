@@ -73,7 +73,7 @@ export default function Settings({ data, onCancel, onSave }: SettingsTypes) {
 	
 	return (
 		<form
-			className="w-screen max-w-[400px] text-start"
+			className="w-screen px-4 max-w-[400px] text-start"
 			onSubmit={(e) => {
 				e.preventDefault();
 				save();
