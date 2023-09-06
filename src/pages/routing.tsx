@@ -7,6 +7,7 @@ import UserProvider from "../global/provider/UserProvider";
 import Profile from "./profile/profile";
 import Terms from "./terms/terms";
 import About from "./about/about";
+import NotFound from "./404/notFound";
 
 export default function Routing() {
 	return (
@@ -21,6 +22,7 @@ export default function Routing() {
 						<Route path="/profile/:uid" element={<Profile />} />
 						<Route path="/terms" element={<Terms />} />
 						<Route path="/about" element={<About />} />
+						<Route path="*" element={<NotFound/>} />
 					</Route>
 					<Route path="/auth" element={<Auth />} />
 				</Routes>
