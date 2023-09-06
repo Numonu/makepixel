@@ -15,10 +15,10 @@ export default function Create() {
 			<Wrapper className="hidden min-[534px]:block">
 				<header className="text-center mt-4 mb-16 lg:mb-14">
 					<h2 className="text-black mb-2 text-xl font-medium">
-						New Pixelart
+						New Pixel Art
 					</h2>
 					<h1 className="text-base font-normal">
-						Create a new pixelart and contribute to {APP_NAME} collection
+						Create a new pixel art and contribute to {APP_NAME} collection
 					</h1>
 				</header>
 				<main className="max-w-[500px] mx-auto grid pb-12 gap-4 grid-cols-1 lg:max-w-none lg:grid-cols-[1fr_500px_1fr]">
