@@ -74,8 +74,10 @@ export default function SignUp() {
 		setSending(true);
 		//
 		toast.promise(() => signInWithPopup(auth, googleProvider), {
-			error: () => {
+			error: (error) => {
 				setSending(false);
+				if(error.code === "auth/popup-blocked")
+					return "the browser has blocked the pop-up window";
 				return FAIL_MESSAGE;
 			},
 			success: "Success",
