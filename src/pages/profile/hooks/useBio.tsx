@@ -5,6 +5,7 @@ import { db } from "../../../config/firebase.config";
 import { userContext } from "../../../global/provider/context/userContext";
 import { toast } from "sonner";
 import { toastError } from "../../../global/utilities/comunToast";
+import { useNavigate } from "react-router-dom";
 
 export type DataTypes = {
 	avatar: string;
@@ -24,6 +25,7 @@ export default function useBio(uid: string): {
 } {
 	const user = useContext(userContext);
 	const [bioData, setBioData] = useState(loadSession(uid));
+	const navigate = useNavigate();
 
 	//En caso de no tener datos locales lo cargaremos de firestore
 	useEffect(() => {
@@ -58,7 +60,10 @@ export default function useBio(uid: string): {
 									saveSession(uid!, send);
 								})
 								.catch(toastError.network);
-						} else toast.error("This user does not exist");
+						} else {
+							navigate("/*");
+							toast.error("the user you are looking for does not exist")
+						}
 					}
 				})
 				.catch(toastError.network);
