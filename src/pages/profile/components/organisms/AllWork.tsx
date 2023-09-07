@@ -22,7 +22,7 @@ import WhiteLink from "../../../../global/components/atoms/WhiteLink";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 
 export default function AllWork() {
-	const QUERY_LIMIT = 12;
+	const QUERY_LIMIT = 10;
 	const { uid } = useParams();
 	const user = useContext(userContext);
 	const sessionKey = ALL_WORK_KEY + uid!;
