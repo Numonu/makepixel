@@ -1,4 +1,4 @@
-import { BsCloudUpload } from "react-icons/bs";
+import { BsUpload } from "react-icons/bs";
 import ToolTip from "../../../../global/components/atoms/ToolTip";
 import ToolCall from "../atoms/ToolCall";
 import UploadModal from "./UploadModal";
@@ -12,15 +12,17 @@ export default function UploadTool() {
 	const { modal, openModal, closeModal } = useModal();
 	return (
 		<>
-			<ToolTip tip="Upload" keycode="u">
+			<ToolTip tip="Publish" keycode="p">
 				<ToolCall
 					callback={() => {
 						openModal();
 						disableRemotes();
 					}}
 				>
-					<BsCloudUpload />
-					<RemoteAction keycode="u" />
+					<span className="text-green-500 font-bold">
+						<BsUpload />
+					</span>
+					<RemoteAction keycode="p" />
 				</ToolCall>
 			</ToolTip>
 			{modal && (
