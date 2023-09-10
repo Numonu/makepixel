@@ -31,7 +31,7 @@ export default function GuideCanvas() {
 
 	return (
 		<canvas
-			className="bg-red-500 absolute"
+			className="bg-transparent absolute"
 			style={{ imageRendering: "pixelated" }}
 			ref={canvasRef}
 			width={500}
