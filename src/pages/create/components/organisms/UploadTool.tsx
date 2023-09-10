@@ -19,7 +19,7 @@ export default function UploadTool() {
 						disableRemotes();
 					}}
 				>
-					<span className="text-green-500 font-bold">
+					<span className="text-primary font-bold">
 						<BsUpload />
 					</span>
 					<RemoteAction keycode="p" />
