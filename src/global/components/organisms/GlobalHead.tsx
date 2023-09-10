@@ -14,7 +14,7 @@ export default function GlobalHead() {
 					<div className="flex gap-6 items-center">
 						<AttachToRoute atach="/">
 							<Link
-								className="bg-primary text-white border-secondary py-1 px-2 flex gap-2 items-center rounded-md border-b-2 hover:border-0"
+								className="bg-primary text-white border-secondary hidden py-1 px-2 gap-2 items-center rounded-md border-b-2 hover:border-0 md:flex"
 								to="/create"
 							>
 								<span className="text-xl">
