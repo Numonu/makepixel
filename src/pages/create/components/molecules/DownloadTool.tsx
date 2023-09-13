@@ -11,7 +11,7 @@ export default function DownloadTool() {
             const imageUrl = canvas.toDataURL("image/png");
             const tempAnchor = document.createElement("a");
             tempAnchor.href = imageUrl;
-            tempAnchor.download = "created_on_pixelcrafters.png";
+            tempAnchor.download = "created_on_makepixel.png";
             tempAnchor.click();
         }
         else{
