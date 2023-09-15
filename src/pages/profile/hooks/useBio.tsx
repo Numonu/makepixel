@@ -6,6 +6,7 @@ import { userContext } from "../../../global/provider/context/userContext";
 import { toast } from "sonner";
 import { toastError } from "../../../global/utilities/comunToast";
 import { useNavigate } from "react-router-dom";
+import { APP_NAME } from "../../../global/constants/names";
 
 export type DataTypes = {
 	avatar: string;
@@ -44,7 +45,7 @@ export default function useBio(uid: string): {
 							const send = {
 								avatar: "",
 								name: user.displayName ?? "New User",
-								bio: "Hi, I am new to Spritecrafters",
+								bio: `Hi, I am new to ${APP_NAME}`,
 								social: {
 									instagram: "",
 									youtube: "",

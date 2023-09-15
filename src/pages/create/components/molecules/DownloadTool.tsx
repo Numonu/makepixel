@@ -3,6 +3,7 @@ import {BsDownload} from "react-icons/bs";
 import ToolCall from "../atoms/ToolCall";
 import RemoteAction from "../../../../global/components/atoms/RemoteAction";
 import { CANVAS_ID } from "../../../../global/constants/draw";
+import { APP_NAME } from "../../../../global/constants/names";
 
 export default function DownloadTool() {
     const downloadCanvasImage = () => {
@@ -11,7 +12,7 @@ export default function DownloadTool() {
             const imageUrl = canvas.toDataURL("image/png");
             const tempAnchor = document.createElement("a");
             tempAnchor.href = imageUrl;
-            tempAnchor.download = "created_on_makepixel.png";
+            tempAnchor.download = `created_on_${APP_NAME}.png`;
             tempAnchor.click();
         }
         else{
